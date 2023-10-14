@@ -36,6 +36,21 @@
     margin-left: 6px;
 }
 
-#text-container {
+#map {
+    height: 500px;
+    width: 900px;
+    border:1px solid #cdced0;
+    margin: 50px auto;
+}
+
+.place-info {
+    font-size: 14px;
     color: black;
+    background-color: white;
+    height: auto;
+    width: 230px;
+}
+
+.img-place {
+    width: 220px;
 }
