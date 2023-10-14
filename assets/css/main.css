@@ -35,3 +35,7 @@
 .header__navbar-login--text i {
     margin-left: 6px;
 }
+
+#text-container {
+    color: black;
+}
