@@ -25,14 +25,30 @@
             </div>
 
             <div class="header__navbar-login">
-                <div class="header__navbar-login--text">Đăng nhập <i class="fa fa-user" aria-hidden="true"></i></div>
+                <button class="header__navbar-login--text" onclick="openLogin()"><span>Đăng nhập</span><i class="fa fa-user" aria-hidden="true"></i></button>
             </div>
         </nav>
     </header>
 
-    <div id="map">
+    <div id="map"></div>
 
-        
+    <div id="login-section">
+        <div class="empty-section" onclick="closeLogin()"></div>
+        <div class="login-box">
+            <img src="./assets/img/logo-blue.png" alt="logo">
+            <p>Đăng nhập vào hệ thống</p>
+            <form action="/login/password" method="post">
+                <section class="input-group">
+                    <div class="input-icon"><label for="username"><i class="fa fa-user" aria-hidden="true"></i></label></div>
+                    <input class="input-field" id="username" name="username" type="text" placeholder="Tên người dùng hoặc email" autocomplete="username" required autofocus>
+                </section>
+                <section class="input-group">
+                    <div class="input-icon"><label for="current-password"><i class="fa fa-lock" aria-hidden="true"></i></label></div>
+                    <input class="input-field" id="current-password" name="password" type="password" placeholder="Mật khẩu" autocomplete="current-password" required>
+                </section>
+                <button class="login-button" type="submit">Đăng nhập</button>
+            </form>
+        </div>
     </div>
 
     <script type="text/javascript" src="./script.js"></script>

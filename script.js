@@ -1,15 +1,9 @@
-// $(document).ready(function() {
-//     $.ajax({
-//         url: "http://192.168.64.1:3000/get-place",
-//         method: "GET",
-//         success: function(response) {
-//         var place = response.place;
-//         for (var i = 0; i < place.length; i++) {
-//             $("#map").append("<p>" + place[i].diachi + "</p>");
-//         }
-//         }
-//     });
-// });
+function openLogin() {
+    document.querySelector('#login-section').style.display = 'flex';
+}
+function closeLogin() {
+    document.querySelector('#login-section').style.display = 'none';
+}
 
 function moveMapToKHTN(map){
     map.setCenter({lat:10.76316473604989, lng:106.68238541539267});

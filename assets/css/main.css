@@ -12,13 +12,13 @@
 }
 
 .header__navbar-logo {
-    height: 55px;
+    height: 40px;
     position: absolute;
     left: 135px;
 }
 
 .header__navbar-logo img {
-    height: 55px;
+    height: 40px;
 }
 
 .header__navbar-login {
@@ -30,6 +30,8 @@
 .header__navbar-login--text {
     font-size: 18px;
     color: white;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .header__navbar-login--text i {
@@ -55,4 +57,104 @@
 .img-place {
     width: 220px;
     margin-top: 10px;
+}
+
+#login-section {
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none; */
+}
+
+.empty-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    width: auto;
+    overflow-y: auto;
+    background-color: #00000047;
+}
+
+.login-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -235px;
+    margin-left: -200px;
+    overflow-y: auto;
+    height: 470px;
+    width: 400px;
+    background-color: white;
+    border: 1px solid #ebeef5;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    padding: 44px 28px;
+}
+
+.login-box img {
+    width: 250px;
+}
+
+.login-box > p {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 16px auto;
+}
+
+.login-box form {
+    width: 100%;
+}
+
+.input-group {
+    margin-bottom: 22px;
+    font-size: 14px;
+    height: 36px;
+    width: 100%;
+    display: flex;
+}
+
+.input-icon {
+    background-color: #F4F7FA;
+    padding: 0 15px;
+    border: 1px solid #dcdfe6;
+    border-right: 0;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon i {
+    color: #909398;
+    font-size: 13px;
+}
+
+.input-field {
+    width: 100%;
+    border: 1px solid #dcdfe6;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding: 0 15px;
+    line-height: 36px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+}
+
+.input-field:focus {
+    border: 1px solid #409eff;
+}
+
+.login-button {
+    width: 100%;
+    line-height: 36px;
+    color: #fff;
+    font-size: 14px;
+    background-color: #409eff;
+    border-color: #409eff;
+    border-radius: 3px;
+    cursor: pointer;
 }
