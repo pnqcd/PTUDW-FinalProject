@@ -26,7 +26,7 @@ VALUES
   (10, '11A Trần Phú', 'Phường 4, Quận 5', 'Đất tư nhân/Nhà ở riêng lẻ', 'Xã hội hoá', '/assets/img/stt10.png', 'CHƯA QUY HOẠCH', 10.763748, 106.680162),
   (11, '749 Trần Hưng Đạo', 'Phường 1, Quận 5', 'Cây xăng', 'Xã hội hoá', '/assets/img/stt11.png', 'ĐÃ QUY HOẠCH', 10.755485, 106.682182),
   (12, 'Công viên 23 Tháng 9', 'Phường Phạm Ngũ Lão, Quận 1', 'Đất công/Công viên/Hành lang an toàn giao thông', 'Quảng cáo thương mại', '/assets/img/stt12.png', 'ĐÃ QUY HOẠCH', 10.769673, 106.694745),
-  (13, '59 Nguyễn Trãi', 'Phường 2, Quận 5', 'Đất tư nhân/Nhà ở riênglẻ', 'Cổ động chính trị', '/assets/img/stt13.png', 'CHƯA QUY HOẠCH', 10.758625, 106.681833);
+  (13, '59 Nguyễn Trãi', 'Phường 2, Quận 5', 'Đất tư nhân/Nhà ở riêng lẻ', 'Cổ động chính trị', '/assets/img/stt13.png', 'CHƯA QUY HOẠCH', 10.758625, 106.681833);
 
 
 

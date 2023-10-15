@@ -44,13 +44,15 @@
 }
 
 .place-info {
-    font-size: 14px;
+    font-size: 15px;
     color: black;
     background-color: white;
     height: auto;
-    width: 230px;
+    width: 240px;
+    font-family: 'Source Sans 3', sans-serif;
 }
 
 .img-place {
     width: 220px;
+    margin-top: 10px;
 }
