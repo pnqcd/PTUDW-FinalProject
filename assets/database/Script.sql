@@ -39,7 +39,20 @@ VALUES
   (23,'342-344 Hai Bà Trưng', 'Phường Tân Định, Quận 1','Đất tư nhân/Nhà ở riêng lẻ', 'Quảng cáo thương mại', '/assets/img/stt23.png', 'ĐÃ QUY HOẠCH',10.790269478614027, 106.68923660490096),
   (24,'Công viên Lê Văn Tám','Phường Đa Kao, Quận 1','Đất công/Công viên/Hành lang an toàn giao thông','Xã hội hoá','/assets/img/stt24.png', 'ĐÃ QUY HOẠCH',10.788267943867027, 106.69379577301899),
   (25,'7 Nguyễn Thị Minh Khai', 'Phường Bến Nghé, Quận 1','Đất tư nhân/Nhà ở riêng lẻ', 'Quảng cáo thương mại', '/assets/img/stt25.png', 'ĐÃ QUY HOẠCH',10.788335426786606, 106.70337229178546),
-  (26,'66 Mạc Cửu/67 Vạn Kiếp', 'Phường 13, Quận 5', 'Đất tư nhân/Nhà ở riêng lẻ', 'Quảng cáo thương mại', '/assets/img/stt26.png', 'ĐÃ QUY HOẠCH',10.750453973043228, 106.65939129886226)
+  (26,'66 Mạc Cửu/67 Vạn Kiếp', 'Phường 13, Quận 5', 'Đất tư nhân/Nhà ở riêng lẻ', 'Quảng cáo thương mại', '/assets/img/stt26.png', 'ĐÃ QUY HOẠCH',10.750453973043228, 106.65939129886226),
+  (40, '37 Bạch Vân', 'Phường 5, Quận 5', 'Chợ', 'Quảng cáo thương mại', '/assets/img/stt40.png', 'ĐÃ QUY HOẠCH', 10.753344016428072, 106.67566715772404),
+  (41, '214 Đ. Phùng Hưng', 'Phường 14, Quận 5', 'Chợ', 'Xã hội hoá', '/assets/img/stt41.png', 'CHƯA HUY HOẠCH', 10.753821865690917, 106.65757988317888),
+  (42, 'QM42+JQ2, Đ. Hà Tôn Quyền', 'Phường 15, Quận 5', 'Chợ', 'Quảng cáo thương mại', '/assets/img/stt42.png', 'ĐÃ HUY HOẠCH', 10.757279102175037, 106.65204380375708),
+  (43, '1 Đ. Phú Giáo', 'Phường 14, Quận 5', 'Chợ', 'Xã hội hoá', '/assets/img/stt43.png', 'CHƯA HUY HOẠCH', 10.752346203906628, 106.65234421114377),
+  (44, 'Công viên 23/9', 'Phường Phạm Ngũ Lão, Quận 1', 'Công viên', 'Quảng cáo thương mại', '/assets/img/stt44.png', 'ĐÃ HUY HOẠCH', 10.771863620867485, 106.69186829100512),
+  (45, 'Công viên Tao Đàn', 'Phường Bến Thành, Quận 1', 'Công viên', 'Xã hội hoá', '/assets/img/stt45.png', 'CHƯA HUY HOẠCH', 10.776966269277086, 106.69148738412568),
+  (46, 'Công viên Bến Bạch Đằng', 'Phường Bến Nghé, Quận 1', 'Công viên', 'Cổ động chính trị', '/assets/img/stt46.png', 'ĐÃ HUY HOẠCH', 10.775617196683136, 106.70745189222578),
+  (47, 'Hùng Vương Plaza', 'Phường 12, Quận 5', 'Trung tâm thương mại', 'Quảng cáo thương mại', '/assets/img/stt47.png', 'CHƯA HUY HOẠCH', 10.756925580407563, 106.66329813444582),
+  (48, 'Trung tâm thương mại Chợ Lớn', 'Phường 11, Quận 5', 'Trung tâm thương mại', 'Xã hội hoá', '/assets/img/stt48.png', 'ĐÃ HUY HOẠCH', 10.7537740121254, 106.66514885863228),
+  (49, 'Thuận Kiều Plaza', 'Phường 12, Quận 5', 'Trung tâm thương mại', 'Quảng cáo thương mại', '/assets/img/stt49.png', 'CHƯA HUY HOẠCH', 10.754859707659163, 106.65698360675886),
+  (50, 'Golden Plaza', 'Phường 14, Quận 5', 'Trung tâm thương mại', 'Cổ động chính trị', '/assets/img/stt50.png', 'ĐÃ HUY HOẠCH', 10.753120540065478, 106.65477346652453),
+  (51, 'Bến xe Bến Thành', 'Phường Nguyễn Thái Bình, Quận 1', 'Nhà chờ xe buýt', '/assets/img/stt51.png', 'CHƯA HUY HOẠCH', 10.77239291160367, 106.6981830620045),
+  (52, 'Điểm trung chuyển Hàm Nghi', 'Phường Bến Nghé, Quận 1', 'Nhà chờ xe buýt', '/assets/img/stt52.png', 'ĐÃ HUY HOẠCH', 10.773151773808188, 106.70298958057228)
 
 
 
