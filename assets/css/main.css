@@ -39,10 +39,9 @@
 }
 
 #map {
-    height: 500px;
-    width: 900px;
+    height: calc(100vh - 70px);
+    width: 100%;
     border:1px solid #cdced0;
-    margin: 50px auto;
 }
 
 .place-info {
