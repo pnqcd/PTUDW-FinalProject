@@ -51,8 +51,8 @@ VALUES
   (48, 'Trung tâm thương mại Chợ Lớn', 'Phường 11, Quận 5', 'Trung tâm thương mại', 'Xã hội hoá', '/assets/img/stt48.png', 'ĐÃ HUY HOẠCH', 10.7537740121254, 106.66514885863228),
   (49, 'Thuận Kiều Plaza', 'Phường 12, Quận 5', 'Trung tâm thương mại', 'Quảng cáo thương mại', '/assets/img/stt49.png', 'CHƯA HUY HOẠCH', 10.754859707659163, 106.65698360675886),
   (50, 'Golden Plaza', 'Phường 14, Quận 5', 'Trung tâm thương mại', 'Cổ động chính trị', '/assets/img/stt50.png', 'ĐÃ HUY HOẠCH', 10.753120540065478, 106.65477346652453),
-  (51, 'Bến xe Bến Thành', 'Phường Nguyễn Thái Bình, Quận 1', 'Nhà chờ xe buýt', '/assets/img/stt51.png', 'CHƯA HUY HOẠCH', 10.77239291160367, 106.6981830620045),
-  (52, 'Điểm trung chuyển Hàm Nghi', 'Phường Bến Nghé, Quận 1', 'Nhà chờ xe buýt', '/assets/img/stt52.png', 'ĐÃ HUY HOẠCH', 10.773151773808188, 106.70298958057228)
+  (51, 'Bến xe Bến Thành', 'Phường Nguyễn Thái Bình, Quận 1', 'Nhà chờ xe buýt', 'Xã hội hoá', '/assets/img/stt51.png', 'CHƯA HUY HOẠCH', 10.77239291160367, 106.6981830620045),
+  (52, 'Điểm trung chuyển Hàm Nghi', 'Phường Bến Nghé, Quận 1', 'Nhà chờ xe buýt', 'Cổ động chính trị','/assets/img/stt52.png', 'ĐÃ HUY HOẠCH', 10.773151773808188, 106.70298958057228)
 
 
 
