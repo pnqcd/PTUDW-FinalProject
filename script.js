@@ -7,7 +7,7 @@ function closeLogin() {
 
 function moveMapToKHTN(map){
     map.setCenter({lat:10.76316473604989, lng:106.68238541539267});
-    map.setZoom(14.5);
+    map.setZoom(15);
 }
 
 

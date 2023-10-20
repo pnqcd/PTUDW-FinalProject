@@ -1,6 +1,6 @@
 .header {
     height: 70px;
-    background-color: #0074D9;
+    background-image: linear-gradient(195deg, #49a3f1 0%, #1A73E8 100%);
 }
 
 .header__navbar {
@@ -32,6 +32,10 @@
     color: white;
     background-color: transparent;
     cursor: pointer;
+}
+
+.header__navbar-login--text span {
+    font-weight: 700;
 }
 
 .header__navbar-login--text i {
