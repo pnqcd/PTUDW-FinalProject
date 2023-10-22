@@ -10,6 +10,9 @@ function moveMapToKHTN(map){
     map.setZoom(15);
 }
 
+function detailAdButtonClicked() {
+    alert("CLICKED!!!");
+}
 
 function addMarkerToGroup(group, coordinate, html, quyhoach) {
     var iconColor = 'blue'; 
@@ -59,6 +62,7 @@ function addInfoBubble(map) {
                         <p>${place[i].diachi}, ${place[i].khuvuc}</p>
                         <b><i>${place[i].quyhoach}</i></b>
                         <img class="img-place" src="${place[i].hinhanh}">
+                        <button class='detailedAdSign' onclick="detailAdButtonClicked()">Chi tiết</button>
                     </div>`, place[i].quyhoach);
             }
             }
