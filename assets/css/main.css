@@ -213,3 +213,15 @@
     margin-top: 10px;
     cursor: pointer;
 }
+
+.place-detail-information {
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.5);
+    transition: 0.3s;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.place-detail-information:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
+}

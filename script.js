@@ -34,13 +34,13 @@ function detailAdButtonClicked(placeID) {
 
                 for (var i = 0; i < placeDetails.length; i++)
                     popupInformationInnerHTML += 
-                        `<div class="place-info">
-                            <b>${placeDetails[i].hinhthuc}</b>
-                            <p>${placeDetails[i].loaivt}</p>
-                            <p>${placeDetails[i].diachi}, ${placeDetails[i].khuvuc}</p>
-                            <b><i>${placeDetails[i].quyhoach}</i></b>
-                            <img class="img-place" src="${placeDetails[i].hinhanh}">
-                            <button class='detailedAdSign' onclick="detailAdButtonClicked('${placeDetails[i].stt}')">Chi tiết</button>
+                        `<div class="place-detail-information">
+                            <b>${placeDetails[i].ad_name}</b>
+                            <p>${placeDetails[i].diachi} - ${placeDetails[i].khuvuc}</p>
+                            <p>Kích thước: ${placeDetails[i].ad_size}</p>
+                            <p>Số lượng:<b>${placeDetails[i].ad_quantity}</b></p>
+                            <p>Hình thức:<b>${placeDetails[i].hinhthuc}</b></p>
+                            <p>Phân loại:<b>${placeDetails[i].loaivt}</b></p>
                         </div>`;
 
                 console.log(popupInformationInnerHTML);
