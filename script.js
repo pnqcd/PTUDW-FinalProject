@@ -12,16 +12,41 @@ function moveMapToKHTN(map){
     map.setZoom(15);
 }
 
-function detailAdButtonClicked(abc) {
+function detailAdButtonClicked(placeID) {
+    var pInformation = document.getElementById("popupInformation");
+    var popupInformationInnerHTML = "";
+
     var popup = document.getElementById("popup");
     popup.style.display = "block";
-
-    var pInformation = document.getElementById("popupInformation");
-    pInformation.innerHTML = abc;
 
     var closePopupButton = document.getElementById("closePopup");
     closePopupButton.addEventListener("click", function() {
         popup.style.display = "none";
+    });
+
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://localhost:3000/get-ad-details/" + placeID,
+            method: "GET",
+            success: function(response) {
+                var placeDetails = response.placeDetails;
+                console.log(placeDetails);
+
+                for (var i = 0; i < placeDetails.length; i++)
+                    popupInformationInnerHTML += 
+                        `<div class="place-info">
+                            <b>${placeDetails[i].hinhthuc}</b>
+                            <p>${placeDetails[i].loaivt}</p>
+                            <p>${placeDetails[i].diachi}, ${placeDetails[i].khuvuc}</p>
+                            <b><i>${placeDetails[i].quyhoach}</i></b>
+                            <img class="img-place" src="${placeDetails[i].hinhanh}">
+                            <button class='detailedAdSign' onclick="detailAdButtonClicked('${placeDetails[i].stt}')">Chi tiết</button>
+                        </div>`;
+
+                console.log(popupInformationInnerHTML);
+                pInformation.innerHTML = popupInformationInnerHTML;
+            }
+        });
     });
 }
 
@@ -64,19 +89,19 @@ function addInfoBubble(map) {
             url: "http://localhost:3000/get-place",
             method: "GET",
             success: function(response) {
-            var place = response.place;
-            console.log(place);
-            for (var i = 0; i < place.length; i++) {
-                addMarkerToGroup(group, {lat: place[i].latitude, lng: place[i].longitude},
-                    `<div class="place-info">
-                        <b>${place[i].hinhthuc}</b>
-                        <p>${place[i].loaivt}</p>
-                        <p>${place[i].diachi}, ${place[i].khuvuc}</p>
-                        <b><i>${place[i].quyhoach}</i></b>
-                        <img class="img-place" src="${place[i].hinhanh}">
-                        <button class='detailedAdSign' onclick="detailAdButtonClicked('${place[i].stt}')">Chi tiết</button>
-                    </div>`, place[i].quyhoach);
-            }
+                var place = response.place;
+                for (var i = 0; i < place.length; i++) {
+                    addMarkerToGroup(group, {lat: place[i].latitude, lng: place[i].longitude},
+                        `<div class="place-info">
+                            <b>${place[i].hinhthuc}</b>
+                            <p>${place[i].loaivt}</p>
+                            <p>${place[i].diachi}, ${place[i].khuvuc}</p>
+                            <b><i>${place[i].quyhoach}</i></b>
+                            <img class="img-place" src="${place[i].hinhanh}">
+                            <button class='detailedAdSign' onclick="detailAdButtonClicked('${place[i].stt}')">Chi tiết</button>
+                        </div>`, place[i].quyhoach
+                    );
+                }
             }
         });
     });

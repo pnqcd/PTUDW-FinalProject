@@ -37,7 +37,7 @@ app.get('/get-ad-details/:id', (req, res) => {
             res.status(500).json({ error });
             console.log("loi roi")
         } else {
-            res.json({ place: results.rows });
+            res.json({ placeDetails: results.rows });
         }
     });
 });
