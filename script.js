@@ -1,3 +1,5 @@
+var InfoBubble;
+
 function openLogin() {
     document.querySelector('#login-section').style.display = 'flex';
 }
@@ -10,9 +12,12 @@ function moveMapToKHTN(map){
     map.setZoom(15);
 }
 
-function detailAdButtonClicked() {
+function detailAdButtonClicked(abc) {
     var popup = document.getElementById("popup");
     popup.style.display = "block";
+
+    var pInformation = document.getElementById("popupInformation");
+    pInformation.innerHTML = abc;
 
     var closePopupButton = document.getElementById("closePopup");
     closePopupButton.addEventListener("click", function() {
@@ -46,7 +51,7 @@ function addInfoBubble(map) {
     map.addObject(group);
 
     group.addEventListener('tap', function (evt) {
-        var InfoBubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
+        InfoBubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
             // read custom data
             content: evt.target.getData()
         });
@@ -60,6 +65,7 @@ function addInfoBubble(map) {
             method: "GET",
             success: function(response) {
             var place = response.place;
+            console.log(place);
             for (var i = 0; i < place.length; i++) {
                 addMarkerToGroup(group, {lat: place[i].latitude, lng: place[i].longitude},
                     `<div class="place-info">
@@ -68,7 +74,7 @@ function addInfoBubble(map) {
                         <p>${place[i].diachi}, ${place[i].khuvuc}</p>
                         <b><i>${place[i].quyhoach}</i></b>
                         <img class="img-place" src="${place[i].hinhanh}">
-                        <button class='detailedAdSign' onclick="detailAdButtonClicked()">Chi tiết</button>
+                        <button class='detailedAdSign' onclick="detailAdButtonClicked('${place[i].stt}')">Chi tiết</button>
                     </div>`, place[i].quyhoach);
             }
             }

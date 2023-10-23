@@ -27,6 +27,21 @@ app.get("/get-place", (req, res) => {
     });
 });
 
+app.get('/get-ad-details/:id', (req, res) => {
+    const placeID = req.params.id;
+    pool.query("SELECT * FROM \
+        PLACE PL JOIN PLACE_DETAILS PD on PL.STT = PD.PLACE_STT \
+        WHERE PD.PLACE_STT = " + placeID
+        , (error, results) => {
+        if (error) {
+            res.status(500).json({ error });
+            console.log("loi roi")
+        } else {
+            res.json({ place: results.rows });
+        }
+    });
+});
+
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });

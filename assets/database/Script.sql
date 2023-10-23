@@ -13,11 +13,12 @@ CREATE TABLE PLACE (
 );
 
 CREATE TABLE PLACE_DETAILS (
-	STT	SERIAL primary KEY,
+  STT	SERIAL primary KEY,
   PLACE_STT SERIAL,
   AD_NAME TEXT,
   AD_SIZE TEXT,
-  AD_QUANTITY SERIAL
+  AD_QUANTITY SERIAL,
+  CONSTRAINT fk_place_stt FOREIGN KEY(PLACE_STT) REFERENCES PLACE(STT)
 );
 
 INSERT INTO PLACE 
@@ -75,5 +76,9 @@ VALUES
   (51, 'Bến xe Bến Thành', 'Phường Nguyễn Thái Bình, Quận 1', 'Nhà chờ xe buýt', 'Xã hội hoá', '/assets/img/stt51.png', 'CHƯA HUY HOẠCH', 10.77239291160367, 106.6981830620045),
   (52, 'Điểm trung chuyển Hàm Nghi', 'Phường Bến Nghé, Quận 1', 'Nhà chờ xe buýt', 'Cổ động chính trị','/assets/img/stt52.png', 'ĐÃ HUY HOẠCH', 10.773151773808188, 106.70298958057228)
 
+INSERT INTO place_details 
+VALUES
+	(1, 2, 'Bảng quảng cáo Nowzone 1', '1.5m x 3.5', 30),
+	(2, 2, 'Bảng quảng cáo Nowzone 2', '10m x 20', 1)
 
 
