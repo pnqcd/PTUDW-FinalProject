@@ -11,7 +11,13 @@ function moveMapToKHTN(map){
 }
 
 function detailAdButtonClicked() {
-    alert("CLICKED!!!");
+    var popup = document.getElementById("popup");
+    popup.style.display = "block";
+
+    var closePopupButton = document.getElementById("closePopup");
+    closePopupButton.addEventListener("click", function() {
+        popup.style.display = "none";
+    });
 }
 
 function addMarkerToGroup(group, coordinate, html, quyhoach) {
@@ -40,12 +46,12 @@ function addInfoBubble(map) {
     map.addObject(group);
 
     group.addEventListener('tap', function (evt) {
-        var bubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
+        var InfoBubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
             // read custom data
             content: evt.target.getData()
         });
         // show info bubble
-        ui.addBubble(bubble);
+        ui.addBubble(InfoBubble);
     }, false);
 
     $(document).ready(function() {

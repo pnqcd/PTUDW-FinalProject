@@ -12,6 +12,14 @@ CREATE TABLE PLACE (
 	Longitude FLOAT8
 );
 
+CREATE TABLE PLACE_DETAILS (
+	STT	SERIAL primary KEY,
+  PLACE_STT SERIAL,
+  AD_NAME TEXT,
+  AD_SIZE TEXT,
+  AD_QUANTITY SERIAL
+);
+
 INSERT INTO PLACE 
 VALUES
   (1, '99 Nguyễn Văn Cừ', 'Phường 3, Quận 5', 'Cây xăng', 'Cổ động chính trị', '/assets/img/stt1.png', 'ĐÃ QUY HOẠCH', 10.759589, 106.683782),
