@@ -41,6 +41,20 @@ function detailAdButtonClicked(placeID) {
                             <p>Số lượng:<b>${placeDetails[i].ad_quantity}</b></p>
                             <p>Hình thức:<b>${placeDetails[i].hinhthuc}</b></p>
                             <p>Phân loại:<b>${placeDetails[i].loaivt}</b></p>
+                            <div class="placeDetailsButtonContainer">
+                                <button class="placeDetailsButton">
+                                    <img src="./assets/img/icon_info.png" width="25px" height="25px">
+                                </button>
+                            
+                                <div style="border: 2px solid #dc4f52; border-radius: 3px;">
+                                <button class="placeDetailsButton textWithImageButton">
+                                    <span>
+                                        <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
+                                    </span>
+                                    BÁO CÁO VI PHẠM
+                                </button>
+                                </div>
+                            </div>
                         </div>`;
 
                 console.log(popupInformationInnerHTML);
