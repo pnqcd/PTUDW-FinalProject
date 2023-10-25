@@ -42,9 +42,9 @@ function detailAdButtonClicked(placeID) {
                             <b>${placeDetails[i].ad_name}</b>
                             <p>${placeDetails[i].diachi} - ${placeDetails[i].khuvuc}</p>
                             <p>Kích thước: ${placeDetails[i].ad_size}</p>
-                            <p>Số lượng:<b>${placeDetails[i].ad_quantity}</b></p>
-                            <p>Hình thức:<b>${placeDetails[i].hinhthuc}</b></p>
-                            <p>Phân loại:<b>${placeDetails[i].loaivt}</b></p>
+                            <p>Số lượng: <b>${placeDetails[i].ad_quantity}</b></p>
+                            <p>Hình thức: <b>${placeDetails[i].hinhthuc}</b></p>
+                            <p>Phân loại: <b>${placeDetails[i].loaivt}</b></p>
                             <div class="placeDetailsButtonContainer">
                                 <a class="placeDetailsButton" href="${placeDetails[i].img_path}" data-lightbox="detail-pano-${placeDetails[i].stt}" data-title="Ngày hết hạn: ${formattedDate}">
                                     <img src="./assets/img/icon_info.png" width="25px" height="25px">
