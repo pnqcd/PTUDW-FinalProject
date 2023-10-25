@@ -32,7 +32,11 @@ function detailAdButtonClicked(placeID) {
                 var placeDetails = response.placeDetails;
                 console.log(placeDetails);
 
-                for (var i = 0; i < placeDetails.length; i++)
+                for (var i = 0; i < placeDetails.length; i++) {
+                    var jsDate = new Date(placeDetails[i].expire_date);
+                    var options = { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' };
+                    var formattedDate = jsDate.toLocaleDateString('vi-VN', options);
+
                     popupInformationInnerHTML += 
                         `<div class="place-detail-information">
                             <b>${placeDetails[i].ad_name}</b>
@@ -42,9 +46,9 @@ function detailAdButtonClicked(placeID) {
                             <p>Hình thức:<b>${placeDetails[i].hinhthuc}</b></p>
                             <p>Phân loại:<b>${placeDetails[i].loaivt}</b></p>
                             <div class="placeDetailsButtonContainer">
-                                <button class="placeDetailsButton">
+                                <a class="placeDetailsButton" href="${placeDetails[i].img_path}" data-lightbox="detail-pano-${placeDetails[i].stt}" data-title="Ngày hết hạn: ${formattedDate}">
                                     <img src="./assets/img/icon_info.png" width="25px" height="25px">
-                                </button>
+                                </a>
                             
                                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
                                 <button class="placeDetailsButton textWithImageButton">
@@ -56,6 +60,7 @@ function detailAdButtonClicked(placeID) {
                                 </div>
                             </div>
                         </div>`;
+                }
 
                 console.log(popupInformationInnerHTML);
                 pInformation.innerHTML = popupInformationInnerHTML;
@@ -151,7 +156,7 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 // Create the default UI components
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
-  // Now use the map as required...
+// Now use the map as required...
 window.onload = function () {
     moveMapToKHTN(map);
 }
