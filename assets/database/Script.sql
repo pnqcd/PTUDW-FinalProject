@@ -78,7 +78,33 @@ VALUES
 
 INSERT INTO place_details 
 VALUES
-	(1, 2, 'Bảng quảng cáo Nowzone 1', '1.5m x 3.5', 30),
-	(2, 2, 'Bảng quảng cáo Nowzone 2', '10m x 20', 1)
-
-
+	(1, 2, 'Bảng quảng cáo Nowzone 1', '1.5m x 3.5m', 30),
+	(2, 2, 'Bảng quảng cáo Nowzone 2', '10m x 20m', 1),
+  (3, 3, 'Biển quảng cáo ngoài trời', '15m x 30m', 1),
+  (4, 8, 'Biển quảng cáo di động', '3m x 6m', 3),
+  (5, 8, 'Khung quảng cáo lớn', '8m x 16m', 2),
+  (6, 1, 'Biển quảng cáo nhỏ', '5m x 10m', 2),
+  (7, 1, 'Ribbon quảng cáo lớn', '3m x 10m', 1),
+  (8, 13, 'Bảng quảng cáo lớn', '10m x 20m', 2),
+  (9, 13, 'Khung quảng cáo nhỏ', '3m x 5m', 5),
+  (10, 27, 'Trụ, cụm pano', '3m x 10m', 4),
+  (11, 27, 'Ruy băng quảng cáo', '5m x 15m', 2),
+  (12, 19, 'Trụ quảng cáo di động', '5m x 5m', 3),
+  (13, 19, 'Bảng quảng cáo LED', '5m x 10m', 1),
+  (14, 5, 'Trụ quảng cáo di động', '5m x 7m', 3),
+  (15, 5, 'Ruy băng quảng cáo', '3m x 10m', 4),
+  (16, 5, 'Trụ, cụm pano', '4m x 8m', 2),
+  (17, 4, 'Biển quảng cáo di động', '3m x 3m', 5),
+  (18, 4, 'Màn hình quảng cáo LED', '5m x 7m', 3),
+  (19, 17, 'Màn hình quảng cáo LED', '5m x 10m', 1),
+  (20, 17, 'Trụ, cụm pano', '3m x 3m', 3),
+  (21, 17, 'Bảng quảng cáo di động', '2m x 4m', 3),
+  (22, 34, 'Bảng quảng cáo LED lớn', '10m x 20m', 2),
+  (23, 34, 'Trụ quảng cáo di động', '5m x 7m', 10),
+  (24, 34, 'Ruy băng quảng cáo', '3m x 5m', 5),
+  (25, 48, 'Trụ, cụm pano', '3m x 5m', 5),
+  (26, 48, 'Bảng quảng cáo lớn', '5m x 8m', 2),
+  (27, 50, 'Màn hình quảng cáo LED', '10m x 20m', 2),
+  (28, 50, 'Bảng quảng ngoài trời lớn', '20m x 30m', 2),
+  (29, 40, 'Ruy băng quảng cáo lớn', '10m x 20m', 4),
+  (30, 40, 'Bảng quảng cáo di động', '5m x 7m', 5)
