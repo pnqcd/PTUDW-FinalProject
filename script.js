@@ -1,4 +1,10 @@
 var InfoBubble;
+const rightPanel = document.getElementById('rightPanel');
+const dataAdDetailsInnerHTML = document.getElementById('content-right-panel-detail-ad');
+
+function closeAdDetailRightSidePanel() {
+    rightPanel.classList.remove('show');
+}
 
 function openLogin() {
     document.querySelector('#login-section').style.display = 'flex';
@@ -13,16 +19,18 @@ function moveMapToKHTN(map){
 }
 
 function detailAdButtonClicked(placeID) {
+    rightPanel.classList.add('show');
+
     var pInformation = document.getElementById("popupInformation");
     var popupInformationInnerHTML = "";
 
-    var popup = document.getElementById("popup");
-    popup.style.display = "block";
+    // var popup = document.getElementById("popup");
+    // popup.style.display = "block";
 
-    var closePopupButton = document.getElementById("closePopup");
-    closePopupButton.addEventListener("click", function() {
-        popup.style.display = "none";
-    });
+    // var closePopupButton = document.getElementById("closePopup");
+    // closePopupButton.addEventListener("click", function() {
+    //     popup.style.display = "none";
+    // });
 
     $(document).ready(function() {
         $.ajax({
@@ -62,8 +70,10 @@ function detailAdButtonClicked(placeID) {
                         </div>`;
                 }
 
-                console.log(popupInformationInnerHTML);
-                pInformation.innerHTML = popupInformationInnerHTML;
+                // console.log(popupInformationInnerHTML);
+                // pInformation.innerHTML = popupInformationInnerHTML;
+                dataAdDetailsInnerHTML.innerHTML = '<span class="close-button" id="closeButton" onclick="closeAdDetailRightSidePanel()">X</span><h2>Thông tin chi tiết</h2>' + popupInformationInnerHTML;
+                console.log(dataAdDetailsInnerHTML.innerHTML);
             }
         });
     });
