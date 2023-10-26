@@ -230,11 +230,11 @@
 .placeDetailsButtonContainer {
     display: flex;
     justify-content: space-between;
-    margin-top: 5px;;
+    margin-top: 5px;
 }
 
 .placeDetailsButton{
-    background-color: white;
+    background-color: inherit;
     cursor: pointer;
 }
 
