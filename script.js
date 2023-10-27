@@ -142,8 +142,9 @@ function addInfoBubble(map) {
     //     '<div class="place-info"><p>Cây xăng</p></div>');
 }
 
+const apiKey = "ylfzo_XrCL0wFOWqMdk89chLwml3by9ZPi5U6J-S3EU";
 var platform = new H.service.Platform({
-    apikey: "ylfzo_XrCL0wFOWqMdk89chLwml3by9ZPi5U6J-S3EU"
+    apikey: apiKey
 });
 var defaultLayers = platform.createDefaultLayers(
     {
@@ -151,7 +152,6 @@ var defaultLayers = platform.createDefaultLayers(
     }
 );
 
-//Step 2: initialize a map - this map is centered over Europe
 var map = new H.Map(document.getElementById('map'),
     defaultLayers.vector.normal.map,{
     center: {lat:10.76316473604989, lng:106.68238541539267},
@@ -173,3 +173,43 @@ window.onload = function () {
 
   // Now use the map as required...
 addInfoBubble(map);
+
+
+var bubble;
+map.addEventListener('tap', function (evt) {
+    let {lat,lng} = map.screenToGeo (
+        evt.currentPointer.viewportX,
+        evt.currentPointer.viewportY,
+    );
+    // console.log(lat, lng);
+    const url = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat}%2C${lng}&lang=vi-VN&apiKey=${apiKey}`;
+    fetch(url)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+        if (data.items && data.items.length > 0) {
+            var address = data.items[0].address;
+            // alert('Địa chỉ: ' + address);
+            let content = '<div style="width:250px"><b>Thông tin địa điểm</b> <br />' + address.label + '</div>';
+
+            // Create a bubble, if not created yet
+            if (!bubble) {
+                bubble = new H.ui.InfoBubble({lat, lng}, {
+                    content: content
+                });
+                ui.addBubble(bubble);
+            } else {
+                // Reuse existing bubble object
+                bubble.setPosition({lat, lng});
+                bubble.setContent(content);
+                bubble.open();
+            }
+        } else {
+            alert('Không tìm thấy địa chỉ cho tọa độ này.');
+        }
+        })
+        .catch(function(error) {
+            console.error(error);
+        });
+});
