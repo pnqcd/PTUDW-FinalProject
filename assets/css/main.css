@@ -278,10 +278,15 @@
 
 .info-place-bubble div:first-child {
     background-color: #DCFFEC !important;
+    bottom: -150px;
+}
+.info-place-bubble .H_ib_tail {
+    display: none;
 }
 .info-place-bubble .H_ib_tail::after {
     border-color: #DCFFEC transparent !important;
 }
+
 .H_ib_body {
     /* background-color: #DCFFEC !important; */
 }

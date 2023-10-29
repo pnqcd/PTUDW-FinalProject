@@ -94,9 +94,7 @@ function addMarkerToGroup(group, coordinate, html, quyhoach) {
     var marker = new H.map.Marker(coordinate,{icon: icon});
     // add custom data to the marker
     marker.setData(html);
-    group.addObject(marker);
-
-    
+    group.addObject(marker);    
 }
 
 function addInfoBubble(map) {
@@ -186,7 +184,6 @@ map.addEventListener('tap', function (evt) {
             var address = data.items[0].address;
             // alert('Địa chỉ: ' + address);
             let content = '<div style="width:250px;"><i class="fa-regular fa-circle-check" style="color: #00a832; margin-right:5px;"></i><b>Thông tin địa điểm</b> <br />' + address.label + '</div>';
-            let className = 'info-place-bubble';
             // Create a bubble, if not created yet
             if (!bubble) {
                 bubble = new H.ui.InfoBubble({lat, lng}, {
