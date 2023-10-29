@@ -275,3 +275,16 @@
 .right-panel.show {
     right: 0;
 }
+
+.info-place-bubble div:first-child {
+    background-color: #DCFFEC !important;
+}
+.info-place-bubble .H_ib_tail::after {
+    border-color: #DCFFEC transparent !important;
+}
+.H_ib_body {
+    /* background-color: #DCFFEC !important; */
+}
+.H_ib.H_ib_top .H_ib_tail::after {
+    /* border-color: #DCFFEC transparent !important; */
+}

@@ -134,12 +134,6 @@ function addInfoBubble(map) {
             }
         });
     });
-
-    // addMarkerToGroup(group, {lat: 10.764171, lng: 106.682503},
-    //     '<div class="place-info"><p>Nowzone Fashion Mall</p></div>');
-
-    // addMarkerToGroup(group, {lat: 10.759589, lng: 106.683782},
-    //     '<div class="place-info"><p>Cây xăng</p></div>');
 }
 
 const apiKey = "ylfzo_XrCL0wFOWqMdk89chLwml3by9ZPi5U6J-S3EU";
@@ -191,13 +185,15 @@ map.addEventListener('tap', function (evt) {
         if (data.items && data.items.length > 0) {
             var address = data.items[0].address;
             // alert('Địa chỉ: ' + address);
-            let content = '<div style="width:250px"><b>Thông tin địa điểm</b> <br />' + address.label + '</div>';
-
+            let content = '<div style="width:250px;"><i class="fa-regular fa-circle-check" style="color: #00a832; margin-right:5px;"></i><b>Thông tin địa điểm</b> <br />' + address.label + '</div>';
+            let className = 'info-place-bubble';
             // Create a bubble, if not created yet
             if (!bubble) {
                 bubble = new H.ui.InfoBubble({lat, lng}, {
-                    content: content
+                    content: content,
+                    className: className,
                 });
+                bubble.addClass(className);
                 ui.addBubble(bubble);
             } else {
                 // Reuse existing bubble object
@@ -205,6 +201,8 @@ map.addEventListener('tap', function (evt) {
                 bubble.setContent(content);
                 bubble.open();
             }
+            var bubbleElement = bubble.getElement();
+            bubbleElement.classList.add(className);
         } else {
             alert('Không tìm thấy địa chỉ cho tọa độ này.');
         }
