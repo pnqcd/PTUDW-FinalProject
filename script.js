@@ -90,7 +90,6 @@ function addMarkerToGroup(group, coordinate, html, quyhoach) {
     </svg>`;
     const icon = new H.map.Icon(iconUrl);
 
-
     var marker = new H.map.Marker(coordinate,{icon: icon});
     // add custom data to the marker
     marker.setData(html);
@@ -167,13 +166,21 @@ window.onload = function () {
 addInfoBubble(map);
 
 
-var bubble;
+let bubble, marker, bubbleElement, bubbleClose;
 map.addEventListener('tap', function (evt) {
     let {lat,lng} = map.screenToGeo (
         evt.currentPointer.viewportX,
         evt.currentPointer.viewportY,
     );
-    // console.log(lat, lng);
+    const iconUrl = `<svg width="22" height="38" viewBox="0 0 22 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M11 0.336562C5.08359 0.336562 0.287342 5.13281 0.287342 11.0492C0.291639 12.8656 0.75781 14.6513 1.19203 15.4447L11 37.6634L20.3736 16.2381H20.3687C21.2491 14.6503 21.7115 12.8648 21.7126 11.0492C21.7127 5.13281 16.9164 0.336562 11 0.336562ZM11 5.69281C11.7034 5.69281 12.3999 5.83136 13.0498 6.10055C13.6996 6.36973 14.2901 6.76429 14.7875 7.26168C15.2849 7.75907 15.6794 8.34955 15.9486 8.99942C16.2177 9.64929 16.3563 10.3458 16.3562 11.0492C16.3562 12.4698 15.7919 13.8322 14.7874 14.8367C13.7829 15.8412 12.4206 16.4055 11 16.4055C9.57943 16.4055 8.21705 15.8412 7.21256 14.8367C6.20807 13.8322 5.64375 12.4698 5.64375 11.0492C5.64375 9.62865 6.20807 8.26627 7.21256 7.26178C8.21705 6.25729 9.57943 5.69297 11 5.69297V5.69281Z" fill="#FF0000"/>
+    </svg>`;
+    const icon = new H.map.Icon(iconUrl);
+    marker = new H.map.Marker({lat, lng}, {icon: icon});
+    // var group = new H.map.Group();
+    // map.addObject(group);
+    map.addObject(marker);
+
     const url = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat}%2C${lng}&lang=vi-VN&apiKey=${apiKey}`;
     fetch(url)
         .then(function(response) {
@@ -198,7 +205,8 @@ map.addEventListener('tap', function (evt) {
                 bubble.setContent(content);
                 bubble.open();
             }
-            var bubbleElement = bubble.getElement();
+            bubbleElement = bubble.getElement();
+            bubbleClose = bubbleElement.querySelector('.H_ib_close');
             bubbleElement.classList.add(className);
         } else {
             alert('Không tìm thấy địa chỉ cho tọa độ này.');
@@ -208,3 +216,16 @@ map.addEventListener('tap', function (evt) {
             console.error(error);
         });
 });
+
+// document.querySelectorAll(".info-place-bubble .H_ib_close").forEach(bubbleClose => 
+//     bubbleClose.addEventListener("click", () => map.removeObject(marker)),
+// )
+
+console.log(bubble);
+console.log(bubbleClose);
+if (bubbleClose) {
+    bubbleClose.addEventListener('click', function() {
+        console.log("haha");
+        marker.setVisibility(false);
+    });
+}
