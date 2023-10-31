@@ -22,6 +22,7 @@
     <script src="./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
     <script src="./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="./node_modules/filepond/dist/filepond.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <header class="header">
@@ -177,6 +178,11 @@
 
                     <label for="adBannerReportUploader" class="formbold-form-label" style="margin-top: 18px;"> Tải lên hình ảnh (tối đa 2 hình) </label>
                     <input type="file" name="adBannerReportUploader" id="adBannerReportUploader"  class="formbold-form-input" multiple>
+
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                    </div>
+
                     <button class="formbold-btn">
                         Send Message
                     </button>
