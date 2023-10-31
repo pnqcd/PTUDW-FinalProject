@@ -1,3 +1,8 @@
+tinymce.init({
+    selector: 'textarea#message',
+    plugins: 'lists link image table code help wordcount'
+});
+
 var InfoBubble;
 const rightPanel = document.getElementById('rightPanel');
 const dataAdDetailsInnerHTML = document.getElementById('content-right-panel-detail-ad');
