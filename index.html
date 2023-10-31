@@ -175,7 +175,8 @@
                     </div> -->
                     <!-- <input type="file" id="upload"/> -->
 
-                    <input type="file" id="adBannerReportUploader" multiple>
+                    <label for="adBannerReportUploader" class="formbold-form-label" style="margin-top: 18px;"> Tải lên hình ảnh (tối đa 2 hình) </label>
+                    <input type="file" name="adBannerReportUploader" id="adBannerReportUploader"  class="formbold-form-input" multiple>
                     <button class="formbold-btn">
                         Send Message
                     </button>
@@ -192,7 +193,7 @@
         FilePond.registerPlugin(FilePondPluginImagePreview);
         FilePond.registerPlugin(FilePondPluginFileValidateType);
         const inputElement = document.getElementById("adBannerReportUploader");
-        const pond = FilePond.create(inputElement, {acceptedFileTypes: ['image/*'],}); 
+        const pond = FilePond.create(inputElement, {acceptedFileTypes: ['image/*'], maxFiles: 2}); 
     </script>
 </body>
 </html>
