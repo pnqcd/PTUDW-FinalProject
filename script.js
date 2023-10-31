@@ -2,6 +2,11 @@ var InfoBubble;
 const rightPanel = document.getElementById('rightPanel');
 const dataAdDetailsInnerHTML = document.getElementById('content-right-panel-detail-ad');
 
+var reportAdBannerDialog = document.getElementById("reportAdBannerDialog");
+var closeButtonAdBannerDialog = document.getElementsByClassName("closeAdBannerDialog")[0];
+
+closeButtonAdBannerDialog.onclick = function() {reportAdBannerDialog.style.display = "none";}
+
 function closeAdDetailRightSidePanel() {
     rightPanel.classList.remove('show');
 }
@@ -16,6 +21,10 @@ function closeLogin() {
 function moveMapToKHTN(map){
     map.setCenter({lat:10.76316473604989, lng:106.68238541539267});
     map.setZoom(15);
+}
+
+function onReportAdBannerClicked() {
+    reportAdBannerDialog.style.display = "block";
 }
 
 function detailAdButtonClicked(placeID) {
@@ -59,7 +68,7 @@ function detailAdButtonClicked(placeID) {
                                 </a>
                             
                                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                                <button class="placeDetailsButton textWithImageButton">
+                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked()">
                                     <span>
                                         <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                                     </span>
