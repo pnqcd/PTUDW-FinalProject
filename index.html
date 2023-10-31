@@ -12,11 +12,16 @@
     <link rel="stylesheet" href="./assets/fonts/fontawesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
     <link rel="stylesheet" href="../assets/lightbox2/css/lightbox.min.css">
+    <link href="./node_modules/filepond/dist/filepond.css" rel="stylesheet" />
+    <link href="./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <script src="./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+    <script src="./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script src="./node_modules/filepond/dist/filepond.js"></script>
 </head>
 <body>
     <header class="header">
@@ -124,7 +129,7 @@
                         ></textarea>
                         <label for="message" class="formbold-form-label"> Nội dung báo cáo </label>
                     </div>
-                    <div class="formbold-input-file">
+                    <!-- <div class="formbold-input-file">
                         <div class="formbold-filename-wrapper">
                             <span class="formbold-filename">
                                 website-information-architecture.pdf
@@ -167,7 +172,10 @@
                             Attach files
                             <input type="file" name="upload" id="upload">
                         </label>
-                    </div>
+                    </div> -->
+                    <!-- <input type="file" id="upload"/> -->
+
+                    <input type="file" id="adBannerReportUploader" multiple>
                     <button class="formbold-btn">
                         Send Message
                     </button>
@@ -180,5 +188,11 @@
     <script src="../assets/lightbox2/js/lightbox-plus-jquery.min.js"></script>
     <script type="application/javascript" src= "./node_modules/tinymce/tinymce.min.js"></script>
     <script type="text/javascript" src="./script.js"></script>
+    <script>
+        FilePond.registerPlugin(FilePondPluginImagePreview);
+        FilePond.registerPlugin(FilePondPluginFileValidateType);
+        const inputElement = document.getElementById("adBannerReportUploader");
+        const pond = FilePond.create(inputElement, {acceptedFileTypes: ['image/*'],}); 
+    </script>
 </body>
 </html>
