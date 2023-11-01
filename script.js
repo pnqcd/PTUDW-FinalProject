@@ -181,7 +181,6 @@ addInfoBubble(map);
 
 
 let bubble, marker, bubbleElement, bubbleClose;
-let isCloseIb = false;
 map.addEventListener('tap', function (evt) {
     if (bubble) {
         marker.setVisibility(false);
@@ -195,8 +194,6 @@ map.addEventListener('tap', function (evt) {
     </svg>`;
     const icon = new H.map.Icon(iconUrl);
     marker = new H.map.Marker({lat, lng}, {icon: icon});
-    // var group = new H.map.Group();
-    // map.addObject(group);
     map.addObject(marker);
     const url = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat}%2C${lng}&lang=vi-VN&apiKey=${apiKey}`;
     fetch(url)
@@ -204,52 +201,36 @@ map.addEventListener('tap', function (evt) {
             return response.json();
         })
         .then(function(data) {
-        if (data.items && data.items.length > 0) {
-            var address = data.items[0].address;
-            // alert('Địa chỉ: ' + address);
-            let content = '<div style="width:250px;"><i class="fa-regular fa-circle-check" style="color: #00a832; margin-right:5px;"></i><b>Thông tin địa điểm</b> <br />' + address.label + '</div>';
-            let className = 'info-place-bubble';
-            // Create a bubble, if not created yet
-            if (!bubble) {
-                bubble = new H.ui.InfoBubble({lat, lng}, {
-                    content: content,
-                    className: className,
-                });
-                ui.addBubble(bubble);
-            } else {
-                // Reuse existing bubble object
-                bubble.setPosition({lat, lng});
-                bubble.setContent(content);
-                bubble.open();
-            }
-            bubbleElement = bubble.getElement();
-            bubbleElement.classList.add(className);
-            bubbleClose = bubbleElement.querySelector('.H_ib_close.H_btn');
+            if (data.items && data.items.length > 0) {
+                var address = data.items[0].address;
+                let content = '<div style="width:250px;"><i class="fa-regular fa-circle-check" style="color: #00a832; margin-right:5px;"></i><b>Thông tin địa điểm</b> <br />' + address.label + '</div>';
+                let className = 'info-place-bubble';
+                // Create a bubble, if not created yet
+                if (!bubble) {
+                    bubble = new H.ui.InfoBubble({lat, lng}, {
+                        content: content,
+                        className: className,
+                    });
+                    ui.addBubble(bubble);
+                } else {
+                    // Reuse existing bubble object
+                    bubble.setPosition({lat, lng});
+                    bubble.setContent(content);
+                    bubble.open();
+                }
+                bubbleElement = bubble.getElement();
+                bubbleElement.classList.add(className);
 
-            // if (!isCloseIb) evt.stopImmediatePropagation();
-            bubbleClose.addEventListener('click', function() {
-                console.log("haha");
-                marker.setVisibility(false);
-                isCloseIb = false;
-            });
-            // if (bubbleClose) isCloseIb();
-            // console.log(bubbleClose);
-        } else {
-            alert('Không tìm thấy địa chỉ cho tọa độ này.');
-        }
+                bubble.addEventListener('statechange', function(evt) {
+                    if (evt.target.getState() === H.ui.InfoBubble.State.CLOSED) {
+                        marker.setVisibility(false);
+                    }
+                })
+            } else {
+                alert('Không tìm thấy địa chỉ cho tọa độ này.');
+            }
         })
         .catch(function(error) {
             console.error(error);
         });
 });
-
-// document.querySelectorAll(".info-place-bubble .H_ib_close").forEach(bubbleClose => 
-//     bubbleClose.addEventListener("click", () => map.removeObject(marker)),
-// )
-
-// function isCloseIb() {
-    // bubbleClose.addEventListener('click', function() {
-    //     console.log("haha");
-    //     marker.setVisibility(false);
-    // });
-// }
