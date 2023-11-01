@@ -181,7 +181,11 @@ addInfoBubble(map);
 
 
 let bubble, marker, bubbleElement, bubbleClose;
+let isCloseIb = false;
 map.addEventListener('tap', function (evt) {
+    if (bubble) {
+        marker.setVisibility(false);
+    }
     let {lat,lng} = map.screenToGeo (
         evt.currentPointer.viewportX,
         evt.currentPointer.viewportY,
@@ -194,7 +198,6 @@ map.addEventListener('tap', function (evt) {
     // var group = new H.map.Group();
     // map.addObject(group);
     map.addObject(marker);
-
     const url = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat}%2C${lng}&lang=vi-VN&apiKey=${apiKey}`;
     fetch(url)
         .then(function(response) {
@@ -220,8 +223,17 @@ map.addEventListener('tap', function (evt) {
                 bubble.open();
             }
             bubbleElement = bubble.getElement();
-            bubbleClose = bubbleElement.querySelector('.H_ib_close');
             bubbleElement.classList.add(className);
+            bubbleClose = bubbleElement.querySelector('.H_ib_close.H_btn');
+
+            // if (!isCloseIb) evt.stopImmediatePropagation();
+            bubbleClose.addEventListener('click', function() {
+                console.log("haha");
+                marker.setVisibility(false);
+                isCloseIb = false;
+            });
+            // if (bubbleClose) isCloseIb();
+            // console.log(bubbleClose);
         } else {
             alert('Không tìm thấy địa chỉ cho tọa độ này.');
         }
@@ -235,11 +247,9 @@ map.addEventListener('tap', function (evt) {
 //     bubbleClose.addEventListener("click", () => map.removeObject(marker)),
 // )
 
-console.log(bubble);
-console.log(bubbleClose);
-if (bubbleClose) {
-    bubbleClose.addEventListener('click', function() {
-        console.log("haha");
-        marker.setVisibility(false);
-    });
-}
+// function isCloseIb() {
+    // bubbleClose.addEventListener('click', function() {
+    //     console.log("haha");
+    //     marker.setVisibility(false);
+    // });
+// }
