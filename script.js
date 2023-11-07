@@ -16,6 +16,27 @@ function closeAdDetailRightSidePanel() {
     rightPanel.classList.remove('show');
 }
 
+function sendAdBannerReportButtonClicked() {
+    console.log(document.getElementById('firstname').value);
+
+    var name = document.getElementById('firstname').value;
+    var email = document.getElementById('email').value;
+    var phone = document.getElementById('phone').value;
+    var editor = tinymce.get("message").getContent();
+    Toastify({
+        text: editor,
+        duration: 3000,
+        newWindow: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "left", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+        background: "rgb(83, 165, 81)",
+        },
+        onClick: function(){} // Callback after click
+    }).showToast();
+}
+
 function openLogin() {
     document.querySelector('#login-section').style.display = 'flex';
 }
@@ -86,7 +107,9 @@ function detailAdButtonClicked(placeID) {
 
                 // console.log(popupInformationInnerHTML);
                 // pInformation.innerHTML = popupInformationInnerHTML;
-                dataAdDetailsInnerHTML.innerHTML = '<span class="close-button" id="closeButton" onclick="closeAdDetailRightSidePanel()">X</span><h2>Thông tin chi tiết</h2>' + popupInformationInnerHTML;
+                // dataAdDetailsInnerHTML.innerHTML = '<span class="close-button" id="closeButton" onclick="closeAdDetailRightSidePanel()">X</span><h2>Thông tin chi tiết</h2>' + popupInformationInnerHTML;
+                // <span class="closeAdBannerDialog">&times;</span>
+                dataAdDetailsInnerHTML.innerHTML = '<span class="close-button" id="closeButton" onclick="closeAdDetailRightSidePanel()">&times;</span><h2>Thông tin chi tiết</h2>' + popupInformationInnerHTML;
                 console.log(dataAdDetailsInnerHTML.innerHTML);
             }
         });

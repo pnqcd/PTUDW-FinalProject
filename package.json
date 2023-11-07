@@ -15,6 +15,7 @@
     "filepond-plugin-file-validate-type": "^1.2.8",
     "filepond-plugin-image-preview": "^4.6.11",
     "pg": "^8.11.3",
-    "tinymce": "^6.7.2"
+    "tinymce": "^6.7.2",
+    "toastify-js": "^1.12.0"
   }
 }
