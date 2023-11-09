@@ -23,18 +23,7 @@ function sendAdBannerReportButtonClicked() {
     var email = document.getElementById('email').value;
     var phone = document.getElementById('phone').value;
     var editor = tinymce.get("message").getContent();
-    Toastify({
-        text: editor,
-        duration: 3000,
-        newWindow: true,
-        gravity: "bottom", // `top` or `bottom`
-        position: "left", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-        background: "rgb(83, 165, 81)",
-        },
-        onClick: function(){} // Callback after click
-    }).showToast();
+    
 
     // // Check browser support
     // if (typeof(Storage) !== "undefined") {
