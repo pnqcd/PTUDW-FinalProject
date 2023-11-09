@@ -35,6 +35,14 @@ function sendAdBannerReportButtonClicked() {
         },
         onClick: function(){} // Callback after click
     }).showToast();
+
+    // // Check browser support
+    // if (typeof(Storage) !== "undefined") {
+    //     localStorage.setItem("lastname", "Smith");
+    //     document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+    // } else {
+    //     document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+    // }
 }
 
 function openLogin() {
