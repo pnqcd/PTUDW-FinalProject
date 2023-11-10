@@ -77,8 +77,8 @@
                 <!-- Author: FormBold Team -->
                 <!-- Learn More: https://formbold.com -->
                 <div class="formbold-form-wrapper">
-                    <!-- <form action="http://localhost:3000/submit" method="POST"> -->
-                    <form id="adBannerDialogReportForm"></form>
+                    <form action="http://localhost:3000/submit" method="POST">
+                    <!-- <form id="adBannerDialogReportForm"></form> -->
                         <div class="formbold-input-flex">
                             <div>
                                 <input
@@ -185,10 +185,9 @@
                         <div class="g-recaptcha" data-sitekey="6LdCxQQpAAAAAAJ8pjtCR8mpE46QGEi_vCQog1KL"></div>
                     </div>
 
-                    <!-- <button class="formbold-btn" onclick="sendAdBannerReportButtonClicked()">
+                    <button class="formbold-btn" onclick="sendAdBannerReportButtonClicked()">
                         Gửi báo cáo
-                    </button> -->
-                    <input type="submit" value="Gửi báo cáo" class="formbold-btn">
+                    </button>
                     </form>
                 </div>
             </div>
@@ -205,27 +204,8 @@
         const pond = FilePond.create(inputElement, {acceptedFileTypes: ['image/*'], maxFiles: 2}); 
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script> 
-        $(function(){ 
-            $("#adBannerDialogReportForm").submit(function(){ // triggers on form submit 
-                alert("abc");
-                $.ajax({ 
-                    'url':'http://localhost:3000/submit', 
-                    'type':'POST', 
-                    'data':$("#adBannerDialogReportForm").serialize(), 
-                    'success':function() {  
-                        // success 
-                        alert('form sent'); 
-                    }, 
-                    'error':function(e) { 
-                        //failed 
-                        alert('failed'); 
-                    } 
-                }); 
-                return false; 
-            }); 
-        }); 
+        
         </script> 
 </body>
 </html>

@@ -24,6 +24,19 @@ function sendAdBannerReportButtonClicked() {
     var phone = document.getElementById('phone').value;
     var editor = tinymce.get("message").getContent();
     
+    var formData = new FormData(document.getElementById('adBannerDialogReportForm'));
+    
+    fetch('http://localhost:3000/submit', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("form submitted: ", data);
+    })
+    .catch(error => {
+        console.log('ERROR: ', error);
+    });
 
     // // Check browser support
     // if (typeof(Storage) !== "undefined") {
