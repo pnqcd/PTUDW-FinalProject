@@ -16,6 +16,37 @@ function closeAdDetailRightSidePanel() {
     rightPanel.classList.remove('show');
 }
 
+function sendAdBannerReportButtonClicked() {
+    console.log(document.getElementById('firstname').value);
+
+    var name = document.getElementById('firstname').value;
+    var email = document.getElementById('email').value;
+    var phone = document.getElementById('phone').value;
+    var editor = tinymce.get("message").getContent();
+    
+    var formData = new FormData(document.getElementById('adBannerDialogReportForm'));
+    
+    fetch('http://localhost:3000/submit', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("form submitted: ", data);
+    })
+    .catch(error => {
+        console.log('ERROR: ', error);
+    });
+
+    // // Check browser support
+    // if (typeof(Storage) !== "undefined") {
+    //     localStorage.setItem("lastname", "Smith");
+    //     document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+    // } else {
+    //     document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+    // }
+}
+
 function openLogin() {
     document.querySelector('#login-section').style.display = 'flex';
 }
@@ -86,7 +117,9 @@ function detailAdButtonClicked(placeID) {
 
                 // console.log(popupInformationInnerHTML);
                 // pInformation.innerHTML = popupInformationInnerHTML;
-                dataAdDetailsInnerHTML.innerHTML = '<span class="close-button" id="closeButton" onclick="closeAdDetailRightSidePanel()">X</span><h2>Thông tin chi tiết</h2>' + popupInformationInnerHTML;
+                // dataAdDetailsInnerHTML.innerHTML = '<span class="close-button" id="closeButton" onclick="closeAdDetailRightSidePanel()">X</span><h2>Thông tin chi tiết</h2>' + popupInformationInnerHTML;
+                // <span class="closeAdBannerDialog">&times;</span>
+                dataAdDetailsInnerHTML.innerHTML = '<span class="close-button" id="closeButton" onclick="closeAdDetailRightSidePanel()">&times;</span><h2>Thông tin chi tiết</h2>' + popupInformationInnerHTML;
                 console.log(dataAdDetailsInnerHTML.innerHTML);
             }
         });

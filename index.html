@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../assets/lightbox2/css/lightbox.min.css">
     <link href="./node_modules/filepond/dist/filepond.css" rel="stylesheet" />
     <link href="./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
@@ -76,7 +77,8 @@
                 <!-- Author: FormBold Team -->
                 <!-- Learn More: https://formbold.com -->
                 <div class="formbold-form-wrapper">
-                    <form action="https://formbold.com/s/FORM_ID" method="POST">
+                    <form action="http://localhost:3000/submit" method="POST">
+                    <!-- <form id="adBannerDialogReportForm"></form> -->
                         <div class="formbold-input-flex">
                             <div>
                                 <input
@@ -180,11 +182,11 @@
                     <input type="file" name="adBannerReportUploader" id="adBannerReportUploader"  class="formbold-form-input" multiple>
 
                     <div style="display: flex; align-items: center; justify-content: center;">
-                        <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                        <div class="g-recaptcha" data-sitekey="6LdCxQQpAAAAAAJ8pjtCR8mpE46QGEi_vCQog1KL"></div>
                     </div>
 
-                    <button class="formbold-btn">
-                        Send Message
+                    <button class="formbold-btn" onclick="sendAdBannerReportButtonClicked()">
+                        Gửi báo cáo
                     </button>
                     </form>
                 </div>
@@ -201,5 +203,9 @@
         const inputElement = document.getElementById("adBannerReportUploader");
         const pond = FilePond.create(inputElement, {acceptedFileTypes: ['image/*'], maxFiles: 2}); 
     </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script> 
+        
+        </script> 
 </body>
 </html>
