@@ -24,14 +24,6 @@ const pool = new Pool({
 });
 
 app.post('/submit', (req, res) => {
-    // console.log("sad");
-    // const { firstname, email } = req.body;
-    // Process the submitted data (e.g., save it to a database, send an email, etc.)
-    // For this example, we'll just send a response back to the user.
-    // res.send(`Received form submission. Name: ${firstname}, Email: ${email}`);
-    // res.send("abc");
-
-    const name = req.body.name;
     const response_key = req.body["g-recaptcha-response"];
     const secret_key = "6LdCxQQpAAAAAKjC5rDm3a-LuGRaiC2MVngHvY60";
     const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${response_key}`;
@@ -41,10 +33,14 @@ app.post('/submit', (req, res) => {
     })
         .then((response) => response.json())
         .then((google_response) => {
-            if (google_response.success == true)
+            if (google_response.success == true) {
+                console.log("success");
                 return res.send({response: "Successful"});
-            else   
+            } 
+            else {
+                console.log("failed");
                 return res.send({response: "Failed"});
+            }  
         })
         .catch((error) => {
             return res.json({ error });

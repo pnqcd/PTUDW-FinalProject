@@ -17,18 +17,21 @@ function closeAdDetailRightSidePanel() {
 }
 
 function sendAdBannerReportButtonClicked() {
-    console.log(document.getElementById('firstname').value);
+    event.preventDefault();
 
-    var name = document.getElementById('firstname').value;
-    var email = document.getElementById('email').value;
-    var phone = document.getElementById('phone').value;
-    var editor = tinymce.get("message").getContent();
+    // var name = document.getElementById('firstname').value;
+    // var email = document.getElementById('email').value;
+    // var phone = document.getElementById('phone').value;
+    // var editor = tinymce.get("message").getContent();
     
-    var formData = new FormData(document.getElementById('adBannerDialogReportForm'));
-    
+    // var formData = new FormData(document.getElementById('adBannerDialogReportForm'));
+
     fetch('http://localhost:3000/submit', {
         method: 'POST',
-        body: formData
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(new FormData(document.getElementById('adBannerDialogReportForm'))),
     })
     .then(response => response.json())
     .then(data => {
@@ -37,14 +40,6 @@ function sendAdBannerReportButtonClicked() {
     .catch(error => {
         console.log('ERROR: ', error);
     });
-
-    // // Check browser support
-    // if (typeof(Storage) !== "undefined") {
-    //     localStorage.setItem("lastname", "Smith");
-    //     document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-    // } else {
-    //     document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-    // }
 }
 
 function openLogin() {
