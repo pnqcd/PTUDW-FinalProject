@@ -195,10 +195,18 @@
 
     <script src="../assets/lightbox2/js/lightbox-plus-jquery.min.js"></script>
     <script type="application/javascript" src= "./node_modules/tinymce/tinymce.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
     <script type="text/javascript" src="./script.js"></script>
     <script>
         FilePond.registerPlugin(FilePondPluginImagePreview);
         FilePond.registerPlugin(FilePondPluginFileValidateType);
+        FilePond.registerPlugin(FilePondPluginFileEncode);
+        FilePond.setOptions({
+                server: {
+                    process: 'http://localhost:3000/submit-ad-banner-report-img', // Server endpoint for file upload
+                    // revert: '/revert',
+                }
+            });
         const inputElement = document.getElementById("adBannerReportUploader");
         const pond = FilePond.create(inputElement, {acceptedFileTypes: ['image/*'], maxFiles: 2}); 
     </script>

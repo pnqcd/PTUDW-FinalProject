@@ -28,6 +28,8 @@ app.post('/submit', (req, res) => {
     const secret_key = "6LdCxQQpAAAAAKjC5rDm3a-LuGRaiC2MVngHvY60";
     const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${response_key}`;
 
+    console.log(req);
+
     fetch(url, {
         method: "post",
     })
@@ -45,6 +47,10 @@ app.post('/submit', (req, res) => {
         .catch((error) => {
             return res.json({ error });
         })
+});
+
+app.post('/submit-ad-banner-report-img', (req, res) => {
+    return res.send({response: "Successful"});
 });
 
 app.get("/get-place", (req, res) => {
