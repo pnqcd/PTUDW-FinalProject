@@ -25,6 +25,7 @@ function sendAdBannerReportButtonClicked() {
     // var editor = tinymce.get("message").getContent();
     
     // var formData = new FormData(document.getElementById('adBannerDialogReportForm'));
+    tinymce.triggerSave(true,true);
 
     fetch('http://localhost:3000/submit', {
         method: 'POST',
@@ -35,10 +36,53 @@ function sendAdBannerReportButtonClicked() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log("form submitted: ", data);
+        console.log("form submitted: ", data.response);
+        if (data.response == "Successful" && data.message == "") {
+            Toastify({
+                text: "Báo cáo thành công!",
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "left", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: "#22bb33",
+                },
+                onClick: function(){} // Callback after click
+            }).showToast();
+        }
+        else {
+            Toastify({
+                text: data.message,
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "left", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: "#f0ad4e",
+                },
+                onClick: function(){} // Callback after click
+            }).showToast();
+        }
     })
     .catch(error => {
         console.log('ERROR: ', error);
+        Toastify({
+            text: 'Đã có lỗi xảy ra trong quá trình xử lý!',
+            duration: 3000,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "left", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+                background: "#bb2124",
+            },
+            onClick: function(){} // Callback after click
+        }).showToast();
     });
 }
 

@@ -28,7 +28,27 @@ app.post('/submit', (req, res) => {
     const secret_key = "6LdCxQQpAAAAAKjC5rDm3a-LuGRaiC2MVngHvY60";
     const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${response_key}`;
 
-    console.log(req);
+    let msg ="";
+
+    const name = req.body["firstname"];
+    const type = req.body["lastname"];
+    const email = req.body["email"];
+    const phone = req.body["phone"];
+    const message = req.body["message"];
+
+    if (name.trim() == "")
+        msg += "Họ tên không thể để trống!\n";
+
+    if (email.trim() == "")
+        msg += "Email không thể để trống!\n";
+
+    if (phone.trim() == "")
+        msg += "Điện thoại không thể để trống!\n";
+    
+    if (message.trim() == "")
+        msg += "Nội dung báo cáo không thể để trống!\n";
+
+    console.log(msg);
 
     fetch(url, {
         method: "post",
@@ -37,11 +57,12 @@ app.post('/submit', (req, res) => {
         .then((google_response) => {
             if (google_response.success == true) {
                 console.log("success");
-                return res.send({response: "Successful"});
+                return res.send({response: "Successful", message: msg});
             } 
             else {
                 console.log("failed");
-                return res.send({response: "Failed"});
+                msg += "Recaptcha chưa được check!\n";
+                return res.send({response: "Failed", message: msg});
             }  
         })
         .catch((error) => {
