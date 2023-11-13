@@ -225,8 +225,8 @@
                 <h6 class="text-white text-capitalize ps-3">Điểm đặt bảng quảng cáo</h6>
                 <div class="row">
                   <div class="col-6">
-                      <button class="btn bg-gradient-success toast-btn btn-outline-white" type="button"
-                          data-target="infoToast" disabled><i class="fa-solid fa-plus pe-1"></i>Add</button>
+                      <button class="btn toast-btn btn-outline-white" type="button"
+                          data-target="infoToast" style="background-color: transparent; color:transparent; border:none ; outline: none; box-shadow: none;" disabled><i class="fa-solid fa-plus pe-1"></i>Add</button>
                   </div>
                   <div class="col-6">
                       <li class="nav-item dropdown pe-3 d-flex align-items-center">
@@ -368,7 +368,7 @@
                                     </div>
                                 <div class="modal-footer"
                                     style="justify-content: space-around;">
-                                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">Chi tiết</button>
+                                    <button type="button" class="btn btn-info" data-bs-dismiss="modal" data-bs-target="#exampleModalTogglechitiet" data-bs-toggle="modal">Chi tiết</button>
                                     <button type="button" class="btn btn-success"
                                         data-bs-dismiss="modal">Xem báo cáo
                                     </button>
@@ -378,6 +378,142 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="modal fade" id="exampleModalTogglechitiet" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelchitiet"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="col-6 px-2"><h5 class="modal-title text-primary" id="staticBackdropLabel">BẢNG QUẢNG CÁO </h5></div>    
+                                <div class="col-1 px-4">
+                                <button class="btn-close toast-btn" type="button"
+                                    data-bs-dismiss="modal" aria-label="Close"
+                                    data-target="infoToast" style="margin-bottom: 0;"><i
+                                        class="fa fa-times-circle text-danger  fs-4"
+                                        aria-hidden="true"></i></button>
+                                </div>
+                            </div>                                                   
+                            <div class="modal-body">
+                              <div class="card mb-1 ">
+                                <div class="card-body">
+                                  <h5 class="text-primary">128 Trần Phú, Phường 4, Quận 5</h4>
+                                  <small>Đất tư nhân/Nhà ở riêng lẻ</small>
+                                </div>
+                              </div>
+                              <div class="container py-1">
+                                <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+                                  <ol class="carousel-indicators">
+                                    <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
+                                    <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
+                                    
+                                  </ol>
+                                  <div class="carousel-inner" role="listbox">
+                                    <div class="carousel-item active">
+                                      <div class="d-flex">
+                                      <div class="col-6">
+                                        <div class="card-body">
+                                          <h6 class="text-sm font-weight-normal mb-1">
+                                            <span class="font-weight-bold">Loại bảng quảng cáo:</span> Bảng quảng cáo LED
+                                          </h6>
+                                          <h6 class="text-sm font-weight-normal mb-1">
+                                            <span class="font-weight-bold">Kích thước: </span>
+                                            5m x 10m
+                                          </h6>
+                                          <h6 class="text-sm font-weight-normal mb-1">
+                                            <span class="font-weight-bold">Số lượng: 
+                                            </span> 1
+                                          </h6>
+                                          <h6 class="text-sm font-weight-normal mb-1">
+                                            <span class="font-weight-bold">Hình thức:
+                                            </span> Quảng cáo thương mại
+                                          </h6>
+                                          <h6 class="text-sm font-weight-normal mb-1">
+                                            <span class="font-weight-bold">Tình trạng: 
+                                            </span> Đã quy hoạch
+                                          </h6>
+                                          <h6 class="text-sm font-weight-normal mb-1">
+                                            <span class="font-weight-bold">Ngày bắt đầu hợp đồng:
+                                            </span>27/10/2023 
+                                          </h6>
+                                          <h6 class="text-sm font-weight-normal mb-1">
+                                            <span class="font-weight-bold">Ngày hết hạn hợp đồng:
+                                            </span> 27/10/2024
+                                          </h6>
+                                        </div>
+                                      </div>
+                                      <div class="col-6">
+                                        <div class="card-img py-3">
+                                          <img src="../assets/img/stt19.png" class="w-100 d-block" alt="First slide">
+                                        </div>
+                                      </div>
+                                    
+                                      </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                      <div class="d-flex">
+                                        <div class="col-6 ">
+                                          <div class="card-body">
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                              <span class="font-weight-bold">Loại bảng quảng cáo:</span> Bảng hiflex ốp tường
+                                            </h6>
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                              <span class="font-weight-bold">Kích thước: </span>
+                                              15m x 10m
+                                            </h6>
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                              <span class="font-weight-bold">Số lượng: 
+                                              </span> 1
+                                            </h6>
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                              <span class="font-weight-bold">Hình thức:
+                                              </span> Quảng cáo thương mại
+                                            </h6>
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                              <span class="font-weight-bold">Tình trạng: 
+                                              </span> Đã quy hoạch
+                                            </h6>
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                              <span class="font-weight-bold">Ngày bắt đầu hợp đồng:
+                                              </span>29/11/2023 
+                                            </h6>
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                              <span class="font-weight-bold">Ngày hết hạn hợp đồng:
+                                              </span> 29/11/2024
+                                            </h6>
+                                          </div>
+                                        </div>
+                                        <div class="col-6">
+                                          <div class="card-img py-3">
+                                            <img src="../assets/img/stt19.png" class="w-100 d-block" alt="First slide">
+                                          </div>
+                                        </div>
+                                    </div>
+                              
+                                  </div>
+                                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                  </button>
+                                  <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer"
+                                style="justify-content: space-around;">
+                                <button type="button" class="btn btn-info"
+                                data-bs-dismiss="modal" data-bs-target="#exampleModalTogglefixads" data-bs-toggle="modal">CHỈNH SỬA</button>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
                     <div class="modal fade" id="exampleModalTogglechinhsua" data-bs-backdrop="static"
                     data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelchinhsua"
                     aria-hidden="true">
