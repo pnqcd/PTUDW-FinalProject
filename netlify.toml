@@ -1,4 +1,0 @@
-[build]
-  command = "npm start"
-  publish = "."
-  timeout = 1800
