@@ -16,11 +16,20 @@ app.use(function(req, res, next) {
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
 const pool = new Pool({
-    user: "postgres",
-    host: "localhost",
-    database: "postgres",
-    password: "12345678",
+    // user: "postgres",
+    // host: "localhost",
+    // database: "postgres",
+    // password: "12345678",
+    // port: 5432
+    user: "yoaqtxvl",
+    host: "rain.db.elephantsql.com",
+    database: "yoaqtxvl",
+    password: "PPr7gzt67BbTzFagQlqq_MzwzfpzX2Hr",
     port: 5432
+    // connectionString: 'postgres://yoaqtxvl:PPr7gzt67BbTzFagQlqq_MzwzfpzX2Hr@rain.db.elephantsql.com/yoaqtxvl',
+    // ssl: {
+    //     rejectUnauthorized: false,
+    // },
 });
 
 app.post('/submit', (req, res) => {
@@ -100,6 +109,8 @@ app.get('/get-ad-details/:id', (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
