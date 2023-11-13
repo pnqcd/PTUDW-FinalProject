@@ -4,6 +4,8 @@ const { Pool } = require("pg");
 var path = require('path');
 const bodyParser = require('body-parser');
 
+require('dotenv').config();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 

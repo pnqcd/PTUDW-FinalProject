@@ -10,6 +10,7 @@
   "author": "Group4",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "filepond": "^4.30.4",
     "filepond-plugin-file-encode": "^2.1.11",
