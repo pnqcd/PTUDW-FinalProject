@@ -198,8 +198,7 @@ function addInfoBubble(map) {
 
     $(document).ready(function() {
         $.ajax({
-            // url: "http://localhost:3000/get-place",
-            url: "/get-place",
+            url: "http://localhost:3000/get-place",
             method: "GET",
             success: function(response) {
                 var place = response.place;

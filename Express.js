@@ -23,15 +23,15 @@ const pool = new Pool({
     // database: "postgres",
     // password: "12345678",
     // port: 5432
-    // user: "yoaqtxvl",
-    // host: "rain.db.elephantsql.com",
-    // database: "yoaqtxvl",
-    // password: "PPr7gzt67BbTzFagQlqq_MzwzfpzX2Hr",
-    // port: 5432
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false,
-    },
+    user: "yoaqtxvl",
+    host: "rain.db.elephantsql.com",
+    database: "yoaqtxvl",
+    password: "PPr7gzt67BbTzFagQlqq_MzwzfpzX2Hr",
+    port: 5432
+    // connectionString: process.env.DATABASE_URL,
+    // ssl: {
+    //     rejectUnauthorized: false,
+    // },
 });
 
 app.post('/submit', (req, res) => {
