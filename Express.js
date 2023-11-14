@@ -111,6 +111,10 @@ app.get('/get-ad-details/:id', (req, res) => {
     });
 });
 
+app.get('/', (req, res) => {
+    res.send('index.html');
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
