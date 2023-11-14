@@ -27,7 +27,7 @@ function sendAdBannerReportButtonClicked() {
     // /var formData = new FormData(document.getElementById('adBannerDialogReportForm'));
     tinymce.triggerSave(true,true);
 
-    fetch('http://localhost:3000/submit', {
+    fetch('/submit', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -118,7 +118,7 @@ function detailAdButtonClicked(placeID) {
 
     $(document).ready(function() {
         $.ajax({
-            url: "http://localhost:3000/get-ad-details/" + placeID,
+            url: "/get-ad-details/" + placeID,
             method: "GET",
             success: function(response) {
                 var placeDetails = response.placeDetails;
