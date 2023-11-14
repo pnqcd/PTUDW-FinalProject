@@ -4,7 +4,11 @@ const { Pool } = require("pg");
 var path = require('path');
 const bodyParser = require('body-parser');
 
+const cors = require('cors');
+
 require('dotenv').config();
+
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(express.static('public'));
