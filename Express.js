@@ -7,7 +7,8 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+// app.use(express.static('public'));
+app.use('/static', express.static('public'))
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -112,7 +113,7 @@ app.get('/get-ad-details/:id', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile('index.html', { root: '.' });
+    res.sendFile('index.html', { root: __dirname });
 });
 
 const PORT = process.env.PORT || 3000;
