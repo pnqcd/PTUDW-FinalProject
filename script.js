@@ -261,9 +261,8 @@ map.addEventListener('tap', function (evt) {
         evt.currentPointer.viewportX,
         evt.currentPointer.viewportY,
     );
-    const iconUrl = `<svg width="22" height="38" viewBox="0 0 22 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M11 0.336562C5.08359 0.336562 0.287342 5.13281 0.287342 11.0492C0.291639 12.8656 0.75781 14.6513 1.19203 15.4447L11 37.6634L20.3736 16.2381H20.3687C21.2491 14.6503 21.7115 12.8648 21.7126 11.0492C21.7127 5.13281 16.9164 0.336562 11 0.336562ZM11 5.69281C11.7034 5.69281 12.3999 5.83136 13.0498 6.10055C13.6996 6.36973 14.2901 6.76429 14.7875 7.26168C15.2849 7.75907 15.6794 8.34955 15.9486 8.99942C16.2177 9.64929 16.3563 10.3458 16.3562 11.0492C16.3562 12.4698 15.7919 13.8322 14.7874 14.8367C13.7829 15.8412 12.4206 16.4055 11 16.4055C9.57943 16.4055 8.21705 15.8412 7.21256 14.8367C6.20807 13.8322 5.64375 12.4698 5.64375 11.0492C5.64375 9.62865 6.20807 8.26627 7.21256 7.26178C8.21705 6.25729 9.57943 5.69297 11 5.69297V5.69281Z" fill="#FF0000"/>
-    </svg>`;
+    const iconUrl = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" ><path d="M 45 90 c -1.415 0 -2.725 -0.748 -3.444 -1.966 l -4.385 -7.417 C 28.167 65.396 19.664 51.02 16.759 45.189 c -2.112 -4.331 -3.175 -8.955 -3.175 -13.773 C 13.584 14.093 27.677 0 45 0 c 17.323 0 31.416 14.093 31.416 31.416 c 0 4.815 -1.063 9.438 -3.157 13.741 c -0.025 0.052 -0.053 0.104 -0.08 0.155 c -2.961 5.909 -11.41 20.193 -20.353 35.309 l -4.382 7.413 C 47.725 89.252 46.415 90 45 90 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,61,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" /><path d="M 45 45.678 c -8.474 0 -15.369 -6.894 -15.369 -15.368 S 36.526 14.941 45 14.941 c 8.474 0 15.368 6.895 15.368 15.369 S 53.474 45.678 45 45.678 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(156,37,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" /></g></svg>';
+
     const icon = new H.map.Icon(iconUrl);
     marker = new H.map.Marker({lat, lng}, {icon: icon});
     map.addObject(marker);
@@ -306,3 +305,29 @@ map.addEventListener('tap', function (evt) {
             console.error(error);
         });
 });
+
+
+// Create current location icon
+var animatedSvg = 
+    `<svg class="svg-icon" style="width: 35px; height: 35px;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M511.927479 574.368272m-449.631728 0a449.631728 449.631728 0 1 0 899.263456 0 449.631728 449.631728 0 1 0-899.263456 0Z" fill="#2B67ED" opacity=".34" /><path d="M347.884419 381.606799L511.927479 0l164.188102 381.606799" fill="#2B67ED" /><path d="M511.927479 574.368272m-261.22153 0a261.22153 261.22153 0 1 0 522.443059 0 261.22153 261.22153 0 1 0-522.443059 0Z" fill="#4381EF" /><path d="M511.927479 835.734844a261.076487 261.076487 0 1 1 261.076487-261.076487 261.076487 261.076487 0 0 1-261.076487 261.076487z m0-493.144476a232.067989 232.067989 0 1 0 232.067988 232.067989 232.067989 232.067989 0 0 0-232.067988-232.648159z" fill="#FFFFFF" /></svg>`
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        position => {
+            const { latitude, longitude } = position.coords;
+        
+            //Căn chỉnh bản đồ đến vị trí định vị
+            // map.setCenter({ lat: latitude, lng: longitude });
+
+            var currentLocationIcon = new H.map.DomIcon(animatedSvg),
+                coords = {lat: latitude, lng: longitude},
+                currentLocationMarker = new H.map.DomMarker(coords, {icon: currentLocationIcon});
+
+            map.addObject(currentLocationMarker);
+        },
+        error => {
+            console.error(error);
+        }
+    );
+} else {
+    console.error('Geolocation is not supported by this browser.');
+}
