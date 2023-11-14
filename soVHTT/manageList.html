@@ -18,6 +18,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-dashboard.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -251,10 +252,45 @@
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">9.455</span>
                       </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
+                      <td class="align-middle" id="custom-phuong-1">
+                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"  onclick="openCustomDown(this)" data-toggle="tooltip" data-original-title="Edit user">
+                          <i class="fa fa-ellipsis-v px-2" aria-hidden="true"></i>
                         </a>
+                        <ul class="customDown" aria-labelledby="dropdownMenuButton">
+                          <li class="mb-2">
+                            <a class="customDown-item border-radius-md" href="javascript:;">
+                              <div class="d-flex py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                  <h6 class="text-sm font-weight-normal mb-1">
+                                    <span class="font-weight-bold">Xem chi tiết</span>
+                                  </h6>
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li class="mb-2">
+                            <a class="customDown-item border-radius-md" href="javascript:;">
+                              <div class="d-flex py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                  <h6 class="text-sm font-weight-normal mb-1">
+                                    <span class="font-weight-bold">Chỉnh sửa</span>
+                                  </h6>
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li>
+                            <a class="customDown-item border-radius-md" href="javascript:;">
+                              <div class="d-flex py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                  <h6 class="text-sm font-weight-normal mb-1">
+                                    <span class="font-weight-bold">Xoá</span>
+                                  </h6>
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                        </ul>
                       </td>
                     </tr>
                     <tr>
@@ -281,7 +317,7 @@
                       </td>
                       <td class="align-middle">
                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
+                          <i class="fa fa-ellipsis-v px-2" aria-hidden="true"></i>
                         </a>
                       </td>
                     </tr>
@@ -309,7 +345,7 @@
                       </td>
                       <td class="align-middle">
                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
+                          <i class="fa fa-ellipsis-v px-2" aria-hidden="true"></i>
                         </a>
                       </td>
                     </tr>
@@ -337,7 +373,7 @@
                       </td>
                       <td class="align-middle">
                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
+                          <i class="fa fa-ellipsis-v px-2" aria-hidden="true"></i>
                         </a>
                       </td>
                     </tr>
@@ -365,7 +401,7 @@
                       </td>
                       <td class="align-middle">
                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
+                          <i class="fa fa-ellipsis-v px-2" aria-hidden="true"></i>
                         </a>
                       </td>
                     </tr>
@@ -393,7 +429,7 @@
                       </td>
                       <td class="align-middle">
                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
+                          <i class="fa fa-ellipsis-v px-2" aria-hidden="true"></i>
                         </a>
                       </td>
                     </tr>
@@ -453,7 +489,7 @@
                       </td>
                       <td class="align-middle">
                         <button class="btn btn-link text-secondary mb-0">
-                          <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
+                          <i class="fa fa-ellipsis-v px-2" aria-hidden="true"></i>
                           
                         </button>
                       </td>
@@ -485,7 +521,7 @@
                       </td>
                       <td class="align-middle">
                         <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
+                          <i class="fa fa-ellipsis-v px-2" aria-hidden="true"></i>
                           
                         </button>
                       </td>
@@ -517,7 +553,7 @@
                       </td>
                       <td class="align-middle">
                         <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
+                          <i class="fa fa-ellipsis-v px-2" aria-hidden="true"></i>
                           
                         </button>
                       </td>
@@ -549,7 +585,7 @@
                       </td>
                       <td class="align-middle">
                         <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
+                          <i class="fa fa-ellipsis-v px-2" aria-hidden="true"></i>
                           
                         </button>
                       </td>
@@ -581,7 +617,7 @@
                       </td>
                       <td class="align-middle">
                         <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
+                          <i class="fa fa-ellipsis-v px-2" aria-hidden="true"></i>
                           
                         </button>
                       </td>
@@ -613,7 +649,7 @@
                       </td>
                       <td class="align-middle">
                         <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
+                          <i class="fa fa-ellipsis-v px-2" aria-hidden="true"></i>
                           
                         </button>
                       </td>
@@ -664,6 +700,7 @@
   <script src="../assets/js/bootstrap.min.js"></script>
   <script src="../assets/js/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/smooth-scrollbar.min.js"></script>
+  <script src="./script.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
