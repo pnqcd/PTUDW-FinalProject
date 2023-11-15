@@ -74,3 +74,7 @@
     color: var(--bs-dropdown-link-hover-color);
     background-color: var(--bs-dropdown-link-hover-bg);
 }
+
+.detail-ward .modal-lg {
+    max-width: 500px;
+}
