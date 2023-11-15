@@ -10,6 +10,7 @@
         Bảng điều khiển
     </title>
     <!--     Fonts and icons     -->
+    <link rel="stylesheet" href="phuong.css">
     <link rel="stylesheet" type="text/css"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -249,8 +250,9 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <button class="btn bg-gradient-success toast-btn btn-outline-white" type="button"
-                                            data-target="infoToast"><i class="fa-solid fa-plus pe-1"></i>Add</button>
+                                            data-target="infoToast" data-bs-toggle="modal" data-bs-target="#exampleModalToggleadd"><i class="fa-solid fa-plus pe-1"></i>Add</button>
                                     </div>
+                                    
                                     <div class="col-6">
                                         <li class="nav-item dropdown pe-3 d-flex align-items-center">
                                             <a href="javascript:;" class="nav-link text-body p-0 text-center"
@@ -299,7 +301,193 @@
                                 </div>
                             </div>
                         </div>
-                        
+                        <!---add-->
+                        <div class="modal fade" id="exampleModalToggleadd" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabeladd"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="col-6 px-2"><h5 class="modal-title text-primary" id="staticBackdropLabel">TẠO YÊU CẦU QUẢNG CÁO </h5></div>    
+                                <div class="col-1 px-4">
+                                <button class="btn-close toast-btn" type="button"
+                                    data-bs-dismiss="modal" aria-label="Close"
+                                    data-target="infoToast" style="margin-bottom: 0;"><i
+                                        class="fa fa-times-circle text-danger  fs-4"
+                                        aria-hidden="true"></i></button>
+                                </div>
+                            </div>                                                   
+                           <div class="modal-body">
+                
+                            <div class="container py-3">
+                              
+                              <h5>Phần 1: Thông tin chung</h5>
+                              <div class="card">
+                                <form class="card-form">
+                                  
+                                  <div class="row  mb-3">
+                                    <div class="col">
+                                      <div class="input">
+                                        <input type="text" class="input-field" value=""
+                                          required />
+                                        <label class="input-label">Tên công ty:</label>
+                                      </div>
+                                    </div>
+                                    <div class="col">
+                                      <div class="input">
+                                        <input type="text" class="input-field" value=""
+                                          required />
+                                        <label class="input-label">Địa chỉ: </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <div class="col">
+                                      <div class="input">
+                                        <input type="text" class="input-field" value=""
+                                          required />
+                                        <label class="input-label">Số điện thoại: </label>
+                                      </div>
+                                    </div>
+                                    <div class="col">
+                                      <div class="input">
+                                        <input type="text" class="input-field" value="" required />
+                                        <label class="input-label">Email: </label>
+                                      </div>
+                                    </div>
+                                    </div>
+                                    
+                                </form>
+                                
+                            </div>
+                          </div>
+                          <div class="container py-3">
+                              
+                            <h5>Phần 2: Thông tin điểm đặt</h5>
+                            <div class="card">
+                              <form class="card-form">
+                                
+                                <div class="row  mb-3">
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value=""
+                                        required />
+                                      <label class="input-label">Địa chỉ điểm đặt</label>
+                                    </div>
+                                  </div>
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value=""
+                                        required />
+                                      <label class="input-label">Vị trí: </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value=""
+                                        required />
+                                      <label class="input-label">Loại vị trí:</label>
+                                    </div>
+                                  </div>
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value="" required />
+                                      <label class="input-label">Tọa độ</label>
+                                    </div>
+                                  </div>
+                                  </div>
+                                  
+                              </form>
+                              
+                          </div>
+                        </div>
+                        <div class="container py-3">
+                              
+                            <h5>Phần 3: Thông tin bảng quảng cáo</h5>
+                            <div class="card">
+                              <form class="card-form">
+                                
+                                <div class="row  mb-3">
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value=""
+                                        required />
+                                      <label class="input-label">Hình thức:</label>
+                                    </div>
+                                  </div>
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value=""
+                                        required />
+                                      <label class="input-label">Loại bảng quảng cáo: </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value=""
+                                        required />
+                                      <label class="input-label">Kích thước: </label>
+                                    </div>
+                                  </div>
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value="" required />
+                                      <label class="input-label">Số lượng:</label>
+                                    </div>
+                                  </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <div class="col">
+                                      <div class="input">
+                                        <input type="text" class="input-field" value=""
+                                          required />
+                                        <label class="input-label">Ngày bắt đầu hợp đồng:</label>
+                                      </div>
+                                    </div>
+                                    <div class="col">
+                                      <div class="input">
+                                        <input type="text" class="input-field" value="" required />
+                                        <label class="input-label">Ngày kết thúc hợp đồng:</label>
+                                      </div>
+                                    </div>
+                                    </div>
+                              </form>
+                              
+                          </div>
+                        </div>
+                        <div class="container pt-3">
+                            <div class="card bg-dark">
+                              <div class="profile-pic">
+                                <div class="image-container">
+                                  <img
+                                    src=""
+                                    id="output" width="100%" height="250px"
+                                    style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; object-fit: cover; position: relative; border-radius:5px;"
+                                  />
+                                  <label class="btn btn-primary" for="file" style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);">
+                                    <span class="glyphicon glyphicon-camera"></span>
+                                    <span>Đổi hình ảnh</span>
+                                  </label>
+                                  <input id="file" type="file" style="display: none;" onchange="loadFile(event)" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                           </div> 
+                           <div class="modal-footer"
+                           style="justify-content: space-around;">
+                           <button type="button" class="btn btn-info"
+                           data-bs-dismiss="modal" data-bs-target="#exampleModalToggletieptheo" data-bs-toggle="modal">GỬI YÊU CẦU</button>
+                          
+                       </div>
+                            
+                        </div>
+                    </div>
+                </div>
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive-lg p-0">
                                 <table class="table align-items-center justify-content-center mb-0">
@@ -465,7 +653,7 @@
                                                                                             <span
                                                                                                 class="font-weight-bold">Hình
                                                                                                 thức quảng cáo: </span>
-                                                                                            Xã hội hóa
+                                                                                            Quảng cáo thương mại
                                                                                         </h6>
                                                                                         <h6
                                                                                             class="text-sm font-weight-normal mb-1">
@@ -513,13 +701,7 @@
                                                                                 <div class="card-img-overlay">
                                                                                     <h5 class="card-title text-white">128 Trần Phú
                                                                                     </h5>
-                                                                                    <p class="card-text">This is a wider
-                                                                                        card with supporting text below
-                                                                                        as a
-                                                                                        natural lead-in to additional
-                                                                                        content. This content is a
-                                                                                        little bit longer.
-                                                                                    </p>
+                                                                                    
                                                                                     
                                                                                 </div>
                                                                             </div>
@@ -531,27 +713,61 @@
                                                                 style="justify-content: space-around;">
                                                                 <button type="button" class="btn btn-primary"
                                                                     data-bs-target="#exampleModalToggle2"
-                                                                    data-bs-toggle="modal" data-bs-dismiss="modal">Chỉnh
+                                                                    data-bs-toggle="modal" data-bs-dismiss="modal" disabled>Chỉnh
                                                                     sửa</button>
                                                                 <button type="button" class="btn btn-success"
                                                                     data-bs-dismiss="modal">Phê duyệt
                                                                 </button>
                                                                 <button type="button" class="btn btn-danger"
-                                                                    data-bs-dismiss="modal">Hủy bỏ </button>
+                                                                    data-bs-dismiss="modal" disabled>Hủy bỏ </button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="modal fade" id="exampleModalToggle2"
-                                                    data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2">
+                                                    <div>
+                                                        <img src="../assets/img/city.jpeg"
+                                                            class="avatar avatar-sm me-3 border-radius-lg"
+                                                            alt="invision">
+                                                    </div>
+                                                    <div class="my-auto">
+                                                        <h6 class="mb-0 text-sm">11A Trần Phú</h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="text-sm font-weight-bold mb-0">Công ty XYZ</p>
+                                            </td>
+                                            <td>
+                                                <span class="text-xs font-weight-bold">Xã hội hóa</span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="me-2 text-warning text-xs font-weight-bold">Chờ phê
+                                                        duyệt</span>
+                                                </div>
+                                            
+                                            </td>
+                                            <td class="align-middle">
+                                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                                                    <i class="fa fa-ellipsis-v " aria-hidden="true"></i></button>
+
+                                            </td>
+                                            <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static"
+                                                    data-bs-keyboard="false" tabindex="-1"
+                                                    aria-labelledby="staticBackdropLabel2" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <div class="col-5 px-2"><h5 class="modal-title text-primary" id="staticBackdropLabel">YÊU
                                                                         CẦU QUẢNG CÁO </h5></div>    
                                                                 <div class="col-6 px-2 d-flex">
-                                                                    <h5 class="modal-title text-success"><span class="font-weight-bold text-secondary">Tình trạng:</span> Đã phê duyệt</h5>
+                                                                    <h5 class="modal-title text-warning"><span class="font-weight-bold text-secondary">Tình trạng:</span> Chờ phê duyệt</h5>
                                                                     
                                                                 </div>
                                                                 <div class="col-1 px-4">
@@ -561,7 +777,7 @@
                                                                         class="fa fa-times-circle text-danger  fs-4"
                                                                         aria-hidden="true"></i></button>
                                                                 </div>
-                                                            </div>   
+                                                            </div>                                                   
                                                             <div class="modal-body">
                                                                 <div class="container-fluid">
                                                                     <div class="row">
@@ -576,14 +792,14 @@
                                                                                             <span
                                                                                                 class="font-weight-bold">Tên
                                                                                                 công ty: </span> Công ty
-                                                                                            ABC
+                                                                                            XYZ
                                                                                         </h6>
                                                                                         <h6
                                                                                             class="text-sm font-weight-normal mb-1">
                                                                                             <span
                                                                                                 class="font-weight-bold">Địa
-                                                                                                chỉ: </span> Số 1, đường
-                                                                                            A, Phường 1,
+                                                                                                chỉ: </span> Số 2, đường
+                                                                                            B, Phường 3,
                                                                                             Quận 5
                                                                                         </h6>
                                                                                         <h6
@@ -598,7 +814,7 @@
                                                                                             <span
                                                                                                 class="font-weight-bold">Email:
                                                                                             </span>
-                                                                                            xyzcompany.contact@gmail.com
+                                                                                            xyzcontactcompany.contact@gmail.com
                                                                                         </h6>
                                                                                     </div>
                                                                                 </div>
@@ -615,7 +831,7 @@
                                                                                             <span
                                                                                                 class="font-weight-bold">Địa
                                                                                                 chỉ điểm đặt: </span>
-                                                                                            128 Trần Phú
+                                                                                            11A Trần Phú
                                                                                         </h6>
                                                                                         <h6
                                                                                             class="text-sm font-weight-normal mb-1">
@@ -668,7 +884,7 @@
                                                                                             class="text-sm font-weight-normal mb-1">
                                                                                             <span
                                                                                                 class="font-weight-bold">Kích
-                                                                                                thước: </span> 5m x 5m
+                                                                                                thước: </span> 15m x 15m
                                                                                         </h6>
                                                                                         <h6
                                                                                             class="text-sm font-weight-normal mb-1">
@@ -681,14 +897,14 @@
                                                                                             <span
                                                                                                 class="font-weight-bold">Ngày
                                                                                                 bắt đầu hợp đồng:
-                                                                                            </span> 27/10/2023
+                                                                                            </span> 17/10/2023
                                                                                         </h6>
                                                                                         <h6
                                                                                             class="text-sm font-weight-normal mb-1">
                                                                                             <span
                                                                                                 class="font-weight-bold">Ngày
                                                                                                 kết thúc hợp
-                                                                                                đồng:</span> 27/10/2024
+                                                                                                đồng:</span> 17/10/2024
                                                                                         </h6>
                                                                                     </div>
                                                                                 </div>
@@ -696,19 +912,13 @@
                                                                         </div>
                                                                         <div class="col-6">
                                                                             <div class="card bg-dark text-white">
-                                                                                <img src="../assets/img/stt19.png"
+                                                                                <img src="../assets/img/stt10.png"
                                                                                     class="card-img" alt="..."
                                                                                     style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
                                                                                 <div class="card-img-overlay">
-                                                                                    <h5 class="card-title text-white">128 Trần Phú
+                                                                                    <h5 class="card-title text-white">11A Trần Phú
                                                                                     </h5>
-                                                                                    <p class="card-text">This is a wider
-                                                                                        card with supporting text below
-                                                                                        as a
-                                                                                        natural lead-in to additional
-                                                                                        content. This content is a
-                                                                                        little bit longer.
-                                                                                    </p>
+                                                                                    
                                                                                     
                                                                                 </div>
                                                                             </div>
@@ -720,46 +930,17 @@
                                                                 style="justify-content: space-around;">
                                                                 <button type="button" class="btn btn-primary"
                                                                     data-bs-target="#exampleModalToggle2"
-                                                                    data-bs-toggle="modal" data-bs-dismiss="modal">Lưu
-                                                                    chỉnh sửa</button>
+                                                                    data-bs-toggle="modal" data-bs-dismiss="modal" disabled>Chỉnh
+                                                                    sửa</button>
+                                                                <button type="button" class="btn btn-success"
+                                                                    data-bs-dismiss="modal" disabled>Phê duyệt
+                                                                </button>
                                                                 <button type="button" class="btn btn-danger"
-                                                                    data-bs-dismiss="modal">Hủy bỏ </button>
+                                                                    data-bs-dismiss="modal" disabled>Hủy bỏ </button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2">
-                                                    <div>
-                                                        <img src="../assets/img/city.jpeg"
-                                                            class="avatar avatar-sm me-3 border-radius-lg"
-                                                            alt="invision">
-                                                    </div>
-                                                    <div class="my-auto">
-                                                        <h6 class="mb-0 text-sm">11A Trần Phú</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-sm font-weight-bold mb-0">Công ty XYZ</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">Xã hội hóa</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="me-2 text-warning text-xs font-weight-bold">Chờ phê
-                                                        duyệt</span>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle">
-                                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false" >
-                                                    <i class="fa fa-ellipsis-v " aria-hidden="true"></i></button>
-
-                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -786,9 +967,190 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false" >
+                                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
                                                     <i class="fa fa-ellipsis-v " aria-hidden="true"></i></button>
-
+                                                    <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static"
+                                                    data-bs-keyboard="false" tabindex="-1"
+                                                    aria-labelledby="staticBackdropLabel3" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <div class="col-5 px-2"><h5 class="modal-title text-primary" id="staticBackdropLabel">YÊU
+                                                                        CẦU QUẢNG CÁO </h5></div>    
+                                                                <div class="col-6 px-2 d-flex">
+                                                                    <h5 class="modal-title text-danger"><span class="font-weight-bold text-secondary">Tình trạng:</span> Không phê duyệt</h5>
+                                                                    
+                                                                </div>
+                                                                <div class="col-1 px-4">
+                                                                <button class="btn-close toast-btn" type="button"
+                                                                    data-bs-dismiss="modal" aria-label="Close"
+                                                                    data-target="infoToast" style="margin-bottom: 0;"><i
+                                                                        class="fa fa-times-circle text-danger  fs-4"
+                                                                        aria-hidden="true"></i></button>
+                                                                </div>
+                                                            </div>                                                   
+                                                            <div class="modal-body">
+                                                                <div class="container-fluid">
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <h6>Phần 1: Thông Tin Chung</h6>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <div
+                                                                                        class="d-flex flex-column justify-content-center">
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Tên
+                                                                                                công ty: </span> Công ty
+                                                                                            TNHH X
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Địa
+                                                                                                chỉ: </span> Số 2, đường
+                                                                                            B, Phường 3,
+                                                                                            Quận 5
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Điện
+                                                                                                thoại: </span>
+                                                                                            0909123456
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Email:
+                                                                                            </span>
+                                                                                            xyzcontactcompany.contact@gmail.com
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <h6>Phần 2: Thông Tin Điểm Đặt </h6>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <div
+                                                                                        class="d-flex flex-column justify-content-center">
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Địa
+                                                                                                chỉ điểm đặt: </span>
+                                                                                            Ngã Sáu Cộng Hòa
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Vị
+                                                                                                trí: </span> Phường 4,
+                                                                                            Quận 5
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Loại
+                                                                                                vị trí: </span> Đất công/Công viên/Hành lang giao thông
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Tọa
+                                                                                                độ: </span> (10.757931,
+                                                                                            106.672182)
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mt-3">
+                                                                        <div class="col-6">
+                                                                            <h6>Phần 3: Thông Tin Bảng Quảng Cáo</h6>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <div
+                                                                                        class="d-flex flex-column justify-content-center">
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Hình
+                                                                                                thức quảng cáo: </span>
+                                                                                            Xã hội hóa
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Loại
+                                                                                                bảng quảng cáo: </span>
+                                                                                            Bảng quảng cáo LED
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Kích
+                                                                                                thước: </span> 15m x 15m
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Số
+                                                                                                lượng: </span> 1
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Ngày
+                                                                                                bắt đầu hợp đồng:
+                                                                                            </span> 17/11/2023
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Ngày
+                                                                                                kết thúc hợp
+                                                                                                đồng:</span> 17/11/2024
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <div class="card bg-dark text-white">
+                                                                                <img src="../assets/img/stt3.png"
+                                                                                    class="card-img" alt="..."
+                                                                                    style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
+                                                                                <div class="card-img-overlay">
+                                                                                    <h5 class="card-title text-white">Ngã Sáu Cộng Hòa
+                                                                                    </h5>
+                                                                                    
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer"
+                                                                style="justify-content: space-around;">
+                                                                <button type="button" class="btn btn-primary"
+                                                                    data-bs-target="#exampleModalToggle2"
+                                                                    data-bs-toggle="modal" data-bs-dismiss="modal" disabled>Chỉnh
+                                                                    sửa</button>
+                                                                <button type="button" class="btn btn-success"
+                                                                    data-bs-dismiss="modal" disabled>Phê duyệt
+                                                                </button>
+                                                                <button type="button" class="btn btn-danger"
+                                                                    data-bs-dismiss="modal" >Hủy bỏ </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -815,8 +1177,378 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false" >
+                                                <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
                                                     <i class="fa fa-ellipsis-v " aria-hidden="true"></i></button>
+                                                    <div class="modal fade" id="staticBackdrop4" data-bs-backdrop="static"
+                                                    data-bs-keyboard="false" tabindex="-1"
+                                                    aria-labelledby="staticBackdropLabel2" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <div class="col-5 px-2"><h5 class="modal-title text-primary" id="staticBackdropLabel">YÊU
+                                                                        CẦU QUẢNG CÁO </h5></div>    
+                                                                <div class="col-6 px-2 d-flex">
+                                                                    <h5 class="modal-title text-secondary"><span class="font-weight-bold text-secondary">Tình trạng:</span> Chưa gửi</h5>
+                                                                    
+                                                                </div>
+                                                                <div class="col-1 px-4">
+                                                                <button class="btn-close toast-btn" type="button"
+                                                                    data-bs-dismiss="modal" aria-label="Close"
+                                                                    data-target="infoToast" style="margin-bottom: 0;"><i
+                                                                        class="fa fa-times-circle text-danger  fs-4"
+                                                                        aria-hidden="true"></i></button>
+                                                                </div>
+                                                            </div>                                                   
+                                                            <div class="modal-body">
+                                                                <div class="container-fluid">
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <h6>Phần 1: Thông Tin Chung</h6>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <div
+                                                                                        class="d-flex flex-column justify-content-center">
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Tên
+                                                                                                công ty: </span> Công ty
+                                                                                            Y
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Địa
+                                                                                                chỉ: </span> Số 22, đường
+                                                                                            C, Phường 7,
+                                                                                            Quận 5
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Điện
+                                                                                                thoại: </span>
+                                                                                            0909123456
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Email:
+                                                                                            </span>
+                                                                                            ycandycompany.contact@gmail.com
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <h6>Phần 2: Thông Tin Điểm Đặt </h6>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <div
+                                                                                        class="d-flex flex-column justify-content-center">
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Địa
+                                                                                                chỉ điểm đặt: </span>
+                                                                                            Công viên Âu Lạc
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Vị
+                                                                                                trí: </span> Phường 4,
+                                                                                            Quận 5
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Loại
+                                                                                                vị trí: </span> Đất công/Công viên/Hành lang giao thông
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Tọa
+                                                                                                độ: </span> (10.757931,
+                                                                                            106.672182)
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mt-3">
+                                                                        <div class="col-6">
+                                                                            <h6>Phần 3: Thông Tin Bảng Quảng Cáo</h6>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <div
+                                                                                        class="d-flex flex-column justify-content-center">
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Hình
+                                                                                                thức quảng cáo: </span>
+                                                                                            Quảng cáo thương mại 
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Loại
+                                                                                                bảng quảng cáo: </span>
+                                                                                            Bảng hiflex ốp
+                                                                                            tường
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Kích
+                                                                                                thước: </span> 5m x 15m
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Số
+                                                                                                lượng: </span> 1
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Ngày
+                                                                                                bắt đầu hợp đồng:
+                                                                                            </span> 
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Ngày
+                                                                                                kết thúc hợp
+                                                                                                đồng:</span> 
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <div class="card bg-dark text-white">
+                                                                                <img src="../assets/img/stt8.png"
+                                                                                    class="card-img" alt="..."
+                                                                                    style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
+                                                                                <div class="card-img-overlay">
+                                                                                    <h5 class="card-title text-white">Công viên Âu Lạc
+                                                                                    </h5>
+                                                                                    
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer"
+                                                                style="justify-content: space-around;">
+                                                                <button type="button" class="btn btn-primary"
+                                                                    data-bs-target="#exampleModalTogglefixads"
+                                                                    data-bs-toggle="modal" data-bs-dismiss="modal">Chỉnh
+                                                                    sửa</button>
+                                                                <button type="button" class="btn btn-success"
+                                                                    data-bs-dismiss="modal" disabled>Phê duyệt
+                                                                </button>
+                                                                <button type="button" class="btn btn-danger"
+                                                                    data-bs-dismiss="modal" disabled>Hủy bỏ </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="exampleModalTogglefixads" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelfixads"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="col-6 px-2"><h5 class="modal-title text-primary" id="staticBackdropLabel">CHỈNH SỬA YÊU CẦU QUẢNG CÁO </h5></div>    
+                                <div class="col-1 px-4">
+                                <button class="btn-close toast-btn" type="button"
+                                    data-bs-dismiss="modal" aria-label="Close"
+                                    data-target="infoToast" style="margin-bottom: 0;"><i
+                                        class="fa fa-times-circle text-danger  fs-4"
+                                        aria-hidden="true"></i></button>
+                                </div>
+                            </div>                                                   
+                           <div class="modal-body">
+                
+                            <div class="container py-3">
+                              
+                              <h5>Phần 1: Thông tin chung</h5>
+                              <div class="card">
+                                <form class="card-form">
+                                  
+                                  <div class="row  mb-3">
+                                    <div class="col">
+                                      <div class="input">
+                                        <input type="text" class="input-field" value="Công ty Y"
+                                          required />
+                                        <label class="input-label">Tên công ty:</label>
+                                      </div>
+                                    </div>
+                                    <div class="col">
+                                      <div class="input">
+                                        <input type="text" class="input-field" value="Số 22, đường C, Phường 7, Quận 5"
+                                          required />
+                                        <label class="input-label">Địa chỉ: </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <div class="col">
+                                      <div class="input">
+                                        <input type="text" class="input-field" value="0909123456"
+                                          required />
+                                        <label class="input-label">Số điện thoại: </label>
+                                      </div>
+                                    </div>
+                                    <div class="col">
+                                      <div class="input">
+                                        <input type="text" class="input-field" value="ycandycompany.contact@gmail.com" required />
+                                        <label class="input-label">Email: </label>
+                                      </div>
+                                    </div>
+                                    </div>
+                                    
+                                </form>
+                                
+                            </div>
+                          </div>
+                          <div class="container py-3">
+                              
+                            <h5>Phần 2: Thông tin điểm đặt</h5>
+                            <div class="card">
+                              <form class="card-form">
+                                
+                                <div class="row  mb-3">
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value="Công viên Âu Lạc"
+                                        required />
+                                      <label class="input-label">Địa chỉ điểm đặt</label>
+                                    </div>
+                                  </div>
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value="Phường 4, Quận 5"
+                                        required />
+                                      <label class="input-label">Vị trí: </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value="Đất công/Công viên/Hành lang giao thông"
+                                        required />
+                                      <label class="input-label">Loại vị trí:</label>
+                                    </div>
+                                  </div>
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value="(10.757931, 106.672182)" required />
+                                      <label class="input-label">Tọa độ</label>
+                                    </div>
+                                  </div>
+                                  </div>
+                                  
+                              </form>
+                              
+                          </div>
+                        </div>
+                        <div class="container py-3">
+                              
+                            <h5>Phần 3: Thông tin bảng quảng cáo</h5>
+                            <div class="card">
+                              <form class="card-form">
+                                
+                                <div class="row  mb-3">
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value="Quảng cáo thương mại"
+                                        required />
+                                      <label class="input-label">Hình thức:</label>
+                                    </div>
+                                  </div>
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value="Bảng hiflex ốp tường"
+                                        required />
+                                      <label class="input-label">Loại bảng quảng cáo: </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value="5m x 15m"
+                                        required />
+                                      <label class="input-label">Kích thước: </label>
+                                    </div>
+                                  </div>
+                                  <div class="col">
+                                    <div class="input">
+                                      <input type="text" class="input-field" value="1" required />
+                                      <label class="input-label">Số lượng:</label>
+                                    </div>
+                                  </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <div class="col">
+                                      <div class="input">
+                                        <input type="text" class="input-field" value=""
+                                          required />
+                                        <label class="input-label">Ngày bắt đầu hợp đồng:</label>
+                                      </div>
+                                    </div>
+                                    <div class="col">
+                                      <div class="input">
+                                        <input type="text" class="input-field" value="" required />
+                                        <label class="input-label">Ngày kết thúc hợp đồng:</label>
+                                      </div>
+                                    </div>
+                                    </div>
+                              </form>
+                              
+                          </div>
+                        </div>
+                        <div class="container pt-3">
+                            <div class="card bg-dark">
+                              <div class="profile-pic">
+                                <div class="image-container">
+                                  <img
+                                    src="../assets/img/stt19.png"
+                                    id="output" width="100%" height="250px"
+                                    style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; object-fit: cover; position: relative; border-radius:5px;"
+                                  />
+                                  <label class="btn btn-primary" for="file" style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);">
+                                    <span class="glyphicon glyphicon-camera"></span>
+                                    <span>Đổi hình ảnh</span>
+                                  </label>
+                                  <input id="file" type="file" style="display: none;" onchange="loadFile(event)" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                           </div> 
+                           <div class="modal-footer"
+                           style="justify-content: space-around;">
+                           <button type="button" class="btn btn-info"
+                           data-bs-dismiss="modal" data-bs-target="#exampleModalToggletieptheo" data-bs-toggle="modal">GỬI YÊU CẦU</button>
+                          
+                       </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                                                
                                             </td>
                                         </tr>
                                         
@@ -878,6 +1610,12 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
     </script>
+    <script>
+        var loadFile = function (event) {
+          var image = document.getElementById("output");
+          image.src = URL.createObjectURL(event.target.files[0]);
+        };
+      </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
