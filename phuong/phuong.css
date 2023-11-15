@@ -56,5 +56,15 @@
 
 
 
- 
+<style>
+.card-body {
+  overflow: hidden;
+}
+
+.card-body>span {
+  overflow: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+</style>
 
