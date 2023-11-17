@@ -501,8 +501,7 @@
                           <i class="fa-solid fa-circle-info text-secondary fs-5"></i>
                         </button>
 
-                        <!-- modal -->
-                        <!-- modal -->
+                        <!-- chi tiết điểm đặt -->
                         <div class="modal fade" id="staticBackdropInfo" data-bs-backdrop="static"
                           data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelInfo"
                           aria-hidden="true">
@@ -575,6 +574,7 @@
                           </div>
                         </div>
 
+                        <!-- chi tiet bảng quảng cáo -->
                         <div class="modal fade" id="exampleModalTogglechitiet" data-bs-backdrop="static"
                           data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelchitiet"
                           aria-hidden="true">
@@ -590,7 +590,7 @@
                                 </div>
                               </div>
                               <div class="modal-body">
-                                <h5 class="text-primary pt-4">128 Trần Phú, Phường 4, Quận 5</h5>
+                                <h5 class="text-primary">128 Trần Phú, Phường 4, Quận 5</h5>
                                 <small>Đất tư nhân/Nhà ở riêng lẻ</small>
                                 <div class="container p-3">
                                   <button type="button" class="btn btn-outline-primary fw-bold w-100 fs-6">Bảng Quảng
@@ -637,6 +637,9 @@
                                           </div>
                                         </div>
                                       </div>
+                                      <button type="button" class="btn btn-info" data-bs-dismiss="modal"
+                                        data-bs-target="#exampleModalTogglefixads1" data-bs-toggle="modal">CHỈNH
+                                        SỬA</button>
                                     </div>
                                   </div>
                                 </div>
@@ -685,19 +688,20 @@
                                           </div>
                                         </div>
                                       </div>
+                                      <button type="button" class="btn btn-info" data-bs-dismiss="modal"
+                                        data-bs-target="#exampleModalTogglefixads2" data-bs-toggle="modal">CHỈNH
+                                        SỬA</button>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                               <div class="modal-footer" style="justify-content: space-around;">
-                                <button type="button" class="btn btn-info" data-bs-dismiss="modal"
-                                  data-bs-target="#exampleModalTogglefixads" data-bs-toggle="modal">CHỈNH SỬA</button>
                               </div>
                             </div>
                           </div>
                         </div>
-
-                        <div class="modal fade" id="exampleModalTogglefixads" data-bs-backdrop="static"
+                        <!-- chinh sua bang quảng cáo 1 2 -->
+                        <div class="modal fade" id="exampleModalTogglefixads1" data-bs-backdrop="static"
                           data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelfixads"
                           aria-hidden="true">
                           <div class="modal-dialog modal-lg">
@@ -711,14 +715,14 @@
                                       class="fa fa-times-circle text-danger  fs-4" aria-hidden="true"></i></button>
                                 </div>
                               </div>
-                              <div class="modal-body">
-                                <h5 class="text-primary pt-4">128 Trần Phú, Phường 4, Quận 5</h5>
-                                <small>Đất tư nhân/Nhà ở riêng lẻ</small>
-                                <div class="container py-3">
-                                  <button type="button" class="btn btn-outline-primary fw-bold w-100 fs-6">Bảng Quảng
-                                    Cáo 1</button>
-                                  <div class="card">
-                                    <form class="card-form">
+                              <form class="card-form pt-0">
+                                <div class="modal-body">
+                                  <h5 class="text-primary">128 Trần Phú, Phường 4, Quận 5</h5>
+                                  <small>Đất tư nhân/Nhà ở riêng lẻ</small>
+                                  <div class="container py-3">
+                                    <button type="button" class="btn btn-outline-primary fw-bold w-100 fs-6">Bảng Quảng
+                                      Cáo 1</button>
+                                    <div class="card">
                                       <div class="row  mb-3">
                                         <div class="col">
                                           <div class="input">
@@ -769,112 +773,71 @@
                                           </div>
                                         </div>
                                       </div>
-                                    </form>
-                                    <div class="container">
-                                      <div class="card bg-dark">
-                                        <div class="profile-pic">
-                                          <div class="image-container">
-                                            <img src="../assets/img/stt19.png" id="output" width="100%" height="250px"
-                                              style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; object-fit: cover; position: relative; border-radius:5px;" />
-                                            <label class="btn btn-primary" for="file"
-                                              style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);">
-                                              <span class="glyphicon glyphicon-camera"></span>
-                                              <span>Đổi hình ảnh</span>
+                                      <div class="row mb-3">
+                                        <div class="container" style="text-align: right;">
+                                          <div class="input mb-3">
+                                            <input type="text" class="input-field input-reason" value = "Lý do chỉnh sửa"required />
+                                            <label class="input-label">Lý do chỉnh sửa
                                             </label>
-                                            <input id="file" type="file" style="display: none;"
-                                              onchange="loadFile(event)" />
                                           </div>
+                                          <!-- <h6 style="margin-bottom: 0;"><span class="ps-2"
+                                              style="margin-bottom: 0;">Thời điểm chỉnh sửa: </span>
+                                            <script>
+                                              document.write(new Date().getDate());
+                                              document.write('/');
+                                              document.write(new Date().getMonth());
+                                              document.write('/');
+                                              document.write(new Date().getFullYear());
+                                            </script>
+                                          </h6> -->
                                         </div>
+                                      </div>
+                                        <div class="container">
+                                          <div class="card bg-dark">
+                                            <div class="profile-pic">
+                                              <div class="image-container">
+                                                <img src="../assets/img/stt19.png" id="output" width="100%"
+                                                  height="250px"
+                                                  style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; object-fit: cover; position: relative; border-radius:5px;" />
+                                                <label class="btn btn-primary" for="file"
+                                                  style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);">
+                                                  <span class="glyphicon glyphicon-camera"></span>
+                                                  <span>Đổi hình ảnh</span>
+                                                </label>
+                                                <input id="file" type="file" style="display: none;"
+                                                  onchange="loadFile(event)" />
+                                              </div>
+                                            </div>
+                                          </div>
+                                      </div>
+                                      <div class="row mb-3 mt-3">
+                                        <h6><span class="ps-2">Thời điểm chỉnh sửa: </span>
+                                          <script>
+                                            document.write(new Date().getDate());
+                                            document.write('/');
+                                            document.write(new Date().getMonth());
+                                            document.write('/');
+                                            document.write(new Date().getFullYear());
+                                          </script>
+                                        </h6>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                                <div class="container py-3">
-                                  <button type="button" class="btn btn-outline-primary fw-bold w-100 fs-6">Bảng Quảng
-                                    Cáo 2</button>
-                                  <div class="card">
-                                    <form class="card-form">
-                                      <div class="row  mb-3">
-                                        <div class="col">
-                                          <div class="input">
-                                            <input type="text" class="input-field" value="Bảng quảng cáo LED"
-                                              required />
-                                            <label class="input-label">Loại bảng quảng cáo</label>
-                                          </div>
-                                        </div>
-                                        <div class="col">
-                                          <div class="input">
-                                            <input type="text" class="input-field" value="5m x 10m" required />
-                                            <label class="input-label">Kích thước:</label>
-                                          </div>
-                                        </div>
-                                        <div class="col">
-                                          <div class="input">
-                                            <input type="text" class="input-field" value="1" required />
-                                            <label class="input-label">Số lượng: </label>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="row  mb-3">
-                                        <div class="col">
-                                          <div class="input">
-                                            <input type="text" class="input-field" value="Quảng cáo thương mại"
-                                              required />
-                                            <label class="input-label">Hình thức</label>
-                                          </div>
-                                        </div>
-                                        <div class="col">
-                                          <div class="input">
-                                            <input type="text" class="input-field" value="Đã quy hoạch" required />
-                                            <label class="input-label">Tình trạng: </label>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="row mb-3">
-                                        <div class="col">
-                                          <div class="input">
-                                            <input type="text" class="input-field" value="27/10/2023" required />
-                                            <label class="input-label">Ngày bắt đầu hợp đồng:</label>
-                                          </div>
-                                        </div>
-                                        <div class="col">
-                                          <div class="input">
-                                            <input type="text" class="input-field" value="27/10/2023" required />
-                                            <label class="input-label">Ngày bắt đầu hợp đồng:</label>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="container">
-                                        <div class="card bg-dark">
-                                          <div class="profile-pic">
-                                            <div class="image-container">
-                                              <img src="../assets/img/stt19.png" id="output" width="100%" height="250px"
-                                                style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; object-fit: cover; position: relative; border-radius:5px;" />
-                                              <label class="btn btn-primary" for="file"
-                                                style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);">
-                                                <span class="glyphicon glyphicon-camera"></span>
-                                                <span>Đổi hình ảnh</span>
-                                              </label>
-                                              <input id="file" type="file" style="display: none;"
-                                                onchange="loadFile(event)" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </form>
-                                  </div>
+                                <div class="modal-footer" style="justify-content: space-around;">
+                                  <!-- <button type="button" class="btn btn-info" data-bs-dismiss="modal"
+                                    data-bs-target="#exampleModalToggletieptheo" data-bs-toggle="modal">TIẾP
+                                    THEO</button> -->
+                                  <input type="submit" class="btn btn-info" value="GỬI YÊU CẦU" />
                                 </div>
-                              </div>
-                              <div class="modal-footer" style="justify-content: space-around;">
-                                <button type="button" class="btn btn-info" data-bs-dismiss="modal"
-                                  data-bs-target="#exampleModalToggletieptheo" data-bs-toggle="modal">TIẾP THEO</button>
-                              </div>
+                              </form>
                             </div>
                           </div>
                         </div>
 
-                        <div class="modal fade" id="exampleModalToggletieptheo" data-bs-backdrop="static"
-                          data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabeltieptheo"
+                        <!-- chinh sua bang quảng cáo 2 -->
+                        <div class="modal fade" id="exampleModalTogglefixads2" data-bs-backdrop="static"
+                          data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelfixads"
                           aria-hidden="true">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -887,34 +850,127 @@
                                       class="fa fa-times-circle text-danger  fs-4" aria-hidden="true"></i></button>
                                 </div>
                               </div>
-                              <div class="modal-body">
-                                <div class="container">
-                                  <h5><span class="ps-2">Thời điểm chỉnh sửa: </span>
-                                    <script>
-                                      document.write(new Date().getDate());
-                                      document.write('/');
-                                      document.write(new Date().getMonth());
-                                      document.write('/');
-                                      document.write(new Date().getFullYear());
-                                    </script>
-                                  </h5>
-
-                                  <div class="input">
-                                    <input type="text" class="input-field input-reason" required />
-                                    <label class="input-label">Lý do chỉnh sửa
-                                    </label>
+                              <form class="card-form pt-0">
+                                <div class="modal-body">
+                                  <h5 class="text-primary">128 Trần Phú, Phường 4, Quận 5</h5>
+                                  <small>Đất tư nhân/Nhà ở riêng lẻ</small>
+                                  <div class="container py-3">
+                                    <button type="button" class="btn btn-outline-primary fw-bold w-100 fs-6">Bảng Quảng
+                                      Cáo 2</button>
+                                    <div class="card">
+                                      <div class="row  mb-3">
+                                        <div class="col">
+                                          <div class="input">
+                                            <input type="text" class="input-field" value="Bảng quảng cáo LED"
+                                              required />
+                                            <label class="input-label">Loại bảng quảng cáo</label>
+                                          </div>
+                                        </div>
+                                        <div class="col">
+                                          <div class="input">
+                                            <input type="text" class="input-field" value="5m x 10m" required />
+                                            <label class="input-label">Kích thước:</label>
+                                          </div>
+                                        </div>
+                                        <div class="col">
+                                          <div class="input">
+                                            <input type="text" class="input-field" value="1" required />
+                                            <label class="input-label">Số lượng: </label>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row  mb-3">
+                                        <div class="col">
+                                          <div class="input">
+                                            <input type="text" class="input-field" value="Quảng cáo thương mại"
+                                              required />
+                                            <label class="input-label">Hình thức</label>
+                                          </div>
+                                        </div>
+                                        <div class="col">
+                                          <div class="input">
+                                            <input type="text" class="input-field" value="Đã quy hoạch" required />
+                                            <label class="input-label">Tình trạng: </label>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <div class="col">
+                                          <div class="input">
+                                            <input type="text" class="input-field" value="27/10/2023" required />
+                                            <label class="input-label">Ngày bắt đầu hợp đồng:</label>
+                                          </div>
+                                        </div>
+                                        <div class="col">
+                                          <div class="input">
+                                            <input type="text" class="input-field" value="27/10/2023" required />
+                                            <label class="input-label">Ngày bắt đầu hợp đồng:</label>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <div class="container" style="text-align: right;">
+                                          <div class="input mb-3">
+                                            <input type="text" class="input-field input-reason" value = "Lý do chỉnh sửa"required />
+                                            <label class="input-label">Lý do chỉnh sửa
+                                            </label>
+                                          </div>
+                                          <!-- <h6 style="margin-bottom: 0;"><span class="ps-2"
+                                              style="margin-bottom: 0;">Thời điểm chỉnh sửa: </span>
+                                            <script>
+                                              document.write(new Date().getDate());
+                                              document.write('/');
+                                              document.write(new Date().getMonth());
+                                              document.write('/');
+                                              document.write(new Date().getFullYear());
+                                            </script>
+                                          </h6> -->
+                                        </div>
+                                      </div>
+                                        <div class="container">
+                                          <div class="card bg-dark">
+                                            <div class="profile-pic">
+                                              <div class="image-container">
+                                                <img src="../assets/img/stt19.png" id="output" width="100%"
+                                                  height="250px"
+                                                  style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; object-fit: cover; position: relative; border-radius:5px;" />
+                                                <label class="btn btn-primary" for="file"
+                                                  style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);">
+                                                  <span class="glyphicon glyphicon-camera"></span>
+                                                  <span>Đổi hình ảnh</span>
+                                                </label>
+                                                <input id="file" type="file" style="display: none;"
+                                                  onchange="loadFile(event)" />
+                                              </div>
+                                            </div>
+                                          </div>
+                                      </div>
+                                      <div class="row mb-3 mt-3">
+                                        <h6><span class="ps-2">Thời điểm chỉnh sửa: </span>
+                                          <script>
+                                            document.write(new Date().getDate());
+                                            document.write('/');
+                                            document.write(new Date().getMonth());
+                                            document.write('/');
+                                            document.write(new Date().getFullYear());
+                                          </script>
+                                        </h6>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="modal-footer" style="justify-content: space-around;">
-                                <button type="button" class="btn btn-info" data-bs-dismiss="modal"
-                                  data-bs-target="#exampleModalToggletieptheo" data-bs-toggle="modal">Gửi yêu
-                                  cầu</button>
-                              </div>
+                                <div class="modal-footer" style="justify-content: space-around;">
+                                  <!-- <button type="button" class="btn btn-info" data-bs-dismiss="modal"
+                                    data-bs-target="#exampleModalToggletieptheo" data-bs-toggle="modal">TIẾP
+                                    THEO</button> -->
+                                  <input type="submit" class="btn btn-info" value="GỬI YÊU CẦU" />
+                                </div>
+                              </form>
                             </div>
                           </div>
                         </div>
 
+                        <!-- chinhsua địa điểm đặt -->
                         <div class="modal fade" id="exampleModalTogglechinhsua" data-bs-backdrop="static"
                           data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelchinhsua"
                           aria-hidden="true">
@@ -929,7 +985,7 @@
                                       class="fa fa-times-circle text-danger  fs-4" aria-hidden="true"></i></button>
                                 </div>
                               </div>
-                              <form class="card-form">
+                              <form class="card-form pt-0">
                                 <div class="modal-body">
                                   <div class="container-fluid">
                                     <div class="card">
@@ -985,20 +1041,10 @@
                                       <div class="row mb-3">
                                         <div class="container" style="text-align: right;">
                                           <div class="input mb-3">
-                                            <input type="text" class="input-field input-reason" required />
+                                            <input type="text" class="input-field input-reason" value = "Lý do chỉnh sửa"required />
                                             <label class="input-label">Lý do chỉnh sửa
                                             </label>
                                           </div>
-                                          <h6 style="margin-bottom: 0;"><span class="ps-2"
-                                              style="margin-bottom: 0;">Thời điểm chỉnh sửa: </span>
-                                            <script>
-                                              document.write(new Date().getDate());
-                                              document.write('/');
-                                              document.write(new Date().getMonth());
-                                              document.write('/');
-                                              document.write(new Date().getFullYear());
-                                            </script>
-                                          </h6>
                                         </div>
                                       </div>
                                       <div class="container pt-3 pb-3">
@@ -1018,6 +1064,17 @@
                                           </div>
                                         </div>
                                       </div>
+                                      <div class="row mb-3 mt-3">
+                                        <h6><span class="ps-2">Thời điểm chỉnh sửa: </span>
+                                          <script>
+                                            document.write(new Date().getDate());
+                                            document.write('/');
+                                            document.write(new Date().getMonth());
+                                            document.write('/');
+                                            document.write(new Date().getFullYear());
+                                          </script>
+                                        </h6>
+                                      </div>
                                       <!-- </form> -->
                                     </div>
                                   </div>
@@ -1032,46 +1089,6 @@
                             </div>
                           </div>
                         </div>
-                        <!-- <div class="modal fade" id="exampleModalToggletieptheochinhsuadiadiem" data-bs-backdrop="static"
-                          data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabeltieptheo"
-                          aria-hidden="true">
-                          <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h4 class="modal-title" id="staticBackdropLabel">CHỈNH SỬA CHI TIẾT BẢNG
-                                  QUẢNG CÁO </h4>
-                                <div class="col-1 px-4">
-                                  <button class="btn-close toast-btn" type="button" data-bs-dismiss="modal"
-                                    aria-label="Close" data-target="infoToast" style="margin-bottom: 0;"><i
-                                      class="fa fa-times-circle text-danger  fs-4" aria-hidden="true"></i></button>
-                                </div>
-                              </div>
-                              <div class="modal-body">
-                                <div class="container">
-                                  <h5><span class="ps-2">Thời điểm chỉnh sửa: </span>
-                                    <script>
-                                      document.write(new Date().getDate());
-                                      document.write('/');
-                                      document.write(new Date().getMonth());
-                                      document.write('/');
-                                      document.write(new Date().getFullYear());
-                                    </script>
-                                  </h5>
-                                  <div class="input">
-                                    <input type="text" class="input-field input-reason" required />
-                                    <label class="input-label">Lý do chỉnh sửa
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="modal-footer" style="justify-content: space-around;">
-                                <button type="button" class="btn btn-info" data-bs-dismiss="modal"
-                                  data-bs-target="#exampleModalToggletieptheo" data-bs-toggle="modal">Gửi yêu
-                                  cầu</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div> -->
                       </td>
 
                       <td class="align-middle  text-center">
