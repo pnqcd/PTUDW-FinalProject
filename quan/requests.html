@@ -268,23 +268,23 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-
                             <div
-                                class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex justify-content-between">
-                                <h6 class="text-white text-capitalize ps-3 fs-4">Danh sách yêu cầu</h6>
-
+                                class="bg-gradient-primary shadow-primary border-radius-lg pt-3 pb-1 d-flex justify-content-between align-items-center">
+                                <h6 class="text-white text-capitalize ps-3">Danh sách yêu cầu</h6>
                                 <div class="row">
                                     <div class="col-6">
-                                        <button class="btn bg-gradient-warning toast-btn" type="button"
-                                            data-target="infoToast" data-bs-toggle="modal"
+                                        <button class="btn bg-gradient-warning toast-btn"
+                                            type="button" data-target="infoToast" data-bs-toggle="modal"
                                             data-bs-target="#exampleModalToggleadd"><i
                                                 class="fa-solid fa-plus pe-1"></i>Add</button>
                                     </div>
+
                                     <div class="col-6">
                                         <li class="nav-item dropdown pe-3 d-flex align-items-center">
                                             <a href="javascript:;" class="nav-link text-body p-0 text-center"
                                                 id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <button class="btn bg-gradient-warning mb-0 me-4 toast-btn"
+                                                <button
+                                                    class="btn bg-gradient-warning mb-0 me-4 toast-btn"
                                                     type="button" data-target="infoToast"><i
                                                         class="fa-solid fa-sort"></i></button>
                                             </a>
@@ -292,17 +292,34 @@
                                                 aria-labelledby="dropdownMenuButton">
                                                 <li>
                                                     <a class="dropdown-item text-center" href="javascript:;">
-                                                        <button class="btn btn-outline-success" type="button"
+                                                        <button class="btn btn-outline-success w-100" type="button"
                                                             data-target="infoToast"><i
-                                                                class="fa-solid fa-arrow-up-a-z pe-1"></i>Ascending
+                                                                class="fa-solid fa-arrow-up-a-z pe-1"></i>Địa chỉ
                                                         </button>
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a class="dropdown-item text-center" href="javascript:;">
-                                                        <button class="btn btn-outline-success" type="button"
+                                                        <button class="btn btn-outline-success w-100" type="button"
                                                             data-target="infoToast"><i
-                                                                class="fa-solid fa-arrow-up-z-a  pe-1"></i>Descending
+                                                                class="fa-solid fa-arrow-up-a-z pe-1"></i>Công ty
+                                                        </button>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item text-center" href="javascript:;">
+                                                        <button class="btn btn-outline-success w-100" type="button"
+                                                            data-target="infoToast"><i
+                                                                class="fa-solid fa-arrow-up-a-z pe-1"></i>Hình thức
+                                                            quảng cáo
+                                                        </button>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item text-center" href="javascript:;">
+                                                        <button class="btn btn-outline-success w-100" type="button"
+                                                            data-target="infoToast"><i
+                                                                class="fa-solid fa-arrow-up-z-a  pe-1"></i>Tình trạng
                                                         </button>
                                                     </a>
                                                 </li>
@@ -517,6 +534,7 @@
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                 Tình trạng
                                             </th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1021,9 +1039,10 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                <button class="btn btn-outline-warning" type="button"
-                                                    data-target="infoToast">detail<i
-                                                        class="fa-solid fa-circle-info ps-2"></i></button>
+                                                <button class="btn btn-link text-secondary mb-0" type="button"
+                                                aria-haspopup="true"
+                                                aria-expanded="false" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop"><i class="fa-solid fa-circle-info text-secondary fs-5"></i></button>
 
                                             </td>
                                         </tr>
@@ -1053,9 +1072,10 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                <button class="btn btn-outline-warning" type="button"
-                                                    data-target="infoToast">detail<i
-                                                        class="fa-solid fa-circle-info ps-2"></i></button>
+                                                <button class="btn btn-link text-secondary mb-0" type="button"
+                                                aria-haspopup="true"
+                                                aria-expanded="false" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop"><i class="fa-solid fa-circle-info text-secondary fs-5"></i></button>
 
                                             </td>
                                         </tr>
@@ -1084,9 +1104,10 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                <button class="btn btn-outline-warning" type="button"
-                                                    data-target="infoToast">detail<i
-                                                        class="fa-solid fa-circle-info ps-2"></i></button>
+                                                <button class="btn btn-link text-secondary mb-0" type="button"
+                                                aria-haspopup="true"
+                                                aria-expanded="false" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop"><i class="fa-solid fa-circle-info text-secondary fs-5"></i></button>
                                             </td>
                                         </tr>
                                         <tr>
@@ -1115,11 +1136,10 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                <button class="btn btn-outline-warning" type="button"
-                                                    data-target="infoToast">detail<i
-                                                        class="fa-solid fa-circle-info ps-2"></i></button>
-
-                                                </button>
+                                                <button class="btn btn-link text-secondary mb-0" type="button"
+                                                aria-haspopup="true"
+                                                aria-expanded="false" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop"><i class="fa-solid fa-circle-info text-secondary fs-5"></i></button>
                                             </td>
                                         </tr>
                                         <tr>
@@ -1148,11 +1168,10 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                <button class="btn btn-outline-warning" type="button"
-                                                    data-target="infoToast">detail<i
-                                                        class="fa-solid fa-circle-info ps-2"></i></button>
-
-                                                </button>
+                                                <button class="btn btn-link text-secondary mb-0" type="button"
+                                                aria-haspopup="true"
+                                                aria-expanded="false" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop"><i class="fa-solid fa-circle-info text-secondary fs-5"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
