@@ -923,27 +923,33 @@
                               <div class="modal-header">
                                 <h5 class="modal-title" id="staticBackdropLabelchinhsua">
                                   CHỈNH SỬA ĐỊA ĐIỂM ĐẶT BẢNG QUẢNG CÁO</h5>
+                                <div class="col-1 px-4">
+                                  <button class="btn-close toast-btn" type="button" data-bs-dismiss="modal"
+                                    aria-label="Close" data-target="infoToast" style="margin-bottom: 0;"><i
+                                      class="fa fa-times-circle text-danger  fs-4" aria-hidden="true"></i></button>
+                                </div>
                               </div>
-                              <div class="modal-body">
-                                <div class="container-fluid">
-                                  <div class="card">
-                                    <form class="card-form">
+                              <form class="card-form">
+                                <div class="modal-body">
+                                  <div class="container-fluid">
+                                    <div class="card">
+                                      <!-- <form class="card-form"> -->
                                       <div class="row  mb-3">
                                         <div class="col">
                                           <div class="input">
-                                            <input type="text" class="input-field" value="128 Trần Phú" required />
+                                            <input type="text" class="input-field" value="abc" required />
                                             <label class="input-label">Địa chỉ</label>
                                           </div>
                                         </div>
                                         <div class="col">
                                           <div class="input">
-                                            <input type="text" class="input-field" value="Phường 4, Quận 4" required />
+                                            <input type="text" class="input-field" value="abc" required />
                                             <label class="input-label">Phường, Quận</label>
                                           </div>
                                         </div>
                                         <div class="col">
                                           <div class="input">
-                                            <input type="text" class="input-field" value="TP Hồ Chí Minh" required />
+                                            <input type="text" class="input-field" value="abc" required />
                                             <label class="input-label">Khu vực</label>
                                           </div>
                                         </div>
@@ -951,15 +957,13 @@
                                       <div class="row  mb-3">
                                         <div class="col">
                                           <div class="input">
-                                            <input type="text" class="input-field" value="Đất tư nhân/Nhà ở riêng lẻ"
-                                              required />
+                                            <input type="text" class="input-field" value="abc" required />
                                             <label class="input-label">Loại vị trí</label>
                                           </div>
                                         </div>
                                         <div class="col">
                                           <div class="input">
-                                            <input type="text" class="input-field" value="(10.761546, 106.677706)"
-                                              required />
+                                            <input type="text" class="input-field" value="abc" required />
                                             <label class="input-label">Toạ độ</label>
                                           </div>
                                         </div>
@@ -967,16 +971,34 @@
                                       <div class="row mb-3">
                                         <div class="col">
                                           <div class="input">
-                                            <input type="text" class="input-field" value="Quảng cáo thương mại"
-                                              required />
+                                            <input type="text" class="input-field" value="abc" required />
                                             <label class="input-label">Hình thức</label>
                                           </div>
                                         </div>
                                         <div class="col">
                                           <div class="input">
-                                            <input type="text" class="input-field" value="Đã quy hoạch" required />
+                                            <input type="text" class="input-field" value="abc" required />
                                             <label class="input-label">Tình trạng</label>
                                           </div>
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <div class="container" style="text-align: right;">
+                                          <div class="input mb-3">
+                                            <input type="text" class="input-field input-reason" required />
+                                            <label class="input-label">Lý do chỉnh sửa
+                                            </label>
+                                          </div>
+                                          <h6 style="margin-bottom: 0;"><span class="ps-2"
+                                              style="margin-bottom: 0;">Thời điểm chỉnh sửa: </span>
+                                            <script>
+                                              document.write(new Date().getDate());
+                                              document.write('/');
+                                              document.write(new Date().getMonth());
+                                              document.write('/');
+                                              document.write(new Date().getFullYear());
+                                            </script>
+                                          </h6>
                                         </div>
                                       </div>
                                       <div class="container pt-3 pb-3">
@@ -996,18 +1018,21 @@
                                           </div>
                                         </div>
                                       </div>
-                                    </form>
+                                      <!-- </form> -->
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="modal-footer" style="justify-content: space-around;">
-                                <button type="button" class="btn btn-info" data-bs-dismiss="modal"
-                                  data-bs-target="#exampleModalToggletieptheochinhsuadiadiem" data-bs-toggle="modal">Tiếp theo</button>
-                              </div>
+                                <div class="modal-footer" style="justify-content: space-around;">
+                                  <!-- <button type="button" class="btn btn-info" data-bs-dismiss="modal"
+                                    data-bs-target="#exampleModalToggletieptheochinhsuadiadiem"
+                                    data-bs-toggle="modal">Tiếp theo</button> -->
+                                  <input type="submit" class="btn btn-info" value="GỬI YÊU CẦU" />
+                                </div>
+                              </form>
                             </div>
                           </div>
                         </div>
-                        <div class="modal fade" id="exampleModalToggletieptheochinhsuadiadiem" data-bs-backdrop="static"
+                        <!-- <div class="modal fade" id="exampleModalToggletieptheochinhsuadiadiem" data-bs-backdrop="static"
                           data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabeltieptheo"
                           aria-hidden="true">
                           <div class="modal-dialog modal-lg">
@@ -1046,7 +1071,7 @@
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                       </td>
 
                       <td class="align-middle  text-center">
