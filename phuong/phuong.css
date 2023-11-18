@@ -54,9 +54,6 @@
     margin-bottom:2rem;
 }
 
-
-
-<style>
 .card-body {
   overflow: hidden;
 }
@@ -66,5 +63,5 @@
   white-space: pre-wrap;
   word-wrap: break-word;
 }
-</style>
+
 

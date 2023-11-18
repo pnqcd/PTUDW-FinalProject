@@ -481,10 +481,111 @@
                         <span class="me-2 text-xs font-weight-bold text-danger">Đang xử lý</span>
                       </td>
                       <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false" data-bs-target="#staticBackdrop2" data-bs-toggle="modal">
                           <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
                           
                         </button>
+                        <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static"
+                                                    data-bs-keyboard="false" tabindex="-1"
+                                                    aria-labelledby="staticBackdropLabel2" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <div class="col-5 px-2"><h5 class="modal-title text-primary" id="staticBackdropLabel">BÁO CÁO: Công viên Âu Lạc </h5></div>    
+                                                                <div class="col-6 px-2 d-flex">
+                                                                    <h5 class="modal-title text-danger"><span class="font-weight-bold text-secondary">Tình trạng:</span> Đang xử lý</h5>
+                                                                    
+                                                                </div>
+                                                                <div class="col-1 px-4">
+                                                                <button class="btn-close toast-btn" type="button"
+                                                                    data-bs-dismiss="modal" aria-label="Close"
+                                                                    data-target="infoToast" style="margin-bottom: 0;"><i
+                                                                        class="fa fa-times-circle text-danger  fs-4"
+                                                                        aria-hidden="true"></i></button>
+                                                                </div>
+                                                            </div>                                                   
+                                                            <div class="modal-body">
+                                                                <div class="container-fluid">
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <h6>Phần 1: Thông Tin Báo Cáo</h6>
+                                                                            <div class="card h-100">
+                                                                                <div class="card-body">
+                                                                                    <div
+                                                                                        class="d-flex flex-column justify-content-center">
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Thời điểm gửi: </span> 28/10/2023 
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Tên
+                                                                                                người gửi: </span> Nguyễn Lê Tấn Phúc 
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Điện
+                                                                                                thoại: </span>
+                                                                                            0909123456
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Email:
+                                                                                            </span>
+                                                                                            nltp@gmail.com
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Hình thức báo cáo:
+                                                                                            </span>
+                                                                                            Đóng góp ý kiến
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <h6>Phần 2: Nội dung báo cáo </h6>
+                                                                            <div class="card h-100 ">
+                                                                                <div class="card-body">
+                                                                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse debitis porro sed blanditiis dignissimos soluta autem fugit aspernatur saepe molestias.</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mt-3">
+                                                                        
+                                                                        <div class="container py-4">
+                                                                            <h6>Phần 3: Hình ảnh </h6>
+                                                                            <div class="card bg-dark text-white">
+                                                                              <img src="../assets/img/stt8.png" class="card-img" alt="..." style="height: 250px ;box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; object-fit: cover;
+                                                                                    ">
+                                                                              <div class="card-img-overlay">
+                                                                                <h5 class="card-title text-white">
+                                                                                  Công viên Âu Lạc
+                                                                                </h5>
+                                                                                
+                                                                              </div>
+                                                                          </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer"
+                                                                style="justify-content: space-around;">
+                                                                <button type="button" class="btn btn-primary"
+                                                                    data-bs-target="#exampleModaltieptheo"
+                                                                    data-bs-toggle="modal" data-bs-dismiss="modal">Xử lý</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                       </td>
                     </tr>
                     <tr>
@@ -510,10 +611,118 @@
                         <span class="me-2 text-xs font-weight-bold text-success">Đã xử lý</span>
                       </td>
                       <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
                           <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
                           
                         </button>
+                        <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static"
+                                                    data-bs-keyboard="false" tabindex="-1"
+                                                    aria-labelledby="staticBackdropLabel3" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <div class="col-5 px-2"><h5 class="modal-title text-primary" id="staticBackdropLabel">BÁO CÁO: Ngã Sáu Cộng Hòa </h5></div>    
+                                                                <div class="col-6 px-2 d-flex">
+                                                                    <h5 class="modal-title text-success"><span class="font-weight-bold text-secondary">Tình trạng:</span> Đã xử lý</h5>
+                                                                    
+                                                                </div>
+                                                                <div class="col-1 px-4">
+                                                                <button class="btn-close toast-btn" type="button"
+                                                                    data-bs-dismiss="modal" aria-label="Close"
+                                                                    data-target="infoToast" style="margin-bottom: 0;"><i
+                                                                        class="fa fa-times-circle text-danger  fs-4"
+                                                                        aria-hidden="true"></i></button>
+                                                                </div>
+                                                            </div>                                                   
+                                                            <div class="modal-body">
+                                                                <div class="container-fluid">
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <h6>Phần 1: Thông Tin Báo Cáo</h6>
+                                                                            <div class="card h-100">
+                                                                                <div class="card-body">
+                                                                                    <div
+                                                                                        class="d-flex flex-column justify-content-center">
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Thời điểm gửi: </span> 28/10/2023 
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Tên
+                                                                                                người gửi: </span> Phan Thái Khang 
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Điện
+                                                                                                thoại: </span>
+                                                                                            0909123456
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Email:
+                                                                                            </span>
+                                                                                            nltp@gmail.com
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Hình thức báo cáo:
+                                                                                            </span>
+                                                                                            Giải đáp thắc mắc
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <h6>Phần 2: Nội dung báo cáo </h6>
+                                                                            <div class="card h-100 ">
+                                                                                <div class="card-body">
+                                                                                    <span>Tôi cần giải đáp thắc mắc về bảng quảng cáo này.</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mt-3">
+                                                                        
+                                                                        <div class="container py-4">
+                                                                            <h6>Phần 3: Hình ảnh </h6>
+                                                                            <div class="card bg-dark text-white">
+                                                                              <img src="../assets/img/stt3.png" class="card-img" alt="..." style="height: 250px ;box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; object-fit: cover;
+                                                                                    ">
+                                                                              <div class="card-img-overlay">
+                                                                                <h5 class="card-title text-white">
+                                                                                  Công viên Âu Lạc
+                                                                                </h5>
+                                                                                
+                                                                              </div>
+                                                                          </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                      <div class="container py-3 mb-4">
+                                                                        <h6>Cách thức xử lý</h6>
+                                                                        <div class="card h-100">
+                                                                          <div class="card-body">
+                                                                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, rem? Quidem eveniet, cumque voluptatum aperiam itaque rerum ducimus minus? Nihil, sed dolorum. Obcaecati ipsa dolor dolores vitae necessitatibus, laudantium laborum, tempore optio quod aut similique sequi maiores minima rem delectus culpa nulla labore nam? Rem id suscipit mollitia enim culpa.</span>
+
+                                                                          </div>
+
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                       </td>
                     </tr>
                     <tr>
@@ -539,10 +748,117 @@
                         <span class="me-2 text-xs font-weight-bold text-success">Đã xử lý</span>
                       </td>
                       <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
                           <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
                           
                         </button>
+                        <div class="modal fade" id="staticBackdrop4" data-bs-backdrop="static"
+                                                    data-bs-keyboard="false" tabindex="-1"
+                                                    aria-labelledby="staticBackdropLabel4" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <div class="col-5 px-2"><h5 class="modal-title text-primary" id="staticBackdropLabel">BÁO CÁO: 11A Trần Phú </h5></div>    
+                                                                <div class="col-6 px-2 d-flex">
+                                                                    <h5 class="modal-title text-success"><span class="font-weight-bold text-secondary">Tình trạng:</span> Đã xử lý</h5>
+                                                                    
+                                                                </div>
+                                                                <div class="col-1 px-4">
+                                                                <button class="btn-close toast-btn" type="button"
+                                                                    data-bs-dismiss="modal" aria-label="Close"
+                                                                    data-target="infoToast" style="margin-bottom: 0;"><i
+                                                                        class="fa fa-times-circle text-danger  fs-4"
+                                                                        aria-hidden="true"></i></button>
+                                                                </div>
+                                                            </div>                                                   
+                                                            <div class="modal-body">
+                                                                <div class="container-fluid">
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <h6>Phần 1: Thông Tin Báo Cáo</h6>
+                                                                            <div class="card h-100">
+                                                                                <div class="card-body">
+                                                                                    <div
+                                                                                        class="d-flex flex-column justify-content-center">
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Thời điểm gửi: </span> 28/10/2023 
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Tên
+                                                                                                người gửi: </span> Phan Như Quỳnh 
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Điện
+                                                                                                thoại: </span>
+                                                                                            0909123456
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Email:
+                                                                                            </span>
+                                                                                            nltp@gmail.com
+                                                                                        </h6>
+                                                                                        <h6
+                                                                                            class="text-sm font-weight-normal mb-1">
+                                                                                            <span
+                                                                                                class="font-weight-bold">Hình thức báo cáo:
+                                                                                            </span>
+                                                                                            Tố giác sai phạm
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <h6>Phần 2: Nội dung báo cáo </h6>
+                                                                            <div class="card h-100 ">
+                                                                                <div class="card-body">
+                                                                                    <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam, similique impedit dolorem cumque nesciunt eum.</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mt-3">
+                                                                        
+                                                                        <div class="container py-4">
+                                                                            <h6>Phần 3: Hình ảnh </h6>
+                                                                            <div class="card bg-dark text-white">
+                                                                              <img src="../assets/img/stt10.png" class="card-img" alt="..." style="height: 250px ;box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; object-fit: cover;
+                                                                                    ">
+                                                                              <div class="card-img-overlay">
+                                                                                <h5 class="card-title text-white">
+                                                                                  Công viên Âu Lạc
+                                                                                </h5>
+                                                                                
+                                                                              </div>
+                                                                          </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                      <div class="container py-3 mb-4">
+                                                                        <h6>Cách thức xử lý</h6>
+                                                                        <div class="card h-100">
+                                                                          <div class="card-body">
+                                                                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, rem? Quidem eveniet, cumque voluptatum aperiam itaque rerum ducimus minus? Nihil, sed dolorum. Obcaecati ipsa dolor dolores vitae necessitatibus, laudantium laborum, tempore optio quod aut similique sequi maiores minima rem delectus culpa nulla labore nam? Rem id suscipit mollitia enim culpa.</span>
+
+                                                                          </div>
+
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
                       </td>
                     </tr>
                   </tbody>
