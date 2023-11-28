@@ -10,10 +10,8 @@
     Bảng điều khiển
   </title>
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" href="phuong.css">
   <link rel="stylesheet" type="text/css"
     href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -21,6 +19,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-dashboard.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/form_edit.css" />
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -35,22 +35,29 @@
         <!-- <span class="ms-1 font-weight-bold text-white">Material Dashboard 2</span> -->
       </a>
     </div>
-    <div class="align-items-center text-center">
+    <div class="align-items-center text-center mb-3">
       <a class="nav-link text-white" href="#">
-        <i class="bi bi-geo-alt-fill"></i>
-        <span class="nav-link-text fs-6 fw-bolder">Phường 4, Quận 5</span>
+        <i class="material-icons opacity-10">location_on</i>
+        <span class="nav-link-text fs-5 fw-bolder">Quận 5</span>
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white " href="./manageList.html">
+          <a class="nav-link text-white" href="./manageList.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">format_list_bulleted</i>
             </div>
             <span class="nav-link-text ms-1">Quản lý danh sách</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="./adsAddress.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">chrome_reader_mode</i>
+            </div>
+            <span class="nav-link-text ms-1">Điểm đặt bảng quảng cáo</span>
           </a>
         </li>
         <li class="nav-item">
@@ -69,7 +76,14 @@
             <span class="nav-link-text ms-1">Báo cáo</span>
           </a>
         </li>
-        
+        <!-- <li class="nav-item">
+          <a class="nav-link text-white " href="../pages/rtl.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">manage_accounts</i>
+            </div>
+            <span class="nav-link-text ms-1">Quản lý tài khoản</span>
+          </a>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link text-white active bg-gradient-primary" href="./notifications.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -118,12 +132,12 @@
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
       data-scroll="true">
       <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb"> 
+        <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Thông báo </li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Quản lý danh sách</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Thông báo</h6>
+          <h6 class="font-weight-bolder mb-0">Quản lý danh sách</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
