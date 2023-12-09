@@ -348,3 +348,73 @@ if (navigator.geolocation) {
 } else {
     console.error('Geolocation is not supported by this browser.');
 }
+
+$(document).ready(function () {
+    // Simulated data for autocomplete
+    const autocompleteData = ['Apple', 'Banana', 'Cherry', 'Date', 'Grape', 'Lemon', 'Orange'];
+
+    const autosuggestAPI = "RwHQ2j65M5LTexUJjALgQHcDkUJksCIc2K0Fyiyi2Ss"
+
+    // Reference to the search input and autocomplete dropdown
+    const searchInput = $('#searchInput');
+    const autocompleteDropdown = $('#autocompleteDropdown');
+
+    // Event listener for the input field
+    searchInput.on('input', function () {
+        const searchTerm = $(this).val().toLowerCase();
+
+        const suggestionURL = `https://autosuggest.search.hereapi.com/v1/autosuggest?at=52.5199813,13.3985138&lang=vi&q=${searchTerm}&apiKey=${autosuggestAPI}`
+
+        console.log(suggestionURL)
+
+        // Clear previous results
+        autocompleteDropdown.empty();
+
+        fetch(suggestionURL).then(res => res.json()).then(res => {
+            matchingResults = []
+            res.items.forEach(item => { 
+                console.log(item.title)
+                matchingResults.push(item.title)
+                autocompleteDropdown.append(`
+                    <div class="dropdown-item">
+                        <a class="fw-bold text-primary">${item.title}</a>
+                        <p class="small text-muted">${item.address.label}</p>
+                    </div>
+                `);
+                autocompleteDropdown.toggle(!!matchingResults.length);
+            })
+        })
+        // Filter and display matching results
+        // const matchingResults = autocompleteData.filter(item => item.toLowerCase().includes(searchTerm));
+        // matchingResults.forEach(result => {
+        //     autocompleteDropdown.append(`<a class="dropdown-item">${result}</a>`);
+        // });
+
+        // Show or hide the autocomplete dropdown based on results
+        
+    });
+
+    // Event listener for losing focus on the search input
+    searchInput.on('blur', function () {
+        // Delay hiding the dropdown to allow the click on the dropdown item
+        setTimeout(() => {
+            autocompleteDropdown.hide();
+        }, 200);
+    });
+
+    // Event listener for focusing on the search input
+    searchInput.on('focus', function () {
+        // Show the autocomplete dropdown when the input is focused
+        autocompleteDropdown.show();
+    });
+
+    // Event listener for selecting an autocomplete option
+    autocompleteDropdown.on('click', '.dropdown-item', function () {
+        const selectedValue = $(this).text();
+        searchInput.val(selectedValue);
+        autocompleteDropdown.empty(); // Hide the dropdown
+
+        // Perform search or any other action here
+        alert(`Searching for: ${selectedValue}`);
+    });
+});

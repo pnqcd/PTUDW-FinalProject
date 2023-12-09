@@ -28,6 +28,7 @@
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
         rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
@@ -41,36 +42,6 @@
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
-    <style>
-        .autocomplete-container {
-            position: relative;
-        }
-
-        .autocomplete-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            /* Set the width to match the search input */
-            border: 1px solid #ced4da;
-            max-height: 150px;
-            overflow-y: auto;
-            display: none;
-            /* Initially hide the dropdown */
-        }
-
-        .dropdown-item {
-            cursor: pointer;
-        }
-
-        .searchbox {
-            position: absolute;
-            left: 10px;
-            top: 40px;
-            z-index: 3;
-        }
-    </style>
 </head>
 
 <body>
@@ -261,59 +232,6 @@
         const pond = FilePond.create(inputElement, { acceptedFileTypes: ['image/*'], maxFiles: 2 }); 
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
-    <script>
-        $(document).ready(function () {
-            // Simulated data for autocomplete
-            const autocompleteData = ['Apple', 'Banana', 'Cherry', 'Date', 'Grape', 'Lemon', 'Orange'];
-
-            // Reference to the search input and autocomplete dropdown
-            const searchInput = $('#searchInput');
-            const autocompleteDropdown = $('#autocompleteDropdown');
-
-            // Event listener for the input field
-            searchInput.on('input', function () {
-                const searchTerm = $(this).val().toLowerCase();
-                console.log(searchTerm)
-
-                // Clear previous results
-                autocompleteDropdown.empty();
-
-                // Filter and display matching results
-                const matchingResults = autocompleteData.filter(item => item.toLowerCase().includes(searchTerm));
-                matchingResults.forEach(result => {
-                    autocompleteDropdown.append(`<a class="dropdown-item">${result}</a>`);
-                });
-
-                // Show or hide the autocomplete dropdown based on results
-                autocompleteDropdown.toggle(!!matchingResults.length);
-            });
-
-            // Event listener for losing focus on the search input
-            searchInput.on('blur', function () {
-                // Delay hiding the dropdown to allow the click on the dropdown item
-                setTimeout(() => {
-                    autocompleteDropdown.hide();
-                }, 200);
-            });
-
-            // Event listener for focusing on the search input
-            searchInput.on('focus', function () {
-                // Show the autocomplete dropdown when the input is focused
-                autocompleteDropdown.show();
-            });
-
-            // Event listener for selecting an autocomplete option
-            autocompleteDropdown.on('click', '.dropdown-item', function () {
-                const selectedValue = $(this).text();
-                searchInput.val(selectedValue);
-                autocompleteDropdown.empty(); // Hide the dropdown
-
-                // Perform search or any other action here
-                alert(`Searching for: ${selectedValue}`);
-            });
-        });
-    </script>
 </body>
 
 </html>
