@@ -6,8 +6,7 @@
 .header__navbar {
     height: 70px;
     display: flex;
-    flex-flow: row wrap;
-    align-items: center;
+    align-items: center; /* Vertically center the content */
     position: relative;
 }
 
@@ -466,8 +465,19 @@
 }
 
 .searchbox {
-    position: absolute;
+    /* position: absolute;
     left: 10px;
-    top: 40px;
+    top: 40px; */
+    z-index: 3;
+}
+
+.header__navbar-search {
+    position: absolute;
+    top: 64%; /* Vertically center the search bar */
+    transform: translateY(-50%);
+    right: 135px;
+    width: 500px; /* Set the width to 700px */
+    display: flex;
+    align-items: center;
     z-index: 3;
 }
