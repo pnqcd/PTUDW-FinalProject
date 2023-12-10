@@ -12,6 +12,8 @@ var closeButtonAdBannerDialog = document.getElementsByClassName("closeAdBannerDi
 
 closeButtonAdBannerDialog.onclick = function () { reportAdBannerDialog.style.display = "none"; }
 
+var searchPlaces = []
+
 function startClustering(map, data) {
     var dataPoints = data.map(function (item) {
         return new H.clustering.DataPoint(item.latitude, item.longitude)
@@ -367,13 +369,17 @@ $(document).ready(function () {
 
         console.log(suggestionURL)
 
+        searchPlaces = []
+
         // Clear previous results
         autocompleteDropdown.empty();
 
         fetch(suggestionURL).then(res => res.json()).then(res => {
             matchingResults = []
-            res.items.forEach(item => { 
-                console.log(item.title)
+            searchPlaces = res.items
+            // console.log(searchPlaces)
+            res.items.forEach(item => {
+                // console.log(item.title)
                 matchingResults.push(item.title)
                 autocompleteDropdown.append(`
                     <div class="dropdown-item">
@@ -391,7 +397,7 @@ $(document).ready(function () {
         // });
 
         // Show or hide the autocomplete dropdown based on results
-        
+
     });
 
     // Event listener for losing focus on the search input
@@ -410,11 +416,78 @@ $(document).ready(function () {
 
     // Event listener for selecting an autocomplete option
     autocompleteDropdown.on('click', '.dropdown-item', function () {
-        const selectedValue = $(this).text();
-        searchInput.val(selectedValue);
-        autocompleteDropdown.empty(); // Hide the dropdown
+        // Find the <a> element inside the clicked dropdown item
+        const selectedLink = $(this).find('a.fw-bold.text-primary');
 
-        // Perform search or any other action here
-        alert(`Searching for: ${selectedValue}`);
+        // Get the text content of the <a> element
+        const selectedText = selectedLink.text();
+
+        let selectedItem;
+        for (let i = 0; i < searchPlaces.length; i++)
+            if (searchPlaces[i].title == selectedText) {
+                selectedItem = searchPlaces[i]
+                break
+            }
+
+        // Perform any action with the selected text
+        alert(`Selected text: ${selectedItem.position.lat}-${selectedItem.position.lng}`);
+
+        const latitude = selectedItem.position.lat
+        const longitude = selectedItem.position.lng
+
+        // Move map the the specific point
+        map.setCenter({
+            lat: latitude,
+            lng: longitude
+        });
+
+        const iconUrl = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" ><path d="M 45 90 c -1.415 0 -2.725 -0.748 -3.444 -1.966 l -4.385 -7.417 C 28.167 65.396 19.664 51.02 16.759 45.189 c -2.112 -4.331 -3.175 -8.955 -3.175 -13.773 C 13.584 14.093 27.677 0 45 0 c 17.323 0 31.416 14.093 31.416 31.416 c 0 4.815 -1.063 9.438 -3.157 13.741 c -0.025 0.052 -0.053 0.104 -0.08 0.155 c -2.961 5.909 -11.41 20.193 -20.353 35.309 l -4.382 7.413 C 47.725 89.252 46.415 90 45 90 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,61,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" /><path d="M 45 45.678 c -8.474 0 -15.369 -6.894 -15.369 -15.368 S 36.526 14.941 45 14.941 c 8.474 0 15.368 6.895 15.368 15.369 S 53.474 45.678 45 45.678 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(156,37,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" /></g></svg>';
+        const icon = new H.map.Icon(iconUrl);
+        const marker = new H.map.Marker({lat: latitude, lng: longitude}, {icon: icon})
+        map.addObject(marker)
+
+        let bubble, bubbleElement, bubbleClose;
+        const url = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${latitude}%2C${longitude}&lang=vi-VN&apiKey=${apiKey}`;
+        
+        fetch(url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            if (data.items && data.items.length > 0) {
+                let address = data.items[0].address;
+                let content = '<div style="width:250px;"><i class="fa-regular fa-circle-check" style="color: #00a832; margin-right:5px;"></i><b>Thông tin địa điểm</b> <br />' + address.label + '</div>';
+                let className = 'info-place-bubble';
+                // Create a bubble, if not created yet
+                if (!bubble) {
+                    bubble = new H.ui.InfoBubble({ lat: latitude, lng: longitude }, {
+                        content: content,
+                        className: className,
+                    });
+                    ui.addBubble(bubble);
+                } else {
+                    // Reuse existing bubble object
+                    bubble.setPosition({ lat: latitude, lng: longitude});
+                    bubble.setContent(content);
+                    bubble.open();
+                }
+                bubbleElement = bubble.getElement();
+                bubbleElement.classList.add(className);
+
+                bubble.addEventListener('statechange', function (evt) {
+                    if (evt.target.getState() === H.ui.InfoBubble.State.CLOSED) {
+                        marker.setVisibility(false);
+                    }
+                })
+            } else {
+                alert('Không tìm thấy địa chỉ cho tọa độ này.');
+            }
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+
+        // Clear the dropdown
+        autocompleteDropdown.empty();
     });
 });
