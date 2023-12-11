@@ -50,22 +50,22 @@
             <div class="header__navbar-logo">
                 <a href="index.html" target="_top"><img src="./assets/img/logo.png" alt="logo"></a>
             </div>
-    
+
             <!-- ... your existing content ... -->
-    
+
             <div class="header__navbar-search">
                 <!-- <div class="container mt-5 searchbox"> -->
-                    <!-- <div class="row justify-content-end"> -->
-                        <!-- <div class="col-md-6"> -->
-                            <div class="input-group autocomplete-container">
-                                <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm địa điểm...">
-                                <div id="autocompleteDropdown" class="autocomplete-dropdown dropdown-menu"></div>
-                            </div>
-                        <!-- </div> -->
-                    <!-- </div> -->
+                <!-- <div class="row justify-content-end"> -->
+                <!-- <div class="col-md-6"> -->
+                <div class="input-group autocomplete-container">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm địa điểm...">
+                    <div id="autocompleteDropdown" class="autocomplete-dropdown dropdown-menu"></div>
+                </div>
+                <!-- </div> -->
+                <!-- </div> -->
                 <!-- </div> -->
             </div>
-    
+
         </nav>
     </header>
 
@@ -235,12 +235,24 @@
         FilePond.registerPlugin(FilePondPluginFileEncode);
         FilePond.setOptions({
             server: {
-                process: '/submit-ad-banner-report-img', // Server endpoint for file upload
-                // revert: '/revert',
+                // process: '/submit-ad-banner-report-img', // Server endpoint for file upload
+                process: {
+                    url: '/submit-ad-banner-report-img',
+                    method: 'POST',
+                    onload: (response) => {
+                        // Extract the unique file ID from the server response
+                        const uniqueFileId = JSON.parse(response);
+
+                        // Do something with the unique file ID (optional)
+                        console.log('Unique File ID:', uniqueFileId.uniqueFileId[0].filename);
+                    },
+                },
+                revert: '/revert',
             }
         });
+
         const inputElement = document.getElementById("adBannerReportUploader");
-        const pond = FilePond.create(inputElement, { acceptedFileTypes: ['image/*'], maxFiles: 2 }); 
+        const pond = FilePond.create(inputElement, { acceptedFileTypes: ['image/*'], maxFiles: 2 });
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>

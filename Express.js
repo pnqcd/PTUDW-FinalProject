@@ -11,7 +11,9 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/'); // Specify the upload directory
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname); // Use the original file name
+        // cb(null, file.originalname); // Use the original file name
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, uniqueSuffix + '-' + file.originalname); // Use a unique filename
     },
 });
 
@@ -100,10 +102,26 @@ app.post('/submit', (req, res) => {
         })
 });
 
-app.post('/submit-ad-banner-report-img', upload.single('adBannerReportUploader'), (req, res) => {
-    console.log("BEGIN /upload")
-    return res.send({ response: "Succesful" });
+app.post('/submit-ad-banner-report-img', upload.array('adBannerReportUploader', 2), (req, res) => {
+    // Files are uploaded and stored in the 'uploads/' directory
+
+    console.log(req)
+
+    // Retrieve file information
+    const files = req.files;
+    files.forEach(file => {
+        console.log('Uploaded file:', file.filename);
+        // You can store file information in a database or perform other actions here
+    });
+
+    // Respond to the client
+    res.send({uniqueFileId: files});
 });
+
+app.delete('/revert', (req, res) => {
+    console.log(req.body)
+})
+
 
 app.get("/get-place", (req, res) => {
     pool.query("SELECT * FROM place", (error, results) => {
