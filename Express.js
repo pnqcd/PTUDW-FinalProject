@@ -3,8 +3,19 @@ const app = express();
 const { Pool } = require("pg");
 var path = require('path');
 const bodyParser = require('body-parser');
-
+const multer = require('multer');
 const cors = require('cors');
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/'); // Specify the upload directory
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname); // Use the original file name
+    },
+});
+
+const upload = multer({ storage: storage });
 
 require('dotenv').config();
 
@@ -15,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // app.use('/static', express.static('public'));
 app.use(express.static(__dirname));
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
@@ -45,7 +56,9 @@ app.post('/submit', (req, res) => {
     const secret_key = "6LdCxQQpAAAAAKjC5rDm3a-LuGRaiC2MVngHvY60";
     const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${response_key}`;
 
-    let msg ="";
+    let msg = "";
+
+    console.log(req)
 
     const name = req.body["firstname"];
     const type = req.body["lastname"];
@@ -61,7 +74,7 @@ app.post('/submit', (req, res) => {
 
     if (phone.trim() == "")
         msg += "Điện thoại không thể để trống!\n";
-    
+
     if (message.trim() == "")
         msg += "Nội dung báo cáo không thể để trống!\n";
 
@@ -74,21 +87,22 @@ app.post('/submit', (req, res) => {
         .then((google_response) => {
             if (google_response.success == true) {
                 console.log("success");
-                return res.send({response: "Successful", message: msg});
-            } 
+                return res.send({ response: "Successful", message: msg });
+            }
             else {
                 console.log("failed");
                 msg += "Recaptcha chưa được check!\n";
-                return res.send({response: "Failed", message: msg});
-            }  
+                return res.send({ response: "Failed", message: msg });
+            }
         })
         .catch((error) => {
             return res.json({ error });
         })
 });
 
-app.post('/submit-ad-banner-report-img', (req, res) => {
-    return res.send({response: "Successful"});
+app.post('/submit-ad-banner-report-img', upload.single('adBannerReportUploader'), (req, res) => {
+    console.log("BEGIN /upload")
+    return res.send({ response: "Succesful" });
 });
 
 app.get("/get-place", (req, res) => {
@@ -108,13 +122,13 @@ app.get('/get-ad-details/:id', (req, res) => {
         PLACE PL JOIN PLACE_DETAILS PD on PL.STT = PD.PLACE_STT \
         WHERE PD.PLACE_STT = " + placeID
         , (error, results) => {
-        if (error) {
-            res.status(500).json({ error });
-            console.log("loi roi")
-        } else {
-            res.json({ placeDetails: results.rows });
-        }
-    });
+            if (error) {
+                res.status(500).json({ error });
+                console.log("loi roi")
+            } else {
+                res.json({ placeDetails: results.rows });
+            }
+        });
 });
 
 app.get('/', (req, res) => {
