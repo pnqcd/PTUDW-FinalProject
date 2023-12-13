@@ -68,13 +68,13 @@ app.post('/submit', (req, res) => {
 
     let msg = "";
 
-    console.log(req)
-
     const name = req.body["firstname"];
     const type = req.body["lastname"];
     const email = req.body["email"];
     const phone = req.body["phone"];
     const message = req.body["message"];
+    const img1 = req.body["adBannerReportUploader"][0];
+    const img2 = req.body["adBannerReportUploader"][1];
 
     if (name.trim() == "")
         msg += "Họ tên không thể để trống!\n";
@@ -97,6 +97,16 @@ app.post('/submit', (req, res) => {
         .then((google_response) => {
             if (google_response.success == true) {
                 console.log("success");
+
+                let img1Valid = img1 ? img1 : "NULL"
+                let img2Valid = img2 ? img2 : "NULL"
+
+                pool.query(`
+                INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2)
+                VALUES
+                    (37.7749, -122.4194, '${name}', '${type}', '${email}', '${phone}', '${message}', 'uploads/${img1Valid}', 'uploads/${img2Valid}');
+                `)
+
                 return res.send({ response: "Successful", message: msg });
             }
             else {
