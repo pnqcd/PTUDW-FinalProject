@@ -5,6 +5,9 @@ var path = require('path');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const cors = require('cors');
+const fs = require('fs');
+
+app.use(express.json());
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -42,11 +45,16 @@ const pool = new Pool({
     // database: "postgres",
     // password: "12345678",
     // port: 5432
+
+
     user: "yoaqtxvl",
     host: "rain.db.elephantsql.com",
     database: "yoaqtxvl",
     password: "PPr7gzt67BbTzFagQlqq_MzwzfpzX2Hr",
     port: 5432
+
+
+
     // connectionString: process.env.DATABASE_URL,
     // ssl: {
     //     rejectUnauthorized: false,
@@ -102,26 +110,42 @@ app.post('/submit', (req, res) => {
         })
 });
 
-app.post('/submit-ad-banner-report-img', upload.array('adBannerReportUploader', 2), (req, res) => {
+app.post('/submit-ad-banner-report-img', upload.single('adBannerReportUploader'), (req, res) => {
     // Files are uploaded and stored in the 'uploads/' directory
 
-    console.log(req)
-
-    // Retrieve file information
-    const files = req.files;
-    files.forEach(file => {
-        console.log('Uploaded file:', file.filename);
-        // You can store file information in a database or perform other actions here
-    });
+    // // Retrieve file information
+    // const files = req.files;
+    // files.forEach(file => {
+    //     console.log('Uploaded file:', file.filename);
+    //     // You can store file information in a database or perform other actions here
+    // });
 
     // Respond to the client
-    res.send({uniqueFileId: files});
+    res.send({uniqueFileId: req.file.filename});
+    
 });
-
+    
 app.delete('/revert', (req, res) => {
-    console.log(req.body)
-})
+    const uniqueFileId = req.body.uniqueFileId;
 
+    // Check if uniqueFileId is received correctly
+    console.log('Received uniqueFileId in /revert:', uniqueFileId);
+
+    // Assuming files are stored in a 'uploads' directory
+    const filePath = `uploads/${uniqueFileId}`;
+
+    // Check if the file exists
+    if (fs.existsSync(filePath)) {
+        // Perform actions to revert or delete the file based on uniqueFileId
+        fs.unlinkSync(filePath);
+
+        // Send a response indicating success
+        res.json({ success: true, message: 'File reverted and deleted successfully' });
+    } else {
+        // Send a response indicating that the file does not exist
+        res.status(404).json({ success: false, message: 'File not found' });
+    }
+})
 
 app.get("/get-place", (req, res) => {
     pool.query("SELECT * FROM place", (error, results) => {

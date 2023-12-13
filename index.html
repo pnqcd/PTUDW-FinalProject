@@ -244,11 +244,21 @@
                         const uniqueFileId = JSON.parse(response);
 
                         // Do something with the unique file ID (optional)
-                        console.log('Unique File ID:', uniqueFileId.uniqueFileId[0].filename);
+                        console.log('Unique File ID:', uniqueFileId.uniqueFileId);
+
+                        return uniqueFileId.uniqueFileId
                     },
                 },
-                revert: '/revert',
-            }
+                revert: (uniqueFileId, load, error) => {
+                    console.log(uniqueFileId);
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("DELETE", "/revert", true);
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.send(JSON.stringify({ uniqueFileId: uniqueFileId }));
+                    
+                },
+            },
         });
 
         const inputElement = document.getElementById("adBannerReportUploader");
