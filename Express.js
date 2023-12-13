@@ -101,6 +101,9 @@ app.post('/submit', (req, res) => {
                 let img1Valid = img1 ? img1 : "NULL"
                 let img2Valid = img2 ? img2 : "NULL"
 
+                console.log(img1Valid);
+                console.log(img2Valid);
+
                 pool.query(`
                 INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2)
                 VALUES
