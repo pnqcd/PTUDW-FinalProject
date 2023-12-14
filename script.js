@@ -7,8 +7,10 @@ var InfoBubble;
 const rightPanel = document.getElementById('rightPanel');
 const dataAdDetailsInnerHTML = document.getElementById('content-right-panel-detail-ad');
 
+var checkbox = document.getElementById('flexSwitchCheckChecked1');
 var reportAdBannerDialog = document.getElementById("reportAdBannerDialog");
 var closeButtonAdBannerDialog = document.getElementsByClassName("closeAdBannerDialog")[0];
+var clusteringLayer
 
 closeButtonAdBannerDialog.onclick = function () { reportAdBannerDialog.style.display = "none"; }
 
@@ -24,7 +26,7 @@ function startClustering(map, data) {
 
     var clusteredDataProvider = new H.clustering.Provider(dataPoints, {
         clusteringOptions: {
-            eps: 64,
+            eps: 20,
             minWeight: 2
         },
         // theme: customTheme
@@ -34,7 +36,7 @@ function startClustering(map, data) {
 
     clusteredDataProvider.setTheme(CUSTOM_THEME)
 
-    var clusteringLayer = new H.map.layer.ObjectLayer(clusteredDataProvider)
+    clusteringLayer = new H.map.layer.ObjectLayer(clusteredDataProvider)
     map.addLayer(clusteringLayer)
 }
 
@@ -378,6 +380,15 @@ window.onload = function () {
 
 // Now use the map as required...
 addInfoBubble(map);
+
+checkbox.addEventListener('change', function () {
+    let markersVisible = checkbox.checked;
+    
+    if (!markersVisible)
+        map.removeLayer(clusteringLayer)
+    else
+    map.addLayer(clusteringLayer)
+})
 
 let bubble, marker, bubbleElement, bubbleClose;
 map.addEventListener('tap', function (evt) {
