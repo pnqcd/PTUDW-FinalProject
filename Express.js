@@ -75,6 +75,9 @@ app.post('/submit', (req, res) => {
     const message = req.body["message"];
     const img1 = req.body["adBannerReportUploader"][0];
     const img2 = req.body["adBannerReportUploader"][1];
+    const lat = req.body["lat"];
+    const lng = req.body["lng"];
+    const isLocationReport = req.body["isLocationReport"]
 
     if (name.trim() == "")
         msg += "Họ tên không thể để trống!\n";
@@ -103,11 +106,13 @@ app.post('/submit', (req, res) => {
 
                 console.log(img1Valid);
                 console.log(img2Valid);
+                console.log(lat);
+                console.log(lng);
 
                 pool.query(`
-                INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2)
+                INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2, locationreport)
                 VALUES
-                    (37.7749, -122.4194, '${name}', '${type}', '${email}', '${phone}', '${message}', 'uploads/${img1Valid}', 'uploads/${img2Valid}');
+                    (${lat}, ${lng}, '${name}', '${type}', '${email}', '${phone}', '${message}', 'uploads/${img1Valid}', 'uploads/${img2Valid}', ${isLocationReport});
                 `)
 
                 return res.send({ response: "Successful", message: msg });

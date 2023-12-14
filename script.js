@@ -16,8 +16,10 @@ closeButtonAdBannerDialog.onclick = function () { reportAdBannerDialog.style.dis
 
 var searchPlaces = []
 var airports
-
+var latX = 0
+var lngY = 0
 var defaultTheme
+var isLocationReport = false
 
 function startClustering(map, data) {
     var dataPoints = data.map(function (item) {
@@ -80,6 +82,7 @@ var CUSTOM_THEME = {
                 <b><i>${data.quyhoach}</i></b>
                 <img class="img-place" src="${data.hinhanh}">
                 <button class='detailedAdSign' onclick="detailAdButtonClicked('${data.stt}')">Chi tiết</button>
+                <p>lat: ${data.latitude} - longtitude: ${data.longitude}<></p>
             </div>`
         );
 
@@ -155,12 +158,19 @@ function sendAdBannerReportButtonClicked() {
     // /var formData = new FormData(document.getElementById('adBannerDialogReportForm'));
     tinymce.triggerSave(true, true);
 
+    const formData = new FormData(document.getElementById('adBannerDialogReportForm'));
+    formData.append('lat', latX);
+    formData.append('lng', lngY);
+    formData.append('isLocationReport', isLocationReport)
+    const urlSearchParams = new URLSearchParams(formData);
+
+
     fetch('/submit', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: new URLSearchParams(new FormData(document.getElementById('adBannerDialogReportForm'))),
+        body: urlSearchParams,
     })
         .then(response => response.json())
         .then(data => {
@@ -226,11 +236,15 @@ function moveMapToKHTN(map) {
     map.setZoom(15);
 }
 
-function onReportAdBannerClicked() {
+function onReportAdBannerClicked(lx, ly, reportType) {
+    latX = lx
+    lngY = ly
+    isLocationReport = reportType
     reportAdBannerDialog.style.display = "block";
 }
 
 function detailAdButtonClicked(placeID) {
+
     rightPanel.classList.add('show');
 
     var pInformation = document.getElementById("popupInformation");
@@ -271,7 +285,7 @@ function detailAdButtonClicked(placeID) {
                                 </a>
                             
                                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked()">
+                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, true)">
                                     <span>
                                         <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                                     </span>
@@ -399,6 +413,7 @@ map.addEventListener('tap', function (evt) {
         evt.currentPointer.viewportX,
         evt.currentPointer.viewportY,
     );
+
     const iconUrl = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve"><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" ><path d="M 45 90 c -1.415 0 -2.725 -0.748 -3.444 -1.966 l -4.385 -7.417 C 28.167 65.396 19.664 51.02 16.759 45.189 c -2.112 -4.331 -3.175 -8.955 -3.175 -13.773 C 13.584 14.093 27.677 0 45 0 c 17.323 0 31.416 14.093 31.416 31.416 c 0 4.815 -1.063 9.438 -3.157 13.741 c -0.025 0.052 -0.053 0.104 -0.08 0.155 c -2.961 5.909 -11.41 20.193 -20.353 35.309 l -4.382 7.413 C 47.725 89.252 46.415 90 45 90 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,61,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" /><path d="M 45 45.678 c -8.474 0 -15.369 -6.894 -15.369 -15.368 S 36.526 14.941 45 14.941 c 8.474 0 15.368 6.895 15.368 15.369 S 53.474 45.678 45 45.678 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(156,37,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" /></g></svg>';
 
     const icon = new H.map.Icon(iconUrl);
@@ -412,7 +427,17 @@ map.addEventListener('tap', function (evt) {
         .then(function (data) {
             if (data.items && data.items.length > 0) {
                 var address = data.items[0].address;
-                let content = '<div style="width:250px;"><i class="fa-regular fa-circle-check" style="color: #00a832; margin-right:5px;"></i><b>Thông tin địa điểm</b> <br />' + address.label + '</div>';
+                let content = '<div style="width:250px;"><i class="fa-regular fa-circle-check" style="color: #00a832; margin-right:5px;"></i><b>Thông tin địa điểm</b> <br />' + address.label + '</div>' + 
+                `
+                <div style="border: 2px solid #dc4f52; border-radius: 3px;">
+                    <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${lat}, ${lng}, false)">
+                        <span>
+                            <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
+                        </span>
+                        BÁO CÁO VI PHẠM
+                    </button>
+                </div>
+                `;
                 let className = 'info-place-bubble';
                 // Create a bubble, if not created yet
                 if (!bubble) {
