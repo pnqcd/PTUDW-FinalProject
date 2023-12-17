@@ -8,6 +8,7 @@ const rightPanel = document.getElementById('rightPanel');
 const dataAdDetailsInnerHTML = document.getElementById('content-right-panel-detail-ad');
 
 var checkbox = document.getElementById('flexSwitchCheckChecked1');
+var toggleReportMarker = document.getElementById('flexSwitchCheckChecked2');
 var reportAdBannerDialog = document.getElementById("reportAdBannerDialog");
 var closeButtonAdBannerDialog = document.getElementsByClassName("closeAdBannerDialog")[0];
 var clusteringLayer
@@ -15,6 +16,8 @@ var clusteringLayer
 closeButtonAdBannerDialog.onclick = function () { reportAdBannerDialog.style.display = "none"; }
 
 var searchPlaces = []
+var groupReportMarker
+var report
 var airports
 var latX = 0
 var lngY = 0
@@ -363,6 +366,47 @@ function addInfoBubble(map) {
     });
 }
 
+function addReportMarker(group, coordinate) {
+    const iconUrl = `<svg height="20" width="20" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 47.94 47.94" xml:space="preserve">
+    <path style="fill:#ED8A19;" d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956C22.602,0.567,25.338,0.567,26.285,2.486z"/>
+    </svg>`;
+    const icon = new H.map.Icon(iconUrl);
+
+    let reportMarker = new H.map.Marker(coordinate, { icon: icon });
+    // add custom data to the marker
+    // marker.setData(html);
+    group.addObject(reportMarker);
+}
+
+function getReportMarker(map) {
+    groupReportMarker = new H.map.Group();
+
+    map.addObject(groupReportMarker);
+
+    // groupReportMarker.addEventListener('tap', function (evt) {
+    //     InfoBubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
+    //         // read custom data
+    //         content: evt.target.getData()
+    //     });
+    //     // show info bubble
+    //     ui.addBubble(InfoBubble);
+    // }, false);
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "/get-report",
+            method: "GET",
+            success: function (response) {
+                report = response.report;
+                console.log(report)
+                for (let i = 0; i < report.length; i++) 
+                    // console.log(report[i].lat + " - " + report[i].lng)
+                    addReportMarker(groupReportMarker, { lat: report[i].lat, lng: report[i].lng });
+            }
+        });
+    });
+}
+
 const apiKey = "ylfzo_XrCL0wFOWqMdk89chLwml3by9ZPi5U6J-S3EU";
 var platform = new H.service.Platform({
     apikey: apiKey
@@ -394,6 +438,7 @@ window.onload = function () {
 
 // Now use the map as required...
 addInfoBubble(map);
+getReportMarker(map)
 
 checkbox.addEventListener('change', function () {
     let markersVisible = checkbox.checked;
@@ -402,6 +447,15 @@ checkbox.addEventListener('change', function () {
         map.removeLayer(clusteringLayer)
     else
     map.addLayer(clusteringLayer)
+})
+
+toggleReportMarker.addEventListener('change', function () {
+    let markersVisible = toggleReportMarker.checked;
+    
+    if (!markersVisible)
+        map.removeObject(groupReportMarker)
+    else
+        map.addObject(groupReportMarker)
 })
 
 let bubble, marker, bubbleElement, bubbleClose;

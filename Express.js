@@ -176,6 +176,17 @@ app.get("/get-place", (req, res) => {
     });
 });
 
+app.get("/get-report", (req, res) => {
+    pool.query('select * from reports where locationreport = true', (error, results) => {
+        if (error) {
+            res.status(500).json({ error });
+            console.log("loi roi")
+        } else {
+            res.json({ report: results.rows });
+        }
+    });
+});
+
 app.get('/get-ad-details/:id', (req, res) => {
     const placeID = req.params.id;
     pool.query("SELECT * FROM \
