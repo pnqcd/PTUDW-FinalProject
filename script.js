@@ -3,6 +3,11 @@ tinymce.init({
     plugins: 'lists link image table code help wordcount'
 });
 
+tinymce.init({
+    selector: 'textarea#messageReport',
+    plugins: 'lists link image table code help wordcount',
+});
+
 var InfoBubble;
 const rightPanel = document.getElementById('rightPanel');
 const dataAdDetailsInnerHTML = document.getElementById('content-right-panel-detail-ad');
@@ -10,10 +15,13 @@ const dataAdDetailsInnerHTML = document.getElementById('content-right-panel-deta
 var checkbox = document.getElementById('flexSwitchCheckChecked1');
 var toggleReportMarker = document.getElementById('flexSwitchCheckChecked2');
 var reportAdBannerDialog = document.getElementById("reportAdBannerDialog");
+var reportDetailDialog = document.getElementById("reportDetailDialog")
 var closeButtonAdBannerDialog = document.getElementsByClassName("closeAdBannerDialog")[0];
+var closeButtonReportDialog = document.getElementById("closeReportDetailDialog")
 var clusteringLayer
 
 closeButtonAdBannerDialog.onclick = function () { reportAdBannerDialog.style.display = "none"; }
+closeButtonReportDialog.onclick = function () { reportDetailDialog.style.display = "none"; }
 
 var searchPlaces = []
 var groupReportMarker
@@ -178,7 +186,7 @@ function sendAdBannerReportButtonClicked() {
         .then(response => response.json())
         .then(data => {
             console.log("form submitted: ", data.response);
-            if (data.response == "Successful" && data.message == "") {
+            if (data.response == "Successful" && data.message == "") {                
                 Toastify({
                     text: "Báo cáo thành công!",
                     duration: 3000,
@@ -192,6 +200,8 @@ function sendAdBannerReportButtonClicked() {
                     },
                     onClick: function () { } // Callback after click
                 }).showToast();
+
+                addReportMarker(groupReportMarker, { lat: latX, lng: lngY })
             }
             else {
                 Toastify({
@@ -246,6 +256,17 @@ function onReportAdBannerClicked(lx, ly, reportType) {
     reportAdBannerDialog.style.display = "block";
 }
 
+function onReportDetailDialogClicked(data) {
+    reportDetailDialog.style.display = "block";
+    document.getElementById("firstnameReport").value = data.reportername
+    document.getElementById("emailReport").value = data.reporteremail
+    document.getElementById("phoneReport").value = data.reporterphonenumber
+    document.getElementById("lastnameReport").value = data.typeofreport
+    tinymce.get("messageReport").setContent(data.reportcontent)
+    document.getElementById("imgReportDetail1").src = data.imagepath1
+    document.getElementById("imgReportDetail2").src = data.imagepath2
+}
+
 function detailAdButtonClicked(placeID) {
 
     rightPanel.classList.add('show');
@@ -288,7 +309,7 @@ function detailAdButtonClicked(placeID) {
                                 </a>
                             
                                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, true)">
+                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false)">
                                     <span>
                                         <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                                     </span>
@@ -366,7 +387,7 @@ function addInfoBubble(map) {
     });
 }
 
-function addReportMarker(group, coordinate) {
+function addReportMarker(group, coordinate, data) {
     const iconUrl = `<svg height="20" width="20" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 47.94 47.94" xml:space="preserve">
     <path style="fill:#ED8A19;" d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956C22.602,0.567,25.338,0.567,26.285,2.486z"/>
     </svg>`;
@@ -375,6 +396,7 @@ function addReportMarker(group, coordinate) {
     let reportMarker = new H.map.Marker(coordinate, { icon: icon });
     // add custom data to the marker
     // marker.setData(html);
+    reportMarker.setData(data)
     group.addObject(reportMarker);
 }
 
@@ -382,6 +404,10 @@ function getReportMarker(map) {
     groupReportMarker = new H.map.Group();
 
     map.addObject(groupReportMarker);
+
+    groupReportMarker.addEventListener('tap', function (evt) {
+        onReportDetailDialogClicked(evt.target.getData())
+    }, false);
 
     // groupReportMarker.addEventListener('tap', function (evt) {
     //     InfoBubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
@@ -401,7 +427,7 @@ function getReportMarker(map) {
                 console.log(report)
                 for (let i = 0; i < report.length; i++) 
                     // console.log(report[i].lat + " - " + report[i].lng)
-                    addReportMarker(groupReportMarker, { lat: report[i].lat, lng: report[i].lng });
+                    addReportMarker(groupReportMarker, { lat: report[i].lat, lng: report[i].lng }, report[i]);
             }
         });
     });
@@ -484,7 +510,7 @@ map.addEventListener('tap', function (evt) {
                 let content = '<div style="width:250px;"><i class="fa-regular fa-circle-check" style="color: #00a832; margin-right:5px;"></i><b>Thông tin địa điểm</b> <br />' + address.label + '</div>' + 
                 `
                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                    <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${lat}, ${lng}, false)">
+                    <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${lat}, ${lng}, true)">
                         <span>
                             <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                         </span>
