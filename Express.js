@@ -109,6 +109,14 @@ app.post('/submit', (req, res) => {
                 console.log(lat);
                 console.log(lng);
 
+                let tmp = `
+                INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2, locationreport)
+                VALUES
+                    (${lat}, ${lng}, '${name}', '${type}', '${email}', '${phone}', '${message}', 'uploads/${img1Valid}', 'uploads/${img2Valid}', ${isLocationReport});
+                `
+
+                console.log(tmp)
+
                 pool.query(`
                 INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2, locationreport)
                 VALUES
@@ -178,6 +186,7 @@ app.get("/get-place", (req, res) => {
 
 app.get("/get-report", (req, res) => {
     pool.query('select * from reports where locationreport = true', (error, results) => {
+    // pool.query('select * from reports', (error, results) => {
         if (error) {
             res.status(500).json({ error });
             console.log("loi roi")

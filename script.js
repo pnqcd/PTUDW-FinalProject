@@ -18,7 +18,9 @@ var reportAdBannerDialog = document.getElementById("reportAdBannerDialog");
 var reportDetailDialog = document.getElementById("reportDetailDialog")
 var closeButtonAdBannerDialog = document.getElementsByClassName("closeAdBannerDialog")[0];
 var closeButtonReportDialog = document.getElementById("closeReportDetailDialog")
+var pInformation = document.getElementById("popupInformation");
 var clusteringLayer
+var selectedReport
 
 closeButtonAdBannerDialog.onclick = function () { reportAdBannerDialog.style.display = "none"; }
 closeButtonReportDialog.onclick = function () { reportDetailDialog.style.display = "none"; }
@@ -74,14 +76,14 @@ var CUSTOM_THEME = {
         // Get a reference to data object our noise points
         // Create a marker for the noisePoint
         var noiseMarker = new H.map.Marker(noisePoint.getPosition(), {
-                // Use min zoom from a noise point
-                // to show it correctly at certain zoom levels:
-                min: noisePoint.getMinZoom(),
-                icon: new H.map.Icon(iconUrl, {
-                    size: { w: 20, h: 20 },
-                    anchor: { x: 10, y: 10 }
-                })
-            });
+            // Use min zoom from a noise point
+            // to show it correctly at certain zoom levels:
+            min: noisePoint.getMinZoom(),
+            icon: new H.map.Icon(iconUrl, {
+                size: { w: 20, h: 20 },
+                anchor: { x: 10, y: 10 }
+            })
+        });
 
         // Link a data from the point to the marker
         // to make it accessible inside onMarkerClick
@@ -186,7 +188,7 @@ function sendAdBannerReportButtonClicked() {
         .then(response => response.json())
         .then(data => {
             console.log("form submitted: ", data.response);
-            if (data.response == "Successful" && data.message == "") {                
+            if (data.response == "Successful" && data.message == "") {
                 Toastify({
                     text: "Báo cáo thành công!",
                     duration: 3000,
@@ -256,22 +258,21 @@ function onReportAdBannerClicked(lx, ly, reportType) {
     reportAdBannerDialog.style.display = "block";
 }
 
-function onReportDetailDialogClicked(data) {
+function onReportDetailDialogClicked(reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2) {
     reportDetailDialog.style.display = "block";
-    document.getElementById("firstnameReport").value = data.reportername
-    document.getElementById("emailReport").value = data.reporteremail
-    document.getElementById("phoneReport").value = data.reporterphonenumber
-    document.getElementById("lastnameReport").value = data.typeofreport
-    tinymce.get("messageReport").setContent(data.reportcontent)
-    document.getElementById("imgReportDetail1").src = data.imagepath1
-    document.getElementById("imgReportDetail2").src = data.imagepath2
+    document.getElementById("firstnameReport").value = reportername
+    document.getElementById("emailReport").value = reporteremail
+    document.getElementById("phoneReport").value = reporterphonenumber
+    document.getElementById("lastnameReport").value = typeofreport
+    tinymce.get("messageReport").setContent(reportcontent)
+    document.getElementById("imgReportDetail1").src = imagepath1
+    document.getElementById("imgReportDetail2").src = imagepath2
 }
 
 function detailAdButtonClicked(placeID) {
 
     rightPanel.classList.add('show');
 
-    var pInformation = document.getElementById("popupInformation");
     var popupInformationInnerHTML = "";
 
     // var popup = document.getElementById("popup");
@@ -406,7 +407,42 @@ function getReportMarker(map) {
     map.addObject(groupReportMarker);
 
     groupReportMarker.addEventListener('tap', function (evt) {
-        onReportDetailDialogClicked(evt.target.getData())
+        // onReportDetailDialogClicked(evt.target.getData())
+        rightPanel.classList.add('show');
+
+        // id: rpt.id,
+        //                 adbannerreportid: rpt.adbannerreportid,
+        //                 imagepath1: rpt.imagepath1,
+        //                 imagepath2: rpt.imagepath2,
+        //                 locationreport: rpt.locationreport,
+        //                 reportcontent: rpt.reportcontent,
+        //                 reporteremail: rpt.reporteremail,
+        //                 reportername: rpt.reportername,
+        //                 reporterphonenumber: rpt.reporterphonenumber,
+        //                 typeofreport: rpt.typeofreport
+
+        let locationReportDetail = ""
+
+        evt.target.getData().forEach(obj => {
+            // reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2
+            locationReportDetail +=
+            `<div class="place-detail-information" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
+                <p><b>Số thứ tự:</b> ${obj.id}</p>
+                <p><b>Phân loại:</b> ${obj.typeofreport}</p>
+            </div>`;
+        })
+
+        dataAdDetailsInnerHTML.innerHTML = '<span class="close-button" id="closeButton" onclick="closeAdDetailRightSidePanel()">&times;</span><h2>Chi tiết các báo cáo</h2>' 
+        + 
+        `<div style="border: 2px solid #dc4f52; border-radius: 3px;">
+            <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${evt.target.a.lat}, ${evt.target.a.lng}, true)">
+                <span>
+                    <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
+                </span>
+                BÁO CÁO VI PHẠM
+            </button>
+        </div>`
+        + locationReportDetail
     }, false);
 
     // groupReportMarker.addEventListener('tap', function (evt) {
@@ -424,10 +460,41 @@ function getReportMarker(map) {
             method: "GET",
             success: function (response) {
                 report = response.report;
-                console.log(report)
-                for (let i = 0; i < report.length; i++) 
-                    // console.log(report[i].lat + " - " + report[i].lng)
-                    addReportMarker(groupReportMarker, { lat: report[i].lat, lng: report[i].lng }, report[i]);
+
+                const groupedReports = {}
+                report.forEach(rpt => {
+                    const key = `${rpt.lat}_${rpt.lng}`
+
+                    if (!groupedReports[key])
+                        groupedReports[key] = {
+                            lat: rpt.lat,
+                            lng: rpt.lng,
+                            data: []
+                        }
+
+                    groupedReports[key].data.push({
+                        id: rpt.id,
+                        adbannerreportid: rpt.adbannerreportid,
+                        imagepath1: rpt.imagepath1,
+                        imagepath2: rpt.imagepath2,
+                        locationreport: rpt.locationreport,
+                        reportcontent: rpt.reportcontent,
+                        reporteremail: rpt.reporteremail,
+                        reportername: rpt.reportername,
+                        reporterphonenumber: rpt.reporterphonenumber,
+                        typeofreport: rpt.typeofreport
+                    });
+                })
+
+                const result = Object.values(groupedReports)
+
+                result.forEach(rst => {
+                    addReportMarker(groupReportMarker, { lat: rst.lat, lng: rst.lng }, rst.data);
+                })
+
+                // for (let i = 0; i < report.length; i++) 
+                //     // console.log(report[i].lat + " - " + report[i].lng)
+                //     addReportMarker(groupReportMarker, { lat: report[i].lat, lng: report[i].lng }, report[i]);
             }
         });
     });
@@ -468,16 +535,16 @@ getReportMarker(map)
 
 checkbox.addEventListener('change', function () {
     let markersVisible = checkbox.checked;
-    
+
     if (!markersVisible)
         map.removeLayer(clusteringLayer)
     else
-    map.addLayer(clusteringLayer)
+        map.addLayer(clusteringLayer)
 })
 
 toggleReportMarker.addEventListener('change', function () {
     let markersVisible = toggleReportMarker.checked;
-    
+
     if (!markersVisible)
         map.removeObject(groupReportMarker)
     else
@@ -507,8 +574,8 @@ map.addEventListener('tap', function (evt) {
         .then(function (data) {
             if (data.items && data.items.length > 0) {
                 var address = data.items[0].address;
-                let content = '<div style="width:250px;"><i class="fa-regular fa-circle-check" style="color: #00a832; margin-right:5px;"></i><b>Thông tin địa điểm</b> <br />' + address.label + '</div>' + 
-                `
+                let content = '<div style="width:250px;"><i class="fa-regular fa-circle-check" style="color: #00a832; margin-right:5px;"></i><b>Thông tin địa điểm</b> <br />' + address.label + '</div>' +
+                    `
                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
                     <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${lat}, ${lng}, true)">
                         <span>
