@@ -24,6 +24,7 @@ var selectedReport
 var bottomReportDialog = document.getElementById("reportDialogModal")
 var placeDetails = []
 var placeDetailsTmp = []
+var adBannerID = null
 
 closeButtonAdBannerDialog.onclick = function () { reportAdBannerDialog.style.display = "none"; }
 closeButtonReportDialog.onclick = function () { reportDetailDialog.style.display = "none"; }
@@ -179,6 +180,7 @@ function sendAdBannerReportButtonClicked() {
     formData.append('lat', latX);
     formData.append('lng', lngY);
     formData.append('isLocationReport', isLocationReport)
+    formData.append('adBannerID', adBannerID)
     const urlSearchParams = new URLSearchParams(formData);
 
 
@@ -255,10 +257,11 @@ function moveMapToKHTN(map) {
     map.setZoom(15);
 }
 
-function onReportAdBannerClicked(lx, ly, reportType) {
+function onReportAdBannerClicked(lx, ly, reportType, adID) {
     latX = lx
     lngY = ly
     isLocationReport = reportType
+    adBannerID = adID
     reportAdBannerDialog.style.display = "block";
 }
 
@@ -357,7 +360,7 @@ function detailAdButtonClicked(placeID) {
                                 </a>
                             
                                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false)">
+                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].stt})">
                                     <span>
                                         <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                                     </span>
@@ -382,7 +385,7 @@ function detailAdButtonClicked(placeID) {
                                 </div>
 
                                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false)">
+                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].stt})">
                                     <span>
                                         <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                                     </span>
@@ -659,7 +662,7 @@ map.addEventListener('tap', function (evt) {
                 let content = '<div style="width:250px;"><i class="fa-regular fa-circle-check" style="color: #00a832; margin-right:5px;"></i><b>Thông tin địa điểm</b> <br />' + address.label + '</div>' +
                     `
                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                    <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${lat}, ${lng}, true)">
+                    <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${lat}, ${lng}, true, null)">
                         <span>
                             <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                         </span>

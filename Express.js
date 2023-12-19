@@ -73,11 +73,22 @@ app.post('/submit', (req, res) => {
     const email = req.body["email"];
     const phone = req.body["phone"];
     const message = req.body["message"];
-    const img1 = req.body["adBannerReportUploader"][0];
-    const img2 = req.body["adBannerReportUploader"][1];
+    var img1, img2
+
+    if (Array.isArray(req.body["adBannerReportUploader"])) {
+        img1 = req.body["adBannerReportUploader"][0];
+        img2 = req.body["adBannerReportUploader"][1];
+    } else {
+        img1 = req.body["adBannerReportUploader"];
+        img2 = null
+    }
+
     const lat = req.body["lat"];
     const lng = req.body["lng"];
     const isLocationReport = req.body["isLocationReport"]
+    const adBannerID = req.body["adBannerID"]
+
+    console.log(img1 + " --- " + img2)
 
     if (name.trim() == "")
         msg += "Họ tên không thể để trống!\n";
@@ -110,17 +121,17 @@ app.post('/submit', (req, res) => {
                 console.log(lng);
 
                 let tmp = `
-                INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2, locationreport)
+                INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2, locationreport, adbannerreportid)
                 VALUES
-                    (${lat}, ${lng}, '${name}', '${type}', '${email}', '${phone}', '${message}', 'uploads/${img1Valid}', 'uploads/${img2Valid}', ${isLocationReport});
+                    (${lat}, ${lng}, '${name}', '${type}', '${email}', '${phone}', '${message}', 'uploads/${img1Valid}', 'uploads/${img2Valid}', ${isLocationReport}, ${adBannerID});
                 `
 
                 console.log(tmp)
 
                 pool.query(`
-                INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2, locationreport)
+                INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2, locationreport, adbannerreportid)
                 VALUES
-                    (${lat}, ${lng}, '${name}', '${type}', '${email}', '${phone}', '${message}', 'uploads/${img1Valid}', 'uploads/${img2Valid}', ${isLocationReport});
+                    (${lat}, ${lng}, '${name}', '${type}', '${email}', '${phone}', '${message}', 'uploads/${img1Valid}', 'uploads/${img2Valid}', ${isLocationReport}, ${adBannerID});
                 `)
 
                 return res.send({ response: "Successful", message: msg });
@@ -174,8 +185,8 @@ app.delete('/revert', (req, res) => {
 })
 
 app.get("/get-place", (req, res) => {
-    // pool.query("SELECT * FROM place", (error, results) => {
-    pool.query("select * from reports right join place on reports.adbannerreportid  = place.stt", (error, results) => {
+    pool.query("SELECT * FROM place", (error, results) => {
+    // pool.query("select * from reports right join place on reports.adbannerreportid  = place.stt", (error, results) => {
         if (error) {
             res.status(500).json({ error });
             console.log("loi roi")
@@ -186,8 +197,8 @@ app.get("/get-place", (req, res) => {
 });
 
 app.get("/get-report", (req, res) => {
-    // pool.query('select * from reports where locationreport = true', (error, results) => {
-    pool.query('select * from reports', (error, results) => {
+    pool.query('select * from reports where locationreport = true', (error, results) => {
+    // pool.query('select * from reports', (error, results) => {
         if (error) {
             res.status(500).json({ error });
             console.log("loi roi")
