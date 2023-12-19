@@ -21,6 +21,9 @@ var closeButtonReportDialog = document.getElementById("closeReportDetailDialog")
 var pInformation = document.getElementById("popupInformation");
 var clusteringLayer
 var selectedReport
+var bottomReportDialog = document.getElementById("reportDialogModal")
+var placeDetails = []
+var placeDetailsTmp = []
 
 closeButtonAdBannerDialog.onclick = function () { reportAdBannerDialog.style.display = "none"; }
 closeButtonReportDialog.onclick = function () { reportDetailDialog.style.display = "none"; }
@@ -289,14 +292,57 @@ function detailAdButtonClicked(placeID) {
             method: "GET",
             success: function (response) {
                 var placeDetails = response.placeDetails;
-                console.log(placeDetails);
 
-                for (var i = 0; i < placeDetails.length; i++) {
+                const groupAdDetail = {}
+                placeDetails.forEach(pds => {
+                    const key = `${pds.stt}`
+
+                    if (!groupAdDetail[key])
+                        groupAdDetail[key] = {
+                            stt: pds.stt,
+                            diachi: pds.diachi,
+                            khuvuc: pds.khuvuc,
+                            loaivt: pds.loaivt,
+                            hinhthuc: pds.hinhthuc,
+                            hinhanh: pds.hinhanh,
+                            quyhoach: pds.quyhoach,
+                            latitude: pds.latitude,
+                            longitude: pds.longitude,
+                            place_stt: pds.place_stt,
+                            ad_name: pds.ad_name,
+                            ad_size: pds.ad_size,
+                            ad_quantity: pds.ad_quantity,
+                            expire_date: pds.expire_date,
+                            img_path: pds.img_path,
+                            reports: []
+                        }
+
+                    groupAdDetail[key].reports.push({
+                        id: pds.id,
+                        lat: pds.lat,
+                        lng: pds.lng,
+                        reportername: pds.reportername,
+                        typeofreport: pds.typeofreport,
+                        reporteremail: pds.reporteremail,
+                        reporterphonenumber: pds.reporterphonenumber,
+                        reportcontent: pds.reportcontent,
+                        imagepath1: pds.imagepath1,
+                        imagepath2: pds.imagepath2,
+                        locationreport: pds.locationreport,
+                        adbannerreportid: pds.adbannerreportid,
+                    });
+                })
+
+                placeDetails = Object.values(groupAdDetail)
+                placeDetailsTmp = placeDetails
+
+                for (let i = 0; i < placeDetails.length; i++) {
                     var jsDate = new Date(placeDetails[i].expire_date);
                     var options = { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' };
                     var formattedDate = jsDate.toLocaleDateString('vi-VN', options);
+                    console.log(placeDetails[i].reports)
 
-                    popupInformationInnerHTML +=
+                    popupInformationInnerHTML += !placeDetails[i].reports[0].id ? 
                         `<div class="place-detail-information">
                             <b>${placeDetails[i].ad_name}</b>
                             <p>${placeDetails[i].diachi} - ${placeDetails[i].khuvuc}</p>
@@ -318,6 +364,31 @@ function detailAdButtonClicked(placeID) {
                                 </button>
                                 </div>
                             </div>
+                        </div>` :
+                        `<div class="place-detail-information">
+                            <b>${placeDetails[i].ad_name} co bao cao!!!</b>
+                            <p>${placeDetails[i].diachi} - ${placeDetails[i].khuvuc}</p>
+                            <p>Kích thước: ${placeDetails[i].ad_size}</p>
+                            <p>Số lượng: <b>${placeDetails[i].ad_quantity}</b></p>
+                            <p>Hình thức: <b>${placeDetails[i].hinhthuc}</b></p>
+                            <p>Phân loại: <b>${placeDetails[i].loaivt}</b></p>
+                            <div class="placeDetailsButtonContainer">
+                                <div>
+                                    <a class="placeDetailsButton" href="${placeDetails[i].img_path}" data-lightbox="detail-pano-${placeDetails[i].stt}" data-title="Ngày hết hạn: ${formattedDate}">
+                                        <img src="./assets/img/icon_info.png" width="25px" height="25px">
+                                    </a>
+                                    <img src="./assets/img/clipboard.svg" width="25px" height="25px" onclick="showReportBottomDialogFromAdBannerDetail(${i})">
+                                </div>
+
+                                <div style="border: 2px solid #dc4f52; border-radius: 3px;">
+                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false)">
+                                    <span>
+                                        <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
+                                    </span>
+                                    BÁO CÁO VI PHẠM
+                                </button>
+                                </div>
+                            </div>
                         </div>`;
                 }
 
@@ -326,7 +397,7 @@ function detailAdButtonClicked(placeID) {
                 // dataAdDetailsInnerHTML.innerHTML = '<span class="close-button" id="closeButton" onclick="closeAdDetailRightSidePanel()">X</span><h2>Thông tin chi tiết</h2>' + popupInformationInnerHTML;
                 // <span class="closeAdBannerDialog">&times;</span>
                 dataAdDetailsInnerHTML.innerHTML = '<span class="close-button" id="closeButton" onclick="closeAdDetailRightSidePanel()">&times;</span><h2>Thông tin chi tiết</h2>' + popupInformationInnerHTML;
-                console.log(dataAdDetailsInnerHTML.innerHTML);
+                // console.log(dataAdDetailsInnerHTML.innerHTML);
             }
         });
     });
@@ -370,19 +441,7 @@ function addInfoBubble(map) {
             success: function (response) {
                 var place = response.place;
                 var airports = response.place;
-                startClustering(map, airports)
-                // for (var i = 0; i < place.length; i++) {
-                //     addMarkerToGroup(group, { lat: place[i].latitude, lng: place[i].longitude },
-                //         `<div class="place-info">
-                //             <b>${place[i].hinhthuc}</b>
-                //             <p>${place[i].loaivt}</p>
-                //             <p>${place[i].diachi}, ${place[i].khuvuc}</p>
-                //             <b><i>${place[i].quyhoach}</i></b>
-                //             <img class="img-place" src="${place[i].hinhanh}">
-                //             <button class='detailedAdSign' onclick="detailAdButtonClicked('${place[i].stt}')">Chi tiết</button>
-                //         </div>`, place[i].quyhoach
-                //     );
-                // }
+                startClustering(map, airports);
             }
         });
     });
@@ -401,48 +460,65 @@ function addReportMarker(group, coordinate, data) {
     group.addObject(reportMarker);
 }
 
+function showReportBottomDialog(data) {
+    data = JSON.parse(data)
+    bottomReportDialog.style.display = 'flex'
+
+    let locationReportDetail = ""
+
+    data.forEach(obj => {
+        // reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2
+        locationReportDetail +=
+        `<div class="report-detail-information" style="margin: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
+            <p><b>Số thứ tự:</b> ${obj.id}</p>
+            <p><b>Phân loại:</b> ${obj.typeofreport}</p>
+        </div>`;
+    })
+
+    bottomReportDialog.innerHTML = locationReportDetail
+}
+
+function showReportBottomDialogFromAdBannerDetail(i) {
+    data = placeDetailsTmp[i].reports
+    bottomReportDialog.style.display = 'flex'
+
+    let locationReportDetail = ""
+
+    data.forEach(obj => {
+        // reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2
+        locationReportDetail +=
+        `<div class="report-detail-information" style="margin: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
+            <p><b>Số thứ tự:</b> ${obj.id}</p>
+            <p><b>Phân loại:</b> ${obj.typeofreport}</p>
+        </div>`;
+    })
+
+    bottomReportDialog.innerHTML = locationReportDetail
+}
+
 function getReportMarker(map) {
     groupReportMarker = new H.map.Group();
 
     map.addObject(groupReportMarker);
 
     groupReportMarker.addEventListener('tap', function (evt) {
-        // onReportDetailDialogClicked(evt.target.getData())
-        rightPanel.classList.add('show');
+        console.log(evt.target.getData())
 
-        // id: rpt.id,
-        //                 adbannerreportid: rpt.adbannerreportid,
-        //                 imagepath1: rpt.imagepath1,
-        //                 imagepath2: rpt.imagepath2,
-        //                 locationreport: rpt.locationreport,
-        //                 reportcontent: rpt.reportcontent,
-        //                 reporteremail: rpt.reporteremail,
-        //                 reportername: rpt.reportername,
-        //                 reporterphonenumber: rpt.reporterphonenumber,
-        //                 typeofreport: rpt.typeofreport
+        showReportBottomDialog(JSON.stringify(evt.target.getData()))
 
-        let locationReportDetail = ""
+        // let locationReportDetail = ""
 
-        evt.target.getData().forEach(obj => {
-            // reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2
-            locationReportDetail +=
-            `<div class="place-detail-information" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
-                <p><b>Số thứ tự:</b> ${obj.id}</p>
-                <p><b>Phân loại:</b> ${obj.typeofreport}</p>
-            </div>`;
-        })
+        // evt.target.getData().forEach(obj => {
+        //     // reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2
+        //     locationReportDetail +=
+        //     `<div class="report-detail-information" style="margin: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
+        //         <p><b>Số thứ tự:</b> ${obj.id}</p>
+        //         <p><b>Phân loại:</b> ${obj.typeofreport}</p>
+        //     </div>`;
+        // })
 
-        dataAdDetailsInnerHTML.innerHTML = '<span class="close-button" id="closeButton" onclick="closeAdDetailRightSidePanel()">&times;</span><h2>Chi tiết các báo cáo</h2>' 
-        + 
-        `<div style="border: 2px solid #dc4f52; border-radius: 3px;">
-            <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${evt.target.a.lat}, ${evt.target.a.lng}, true)">
-                <span>
-                    <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
-                </span>
-                BÁO CÁO VI PHẠM
-            </button>
-        </div>`
-        + locationReportDetail
+        // bottomReportDialog.innerHTML = locationReportDetail
+
     }, false);
 
     // groupReportMarker.addEventListener('tap', function (evt) {

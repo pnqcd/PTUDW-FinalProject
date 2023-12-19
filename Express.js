@@ -174,7 +174,8 @@ app.delete('/revert', (req, res) => {
 })
 
 app.get("/get-place", (req, res) => {
-    pool.query("SELECT * FROM place", (error, results) => {
+    // pool.query("SELECT * FROM place", (error, results) => {
+    pool.query("select * from reports right join place on reports.adbannerreportid  = place.stt", (error, results) => {
         if (error) {
             res.status(500).json({ error });
             console.log("loi roi")
@@ -185,8 +186,8 @@ app.get("/get-place", (req, res) => {
 });
 
 app.get("/get-report", (req, res) => {
-    pool.query('select * from reports where locationreport = true', (error, results) => {
-    // pool.query('select * from reports', (error, results) => {
+    // pool.query('select * from reports where locationreport = true', (error, results) => {
+    pool.query('select * from reports', (error, results) => {
         if (error) {
             res.status(500).json({ error });
             console.log("loi roi")
@@ -199,7 +200,7 @@ app.get("/get-report", (req, res) => {
 app.get('/get-ad-details/:id', (req, res) => {
     const placeID = req.params.id;
     pool.query("SELECT * FROM \
-        PLACE PL JOIN PLACE_DETAILS PD on PL.STT = PD.PLACE_STT \
+        PLACE PL JOIN PLACE_DETAILS PD on PL.STT = PD.PLACE_STT left join reports RP on RP.adbannerreportid = PD.stt  \
         WHERE PD.PLACE_STT = " + placeID
         , (error, results) => {
             if (error) {

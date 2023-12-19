@@ -214,6 +214,7 @@
 } */
 
 .place-detail-information {
+    display: block;
     height: auto;
     box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.5);
     transition: 0.3s;
@@ -221,6 +222,22 @@
     margin-top: 10px;
     border-radius: 10px 10px 10px 10px;
     background-color: white;
+}
+
+.report-detail-information:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
+}
+
+.report-detail-information {
+    display: block;
+    height: auto;
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.5);
+    transition: 0.3s;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px 10px 10px 10px;
+    backdrop-filter: blur(6px);
+    background-color: rgba(255, 255, 255, 0.75);
 }
 
 .place-detail-information:hover {
@@ -257,6 +274,7 @@
     backdrop-filter: blur(6px);
     overflow-y: auto;
     transition: right 0.3s;
+    z-index: 2;
 }
 
 #content-right-panel-detail-ad {
@@ -496,4 +514,22 @@
 
 .form-switch .form-check-input {
     border-radius: 3em !important;
+}
+
+#reportDialogModal {
+    display: flex;
+    position: absolute;
+    border-radius: 10px;
+    left: 220px;
+    bottom: 0px;
+    max-width: 50%;
+    z-index: 2;
+    overflow-x: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+    margin: 7px;
+}
+
+#reportDialogModal::-webkit-scrollbar {
+    display: none;
 }
