@@ -517,7 +517,7 @@
 }
 
 #reportDialogModal {
-    display: flex;
+    display: none;
     position: absolute;
     border-radius: 10px;
     left: 220px;

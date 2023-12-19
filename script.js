@@ -161,6 +161,7 @@ function getRandomDataPoint(cluster) {
 
 function closeAdDetailRightSidePanel() {
     rightPanel.classList.remove('show');
+    dưedf
 }
 
 function sendAdBannerReportButtonClicked() {
@@ -629,6 +630,11 @@ toggleReportMarker.addEventListener('change', function () {
 
 let bubble, marker, bubbleElement, bubbleClose;
 map.addEventListener('tap', function (evt) {
+
+    if (evt.target instanceof H.Map) {
+        bottomReportDialog.style.display = "none"
+    }
+
     if (bubble) {
         marker.setVisibility(false);
     }
