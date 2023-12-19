@@ -29,6 +29,7 @@
         rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
@@ -54,16 +55,15 @@
             <!-- ... your existing content ... -->
 
             <div class="header__navbar-search">
-                <!-- <div class="container mt-5 searchbox"> -->
-                <!-- <div class="row justify-content-end"> -->
-                <!-- <div class="col-md-6"> -->
-                <div class="input-group autocomplete-container">
+                <div class="input-group autocomplete-container" id="searchPlaceBox">
+                    <!-- Add a search icon using Font Awesome -->
+
+                    <!-- Input field for search -->
                     <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm địa điểm...">
+            
+                    <!-- Autocomplete dropdown -->
                     <div id="autocompleteDropdown" class="autocomplete-dropdown dropdown-menu"></div>
                 </div>
-                <!-- </div> -->
-                <!-- </div> -->
-                <!-- </div> -->
             </div>
 
         </nav>

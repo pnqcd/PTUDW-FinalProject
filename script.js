@@ -162,7 +162,6 @@ function getRandomDataPoint(cluster) {
 
 function closeAdDetailRightSidePanel() {
     rightPanel.classList.remove('show');
-    dưedf
 }
 
 function sendAdBannerReportButtonClicked() {
