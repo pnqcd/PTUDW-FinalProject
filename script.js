@@ -295,6 +295,9 @@ function detailAdButtonClicked(placeID) {
             success: function (response) {
                 var placeDetails = response.placeDetails;
 
+                console.log("abc");
+                console.log(placeDetails)
+
                 const groupAdDetail = {}
                 placeDetails.forEach(pds => {
                     const key = `${pds.stt}`
@@ -316,6 +319,7 @@ function detailAdButtonClicked(placeID) {
                             adQuantity: pds.adQuantity,
                             expireDay: pds.expireDay,
                             imagePath: pds.imagePath,
+                            adBannerId: pds.adbannerid,
                             reports: []
                         }
 
@@ -360,7 +364,7 @@ function detailAdButtonClicked(placeID) {
                                 </a>
                             
                                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].id})">
+                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].adBannerId})">
                                     <span>
                                         <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                                     </span>
@@ -385,7 +389,7 @@ function detailAdButtonClicked(placeID) {
                                 </div>
 
                                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].id})">
+                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].adBannerId})">
                                     <span>
                                         <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                                     </span>

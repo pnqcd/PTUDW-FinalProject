@@ -247,9 +247,25 @@ app.get("/get-report", (req, res) => {
 app.get('/get-ad-details/:id', (req, res) => {
     const placeID = req.params.id;
     pool.query(
-        'SELECT * FROM \
-        "Places" PL JOIN "Placedetails" PD on PL.id = PD."placeId"  left join reports RP on RP.adbannerreportid = PD.id \
-        WHERE PD."placeId" = ' + placeID
+        `
+        SELECT
+            PL.*,
+            PD.id AS adBannerId,
+            PD."placeId",
+            PD."adName",
+            PD."adSize",
+            PD."adQuantity",
+            PD."expireDay",
+            PD."imagePath",
+            PD."publicImageId",
+            PD."createdAt" AS adCreatedAt,
+            PD."updatedAt" AS adUpdatedAt,
+            RP.*
+        FROM "Places" PL
+        JOIN "Placedetails" PD ON PL.id = PD."placeId"
+        LEFT JOIN reports RP ON RP.adbannerreportid = PD.id
+        WHERE PD."placeId" = 
+        ` + placeID
         , (error, results) => {
             if (error) {
                 res.status(500).json({ error });
