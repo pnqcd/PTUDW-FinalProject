@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const cors = require('cors');
 const fs = require('fs');
+const cloudinary = require('cloudinary').v2;
 
 app.use(express.json());
 
@@ -61,6 +62,33 @@ const pool = new Pool({
     // },
 });
 
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET,
+    secure: true
+});
+
+const uploadImage = async (imagePath) => {
+
+    // Use the uploaded file's name as the asset's public ID and 
+    // allow overwriting the asset with new versions
+    const options = {
+        use_filename: true,
+        unique_filename: false,
+        overwrite: true,
+    };
+
+    try {
+        // Upload the image
+        const result = await cloudinary.uploader.upload(imagePath, options);
+        console.log(result);
+        return result.secure_url;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 app.post('/submit', (req, res) => {
     const response_key = req.body["g-recaptcha-response"];
     const secret_key = "6LdCxQQpAAAAAKjC5rDm3a-LuGRaiC2MVngHvY60";
@@ -108,7 +136,7 @@ app.post('/submit', (req, res) => {
         method: "post",
     })
         .then((response) => response.json())
-        .then((google_response) => {
+        .then(async (google_response) => {
             if (google_response.success == true) {
                 console.log("success");
 
@@ -119,6 +147,14 @@ app.post('/submit', (req, res) => {
                 console.log(img2Valid);
                 console.log(lat);
                 console.log(lng);
+
+                if (img1Valid != "NULL") {
+                    img1Valid = await uploadImage(`uploads/${img1Valid}`);
+                }
+
+                if (img2Valid != "NULL") {
+                    img2Valid = await uploadImage(`uploads/${img2Valid}`);
+                }
 
                 let tmp = `
                 INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2, locationreport, adbannerreportid)
@@ -131,7 +167,7 @@ app.post('/submit', (req, res) => {
                 pool.query(`
                 INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2, locationreport, adbannerreportid)
                 VALUES
-                    (${lat}, ${lng}, '${name}', '${type}', '${email}', '${phone}', '${message}', 'uploads/${img1Valid}', 'uploads/${img2Valid}', ${isLocationReport}, ${adBannerID});
+                    (${lat}, ${lng}, '${name}', '${type}', '${email}', '${phone}', '${message}', '${img1Valid}', '${img2Valid}', ${isLocationReport}, ${adBannerID});
                 `)
 
                 return res.send({ response: "Successful", message: msg });
@@ -158,10 +194,10 @@ app.post('/submit-ad-banner-report-img', upload.single('adBannerReportUploader')
     // });
 
     // Respond to the client
-    res.send({uniqueFileId: req.file.filename});
-    
+    res.send({ uniqueFileId: req.file.filename });
+
 });
-    
+
 app.delete('/revert', (req, res) => {
     const uniqueFileId = req.body.uniqueFileId;
 
@@ -185,8 +221,8 @@ app.delete('/revert', (req, res) => {
 })
 
 app.get("/get-place", (req, res) => {
-    pool.query("SELECT * FROM place", (error, results) => {
-    // pool.query("select * from reports right join place on reports.adbannerreportid  = place.stt", (error, results) => {
+    pool.query('SELECT * FROM "Places"', (error, results) => {
+        // pool.query("select * from reports right join place on reports.adbannerreportid  = place.stt", (error, results) => {
         if (error) {
             res.status(500).json({ error });
             console.log("loi roi")
@@ -198,7 +234,7 @@ app.get("/get-place", (req, res) => {
 
 app.get("/get-report", (req, res) => {
     pool.query('select * from reports where locationreport = true', (error, results) => {
-    // pool.query('select * from reports', (error, results) => {
+        // pool.query('select * from reports', (error, results) => {
         if (error) {
             res.status(500).json({ error });
             console.log("loi roi")
@@ -210,9 +246,10 @@ app.get("/get-report", (req, res) => {
 
 app.get('/get-ad-details/:id', (req, res) => {
     const placeID = req.params.id;
-    pool.query("SELECT * FROM \
-        PLACE PL JOIN PLACE_DETAILS PD on PL.STT = PD.PLACE_STT left join reports RP on RP.adbannerreportid = PD.stt  \
-        WHERE PD.PLACE_STT = " + placeID
+    pool.query(
+        'SELECT * FROM \
+        "Places" PL JOIN "Placedetails" PD on PL.id = PD."placeId"  left join reports RP on RP.adbannerreportid = PD.id \
+        WHERE PD."placeId" = ' + placeID
         , (error, results) => {
             if (error) {
                 res.status(500).json({ error });

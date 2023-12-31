@@ -93,13 +93,12 @@ var CUSTOM_THEME = {
         // to make it accessible inside onMarkerClick
         noiseMarker.setData(
             `<div class="place-info">
-                <b>${data.hinhthuc}</b>
-                <p>${data.loaivt}</p>
-                <p>${data.diachi}, ${data.khuvuc}</p>
-                <b><i>${data.quyhoach}</i></b>
-                <img class="img-place" src="${data.hinhanh}">
-                <button class='detailedAdSign' onclick="detailAdButtonClicked('${data.stt}')">Chi tiết</button>
-                <p>lat: ${data.latitude} - longtitude: ${data.longitude}<></p>
+                <b>${data.hinhThuc}</b>
+                <p>${data.loaiVT}</p>
+                <p>${data.diaChi}, ${data.khuVuc}</p>
+                <b><i>${data.quyHoach}</i></b>
+                <img class="img-place" src="${data.hinhAnh}">
+                <button class='detailedAdSign' onclick="detailAdButtonClicked('${data.id}')">Chi tiết</button>
             </div>`
         );
 
@@ -302,21 +301,21 @@ function detailAdButtonClicked(placeID) {
 
                     if (!groupAdDetail[key])
                         groupAdDetail[key] = {
-                            stt: pds.stt,
-                            diachi: pds.diachi,
-                            khuvuc: pds.khuvuc,
-                            loaivt: pds.loaivt,
-                            hinhthuc: pds.hinhthuc,
-                            hinhanh: pds.hinhanh,
-                            quyhoach: pds.quyhoach,
+                            id: pds.id,
+                            diaChi: pds.diaChi,
+                            khuVuc: pds.khuVuc,
+                            loaiVT: pds.loaiVT,
+                            hinhThuc: pds.hinhThuc,
+                            hinhAnh: pds.hinhAnh,
+                            quyHoach: pds.quyHoach,
                             latitude: pds.latitude,
                             longitude: pds.longitude,
-                            place_stt: pds.place_stt,
-                            ad_name: pds.ad_name,
-                            ad_size: pds.ad_size,
-                            ad_quantity: pds.ad_quantity,
-                            expire_date: pds.expire_date,
-                            img_path: pds.img_path,
+                            placeId: pds.placeId,
+                            adName: pds.adName,
+                            adSize: pds.adSize,
+                            adQuantity: pds.adQuantity,
+                            expireDay: pds.expireDay,
+                            imagePath: pds.imagePath,
                             reports: []
                         }
 
@@ -339,27 +338,29 @@ function detailAdButtonClicked(placeID) {
                 placeDetails = Object.values(groupAdDetail)
                 placeDetailsTmp = placeDetails
 
+                console.log(placeDetails)
+
                 for (let i = 0; i < placeDetails.length; i++) {
-                    var jsDate = new Date(placeDetails[i].expire_date);
+                    var jsDate = new Date(placeDetails[i].expireDay);
                     var options = { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' };
                     var formattedDate = jsDate.toLocaleDateString('vi-VN', options);
                     console.log(placeDetails[i].reports)
 
                     popupInformationInnerHTML += !placeDetails[i].reports[0].id ? 
                         `<div class="place-detail-information">
-                            <b>${placeDetails[i].ad_name}</b>
-                            <p>${placeDetails[i].diachi} - ${placeDetails[i].khuvuc}</p>
-                            <p>Kích thước: ${placeDetails[i].ad_size}</p>
-                            <p>Số lượng: <b>${placeDetails[i].ad_quantity}</b></p>
-                            <p>Hình thức: <b>${placeDetails[i].hinhthuc}</b></p>
-                            <p>Phân loại: <b>${placeDetails[i].loaivt}</b></p>
+                            <b>${placeDetails[i].adName}</b>
+                            <p>${placeDetails[i].diaChi} - ${placeDetails[i].khuVuc}</p>
+                            <p>Kích thước: ${placeDetails[i].adSize}</p>
+                            <p>Số lượng: <b>${placeDetails[i].adQuantity}</b></p>
+                            <p>Hình thức: <b>${placeDetails[i].hinhThuc}</b></p>
+                            <p>Phân loại: <b>${placeDetails[i].loaiVT}</b></p>
                             <div class="placeDetailsButtonContainer">
-                                <a class="placeDetailsButton" href="${placeDetails[i].img_path}" data-lightbox="detail-pano-${placeDetails[i].stt}" data-title="Ngày hết hạn: ${formattedDate}">
+                                <a class="placeDetailsButton" href="${placeDetails[i].imgagePath}" data-lightbox="detail-pano-${placeDetails[i].id}" data-title="Ngày hết hạn: ${formattedDate}">
                                     <img src="./assets/img/icon_info.png" width="25px" height="25px">
                                 </a>
                             
                                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].stt})">
+                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].id})">
                                     <span>
                                         <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                                     </span>
@@ -369,22 +370,22 @@ function detailAdButtonClicked(placeID) {
                             </div>
                         </div>` :
                         `<div class="place-detail-information">
-                            <b>${placeDetails[i].ad_name} co bao cao!!!</b>
-                            <p>${placeDetails[i].diachi} - ${placeDetails[i].khuvuc}</p>
-                            <p>Kích thước: ${placeDetails[i].ad_size}</p>
-                            <p>Số lượng: <b>${placeDetails[i].ad_quantity}</b></p>
-                            <p>Hình thức: <b>${placeDetails[i].hinhthuc}</b></p>
-                            <p>Phân loại: <b>${placeDetails[i].loaivt}</b></p>
+                            <b>${placeDetails[i].adName}</b>
+                            <p>${placeDetails[i].diaChi} - ${placeDetails[i].khuVuc}</p>
+                            <p>Kích thước: ${placeDetails[i].adSize}</p>
+                            <p>Số lượng: <b>${placeDetails[i].adQuantity}</b></p>
+                            <p>Hình thức: <b>${placeDetails[i].hinhThuc}</b></p>
+                            <p>Phân loại: <b>${placeDetails[i].loaiVT}</b></p>
                             <div class="placeDetailsButtonContainer">
                                 <div>
-                                    <a class="placeDetailsButton" href="${placeDetails[i].img_path}" data-lightbox="detail-pano-${placeDetails[i].stt}" data-title="Ngày hết hạn: ${formattedDate}">
+                                    <a class="placeDetailsButton" href="${placeDetails[i].imagePath}" data-lightbox="detail-pano-${placeDetails[i].id}" data-title="Ngày hết hạn: ${formattedDate}">
                                         <img src="./assets/img/icon_info.png" width="25px" height="25px">
                                     </a>
                                     <img src="./assets/img/clipboard.svg" width="25px" height="25px" onclick="showReportBottomDialogFromAdBannerDetail(${i})">
                                 </div>
 
                                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].stt})">
+                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].id})">
                                     <span>
                                         <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                                     </span>
@@ -444,6 +445,7 @@ function addInfoBubble(map) {
             success: function (response) {
                 var place = response.place;
                 var airports = response.place;
+                console.log(airports)
                 startClustering(map, airports);
             }
         });
