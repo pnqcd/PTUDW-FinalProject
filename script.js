@@ -12,6 +12,14 @@ var InfoBubble;
 const offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasExample'));
 const dataAdDetailsInnerHTML = document.getElementById('rightSidePanelBody');
 
+var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+    keyboard: false
+})
+
+var myModalShowReportDetail = new bootstrap.Modal(document.getElementById('exampleModalShowReport'), {
+    keyboard: false
+})
+
 var checkbox = document.getElementById('flexSwitchCheckChecked1');
 var toggleReportMarker = document.getElementById('flexSwitchCheckChecked2');
 var reportAdBannerDialog = document.getElementById("reportAdBannerDialog");
@@ -26,8 +34,8 @@ var placeDetails = []
 var placeDetailsTmp = []
 var adBannerID = null
 
-closeButtonAdBannerDialog.onclick = function () { reportAdBannerDialog.style.display = "none"; }
-closeButtonReportDialog.onclick = function () { reportDetailDialog.style.display = "none"; }
+// closeButtonAdBannerDialog.onclick = function () { reportAdBannerDialog.style.display = "none"; }
+// closeButtonReportDialog.onclick = function () { reportDetailDialog.style.display = "none"; }
 
 var searchPlaces = []
 var groupReportMarker
@@ -192,6 +200,14 @@ function sendAdBannerReportButtonClicked() {
         .then(response => response.json())
         .then(data => {
             console.log("form submitted: ", data.response);
+
+            document.getElementById('firstname').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('phone').value = '';
+            tinymce.get("message").setContent('');
+
+            myModal.hide();
+
             if (data.response == "Successful" && data.message == "") {
                 Toastify({
                     text: "Báo cáo thành công!",
@@ -260,16 +276,49 @@ function onReportAdBannerClicked(lx, ly, reportType, adID) {
     lngY = ly
     isLocationReport = reportType
     adBannerID = adID
-    reportAdBannerDialog.style.display = "block";
+    // reportAdBannerDialog.style.display = "block";
+    myModal.show()
 }
 
 function onReportDetailDialogClicked(reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2) {
-    reportDetailDialog.style.display = "block";
+    // reportDetailDialog.style.display = "block";
+    myModalShowReportDetail.show();
     document.getElementById("firstnameReport").value = reportername
     document.getElementById("emailReport").value = reporteremail
     document.getElementById("phoneReport").value = reporterphonenumber
     document.getElementById("lastnameReport").value = typeofreport
     tinymce.get("messageReport").setContent(reportcontent)
+
+    if (imagepath1) {
+        document.getElementsByClassName('carousel-indicators').innerHTML += 
+            `<button type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="0" class="active" aria-current="true"
+            aria-label="Slide 1"></button>`
+
+        // document.getElementsByClassName('carousel-inner').innerHTML +=
+        //     `<div class="carousel-item active">
+        //         <img id="imgReportDetail1" class="d-block w-100" alt="...">
+        //         <div class="carousel-caption d-none d-md-block">
+        //             <h5>Hình ảnh 1</h5>
+        //         </div>
+        //     </div>`
+    }
+
+    if (imagepath2) {
+        document.getElementsByClassName('carousel-indicators').innerHTML += 
+            `<button type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="1" aria-label="Slide 2"></button>`
+
+        // document.getElementsByClassName('carousel-inner').innerHTML +=
+        //     `<div class="carousel-item">
+        //         <img id="imgReportDetail2" class="d-block w-100" alt="...">
+        //         <div class="carousel-caption d-none d-md-block">
+        //             <h5>Hình ảnh 2</h5>
+        //         </div>
+        //     </div>`
+    }
+    // alert(imagepath1)
+    // alert(imagepath2)
     document.getElementById("imgReportDetail1").src = imagepath1
     document.getElementById("imgReportDetail2").src = imagepath2
 }
