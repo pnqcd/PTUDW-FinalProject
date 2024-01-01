@@ -9,8 +9,8 @@ tinymce.init({
 });
 
 var InfoBubble;
-const rightPanel = document.getElementById('rightPanel');
-const dataAdDetailsInnerHTML = document.getElementById('content-right-panel-detail-ad');
+const offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasExample'));
+const dataAdDetailsInnerHTML = document.getElementById('rightSidePanelBody');
 
 var checkbox = document.getElementById('flexSwitchCheckChecked1');
 var toggleReportMarker = document.getElementById('flexSwitchCheckChecked2');
@@ -160,7 +160,7 @@ function getRandomDataPoint(cluster) {
 // }
 
 function closeAdDetailRightSidePanel() {
-    rightPanel.classList.remove('show');
+    offcanvas.hide()
 }
 
 function sendAdBannerReportButtonClicked() {
@@ -276,7 +276,7 @@ function onReportDetailDialogClicked(reportername, reporteremail, reporterphonen
 
 function detailAdButtonClicked(placeID) {
 
-    rightPanel.classList.add('show');
+    offcanvas.show()
 
     var popupInformationInnerHTML = "";
 
@@ -404,7 +404,7 @@ function detailAdButtonClicked(placeID) {
                 // pInformation.innerHTML = popupInformationInnerHTML;
                 // dataAdDetailsInnerHTML.innerHTML = '<span class="close-button" id="closeButton" onclick="closeAdDetailRightSidePanel()">X</span><h2>Thông tin chi tiết</h2>' + popupInformationInnerHTML;
                 // <span class="closeAdBannerDialog">&times;</span>
-                dataAdDetailsInnerHTML.innerHTML = '<span class="close-button" id="closeButton" onclick="closeAdDetailRightSidePanel()">&times;</span><h2>Thông tin chi tiết</h2>' + popupInformationInnerHTML;
+                dataAdDetailsInnerHTML.innerHTML = popupInformationInnerHTML;
                 // console.log(dataAdDetailsInnerHTML.innerHTML);
             }
         });
