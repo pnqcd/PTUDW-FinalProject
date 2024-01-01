@@ -29,7 +29,7 @@ var closeButtonReportDialog = document.getElementById("closeReportDetailDialog")
 var pInformation = document.getElementById("popupInformation");
 var clusteringLayer
 var selectedReport
-var bottomReportDialog = document.getElementById("reportDialogModal")
+// var bottomReportDialog = document.getElementById("reportDialogModal")
 var placeDetails = []
 var placeDetailsTmp = []
 var adBannerID = null
@@ -290,7 +290,7 @@ function onReportDetailDialogClicked(reportername, reporteremail, reporterphonen
     tinymce.get("messageReport").setContent(reportcontent)
 
     if (imagepath1) {
-        document.getElementsByClassName('carousel-indicators').innerHTML += 
+        document.getElementsByClassName('carousel-indicators').innerHTML +=
             `<button type="button" data-bs-target="#carouselExampleCaptions"
             data-bs-slide-to="0" class="active" aria-current="true"
             aria-label="Slide 1"></button>`
@@ -305,7 +305,7 @@ function onReportDetailDialogClicked(reportername, reporteremail, reporterphonen
     }
 
     if (imagepath2) {
-        document.getElementsByClassName('carousel-indicators').innerHTML += 
+        document.getElementsByClassName('carousel-indicators').innerHTML +=
             `<button type="button" data-bs-target="#carouselExampleCaptions"
             data-bs-slide-to="1" aria-label="Slide 2"></button>`
 
@@ -399,7 +399,7 @@ function detailAdButtonClicked(placeID) {
                     var formattedDate = jsDate.toLocaleDateString('vi-VN', options);
                     console.log(placeDetails[i].reports)
 
-                    popupInformationInnerHTML += !placeDetails[i].reports[0].id ? 
+                    popupInformationInnerHTML += !placeDetails[i].reports[0].id ?
                         `<div class="place-detail-information">
                             <b>${placeDetails[i].adName}</b>
                             <p>${placeDetails[i].diaChi} - ${placeDetails[i].khuVuc}</p>
@@ -434,19 +434,39 @@ function detailAdButtonClicked(placeID) {
                                     <a class="placeDetailsButton" href="${placeDetails[i].imagePath}" data-lightbox="detail-pano-${placeDetails[i].id}" data-title="Ngày hết hạn: ${formattedDate}">
                                         <img src="./assets/img/icon_info.png" width="25px" height="25px">
                                     </a>
-                                    <img src="./assets/img/clipboard.svg" width="25px" height="25px" onclick="showReportBottomDialogFromAdBannerDetail(${i})">
+                                    
+                                    <img src="./assets/img/clipboard.svg" width="25px" height="25px" onclick="showReportBottomDialogFromAdBannerDetail(${i})" data-bs-toggle="collapse" href="#collapseReports" role="button" aria-expanded="false" aria-controls="collapseExample">
                                 </div>
 
                                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].adBannerId})">
-                                    <span>
-                                        <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
-                                    </span>
-                                    BÁO CÁO VI PHẠM
-                                </button>
+                                    <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].adBannerId})">
+                                        <span>
+                                            <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
+                                        </span>
+                                        BÁO CÁO VI PHẠM
+                                    </button>
                                 </div>
                             </div>
-                        </div>`;
+
+                        <div class="collapse" id="collapseReports" style="margin-top: 5px;" >
+                            <div class="card card-body">
+                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
+                                    <div class="carousel-indicators" id="indicator-carousel-report">                                       
+                                    </div>
+                                    <div class="carousel-inner" id="inner-carousel-report">
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
                 }
 
                 // console.log(popupInformationInnerHTML);
@@ -520,38 +540,65 @@ function addReportMarker(group, coordinate, data) {
 
 function showReportBottomDialog(data) {
     data = JSON.parse(data)
-    bottomReportDialog.style.display = 'flex'
+    // bottomReportDialog.style.display = 'flex'
 
     let locationReportDetail = ""
 
     data.forEach(obj => {
         // reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2
         locationReportDetail +=
-        `<div class="report-detail-information" style="margin: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
+            `<div class="report-detail-information" style="margin: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
             <p><b>Số thứ tự:</b> ${obj.id}</p>
             <p><b>Phân loại:</b> ${obj.typeofreport}</p>
         </div>`;
     })
 
-    bottomReportDialog.innerHTML = locationReportDetail
+    // bottomReportDialog.innerHTML = locationReportDetail
 }
 
 function showReportBottomDialogFromAdBannerDetail(i) {
     data = placeDetailsTmp[i].reports
-    bottomReportDialog.style.display = 'flex'
+    // bottomReportDialog.style.display = 'flex'
 
     let locationReportDetail = ""
+    document.getElementById("indicator-carousel-report").innerHTML = ""
+    document.getElementById("inner-carousel-report").innerHTML = ""
 
+    for (let i = 0; i < data.length; i++) {
+        if (i == 0) {
+            document.getElementById("indicator-carousel-report").innerHTML += `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" class="active" aria-current="true" aria-label="Slide ${i + 1}"></button>`
+            
+            document.getElementById("inner-carousel-report").innerHTML += 
+            `<div class="carousel-item active">
+                <div class="report-detail-information" onclick="onReportDetailDialogClicked('${data[i].reportername}', '${data[i].reporteremail}', '${data[i].reporterphonenumber}', '${data[i].typeofreport}', '${data[i].reportcontent}', '${data[i].imagepath1}', '${data[i].imagepath2}')">
+                    <p><b>Số thứ tự:</b> ${data[i].id}</p>
+                    <p><b>Phân loại:</b> ${data[i].typeofreport}</p>
+                </div>
+            </div>`
+        }
+        else {
+            document.getElementById("indicator-carousel-report").innerHTML += `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" aria-label="Slide ${i + 1}"></button>`
+        
+            document.getElementById("inner-carousel-report").innerHTML += 
+            `<div class="carousel-item">
+                <div class="report-detail-information" onclick="onReportDetailDialogClicked('${data[i].reportername}', '${data[i].reporteremail}', '${data[i].reporterphonenumber}', '${data[i].typeofreport}', '${data[i].reportcontent}', '${data[i].imagepath1}', '${data[i].imagepath2}')">
+                    <p><b>Số thứ tự:</b> ${data[i].id}</p>
+                    <p><b>Phân loại:</b> ${data[i].typeofreport}</p>
+                </div>
+            </div>`
+        }
+    }
+    
     data.forEach(obj => {
         // reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2
         locationReportDetail +=
-        `<div class="report-detail-information" style="margin: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
+            `<div class="report-detail-information" style="margin: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
             <p><b>Số thứ tự:</b> ${obj.id}</p>
             <p><b>Phân loại:</b> ${obj.typeofreport}</p>
         </div>`;
     })
 
-    bottomReportDialog.innerHTML = locationReportDetail
+    // bottomReportDialog.innerHTML = locationReportDetail
 }
 
 function getReportMarker(map) {
@@ -689,7 +736,7 @@ let bubble, marker, bubbleElement, bubbleClose;
 map.addEventListener('tap', function (evt) {
 
     if (evt.target instanceof H.Map) {
-        bottomReportDialog.style.display = "none"
+        // bottomReportDialog.style.display = "none"
     }
 
     if (bubble) {
