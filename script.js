@@ -106,7 +106,10 @@ var CUSTOM_THEME = {
                 <p>${data.diaChi}, ${data.khuVuc}</p>
                 <b><i>${data.quyHoach}</i></b>
                 <img class="img-place" src="${data.hinhAnh}">
-                <button class='detailedAdSign' onclick="detailAdButtonClicked('${data.id}')">Chi tiết</button>
+                <!--<button class='detailedAdSign' onclick="detailAdButtonClicked('${data.id}')">Chi tiết</button>-->
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-primary" style="margin-top: 10px;" onclick="detailAdButtonClicked('${data.id}')">Chi tiết</button>
+                </div>
             </div>`
         );
 
@@ -413,12 +416,17 @@ function detailAdButtonClicked(placeID) {
                                 </a>
                             
                                 <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].adBannerId})">
+                                <!--<button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].adBannerId})">
                                     <span>
                                         <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                                     </span>
                                     BÁO CÁO VI PHẠM
-                                </button>
+                                </button>-->
+
+                                <div class="d-grid gap-2" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].adBannerId})">
+                                    <button type="button" class="btn btn-danger">Báo cáo vi phạm</button>
+                                </div>
+
                                 </div>
                             </div>
                         </div>` :
@@ -438,13 +446,16 @@ function detailAdButtonClicked(placeID) {
                                     <img src="./assets/img/clipboard.svg" width="25px" height="25px" onclick="showReportBottomDialogFromAdBannerDetail(${i})" data-bs-toggle="collapse" href="#collapseReports" role="button" aria-expanded="false" aria-controls="collapseExample">
                                 </div>
 
-                                <div style="border: 2px solid #dc4f52; border-radius: 3px;">
+                                <!--<div style="border: 2px solid #dc4f52; border-radius: 3px;">
                                     <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].adBannerId})">
                                         <span>
                                             <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                                         </span>
                                         BÁO CÁO VI PHẠM
                                     </button>
+                                </div>-->
+                                <div class="d-grid gap-2" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].adBannerId})">
+                                    <button type="button" class="btn btn-danger">Báo cáo vi phạm</button>
                                 </div>
                             </div>
 
@@ -762,13 +773,18 @@ map.addEventListener('tap', function (evt) {
                 var address = data.items[0].address;
                 let content = '<div style="width:250px;"><i class="fa-regular fa-circle-check" style="color: #00a832; margin-right:5px;"></i><b>Thông tin địa điểm</b> <br />' + address.label + '</div>' +
                     `
-                <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                    <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${lat}, ${lng}, true, null)">
+                <!--<div style="border: 2px solid #dc4f52; border-radius: 3px;">
+                    <!--<button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${lat}, ${lng}, true, null)">
                         <span>
                             <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                         </span>
                         BÁO CÁO VI PHẠM
                     </button>
+                </div>-->
+                
+
+                <div class="d-grid gap-2" style="margin-top: 5px;" onclick="onReportAdBannerClicked(${lat}, ${lng}, true, null)">
+                    <button type="button" class="btn btn-danger">Báo cáo vi phạm</button>
                 </div>
                 `;
                 let className = 'info-place-bubble';
