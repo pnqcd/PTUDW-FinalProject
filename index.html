@@ -281,8 +281,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary"
-                        onclick="sendAdBannerReportButtonClicked()">Gửi</button>
+                    <button type="button" class="btn btn-primary" id="sendReportButton"
+                        onclick="sendAdBannerReportButtonClicked()">
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" id="reportPostingSpinner" style="display: none;"></span>
+                        Gửi
+                    </button>
                 </div>
             </div>
         </div>

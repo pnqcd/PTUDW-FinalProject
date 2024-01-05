@@ -181,8 +181,9 @@ function sendAdBannerReportButtonClicked() {
     // var email = document.getElementById('email').value;
     // var phone = document.getElementById('phone').value;
     // var editor = tinymce.get("message").getContent();
+    $("#reportPostingSpinner").show();
+    document.getElementById("sendReportButton").disabled = true;
 
-    // /var formData = new FormData(document.getElementById('adBannerDialogReportForm'));
     tinymce.triggerSave(true, true);
 
     const formData = new FormData(document.getElementById('adBannerDialogReportForm'));
@@ -209,7 +210,8 @@ function sendAdBannerReportButtonClicked() {
             document.getElementById('phone').value = '';
             tinymce.get("message").setContent('');
 
-            myModal.hide();
+            $("#reportPostingSpinner").hide();
+            document.getElementById("sendReportButton").disabled = false;
 
             if (data.response == "Successful" && data.message == "") {
                 Toastify({
