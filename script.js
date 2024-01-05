@@ -294,38 +294,42 @@ function onReportDetailDialogClicked(reportername, reporteremail, reporterphonen
     document.getElementById("lastnameReport").value = typeofreport
     tinymce.get("messageReport").setContent(reportcontent)
 
-    if (imagepath1) {
-        document.getElementsByClassName('carousel-indicators').innerHTML +=
-            `<button type="button" data-bs-target="#carouselExampleCaptions"
-            data-bs-slide-to="0" class="active" aria-current="true"
-            aria-label="Slide 1"></button>`
+    alert(imagepath1)
+    alert(imagepath2)
 
-        // document.getElementsByClassName('carousel-inner').innerHTML +=
-        //     `<div class="carousel-item active">
-        //         <img id="imgReportDetail1" class="d-block w-100" alt="...">
-        //         <div class="carousel-caption d-none d-md-block">
-        //             <h5>Hình ảnh 1</h5>
-        //         </div>
-        //     </div>`
-    }
-
-    if (imagepath2) {
-        document.getElementsByClassName('carousel-indicators').innerHTML +=
-            `<button type="button" data-bs-target="#carouselExampleCaptions"
-            data-bs-slide-to="1" aria-label="Slide 2"></button>`
-
-        // document.getElementsByClassName('carousel-inner').innerHTML +=
-        //     `<div class="carousel-item">
-        //         <img id="imgReportDetail2" class="d-block w-100" alt="...">
-        //         <div class="carousel-caption d-none d-md-block">
-        //             <h5>Hình ảnh 2</h5>
-        //         </div>
-        //     </div>`
-    }
-    // alert(imagepath1)
-    // alert(imagepath2)
     document.getElementById("imgReportDetail1").src = imagepath1
     document.getElementById("imgReportDetail2").src = imagepath2
+
+    // if (imagepath1) {
+    //     document.getElementsByClassName('carousel-indicators').innerHTML +=
+    //         `<button type="button" data-bs-target="#carouselExampleCaptions"
+    //         data-bs-slide-to="0" class="active" aria-current="true"
+    //         aria-label="Slide 1"></button>`
+
+    //     // document.getElementsByClassName('carousel-inner').innerHTML +=
+    //     //     `<div class="carousel-item active">
+    //     //         <img id="imgReportDetail1" class="d-block w-100" alt="...">
+    //     //         <div class="carousel-caption d-none d-md-block">
+    //     //             <h5>Hình ảnh 1</h5>
+    //     //         </div>
+    //     //     </div>`
+    // }
+
+    // if (imagepath2) {
+    //     document.getElementsByClassName('carousel-indicators').innerHTML +=
+    //         `<button type="button" data-bs-target="#carouselExampleCaptions"
+    //         data-bs-slide-to="1" aria-label="Slide 2"></button>`
+
+    //     // document.getElementsByClassName('carousel-inner').innerHTML +=
+    //     //     `<div class="carousel-item">
+    //     //         <img id="imgReportDetail2" class="d-block w-100" alt="...">
+    //     //         <div class="carousel-caption d-none d-md-block">
+    //     //             <h5>Hình ảnh 2</h5>
+    //     //         </div>
+    //     //     </div>`
+    // }
+    // alert(imagepath1)
+    // alert(imagepath2)
 }
 
 function detailAdButtonClicked(placeID) {
@@ -390,6 +394,7 @@ function detailAdButtonClicked(placeID) {
                         imagepath2: pds.imagepath2,
                         locationreport: pds.locationreport,
                         adbannerreportid: pds.adbannerreportid,
+                        handlemethod: pds.handlemethod
                     });
                 })
 
@@ -554,6 +559,7 @@ function addReportMarker(group, coordinate, data) {
 
 function showReportBottomDialog(data) {
     data = JSON.parse(data)
+    offcanvas.show()
     // bottomReportDialog.style.display = 'flex'
 
     let locationReportDetail = ""
@@ -561,11 +567,24 @@ function showReportBottomDialog(data) {
     data.forEach(obj => {
         // reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2
         locationReportDetail +=
-            `<div class="report-detail-information" style="margin: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
+        (obj.handlemethod != "" && obj.handlemethod != null) ?
+
+        `<div class="report-detail-information" style="margin: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
             <p><b>Số thứ tự:</b> ${obj.id}</p>
             <p><b>Phân loại:</b> ${obj.typeofreport}</p>
-        </div>`;
+            <p><b>Trạng thái xử lý:</b>${data[i].handlemethod}</p>
+        </div>`
+
+        :
+
+        `<div class="report-detail-information" style="background-color: rgba(254, 182, 0, 0.75);" style="margin: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
+            <p><b>Số thứ tự:</b> ${obj.id}</p>
+            <p><b>Phân loại:</b> ${obj.typeofreport}</p>
+            <p><b>Trạng thái xử lý:</b>CHƯA XỬ LÝ</p>
+        </div>`
     })
+
+    dataAdDetailsInnerHTML.innerHTML = locationReportDetail;
 
     // bottomReportDialog.innerHTML = locationReportDetail
 }
@@ -581,12 +600,26 @@ function showReportBottomDialogFromAdBannerDetail(index) {
     for (let i = 0; i < data.length; i++) {
         if (i == 0) {
             document.getElementById("indicator-carousel-report" + index).innerHTML += `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" class="active" aria-current="true" aria-label="Slide ${i + 1}"></button>`
-            
+
             document.getElementById("inner-carousel-report" + index).innerHTML += 
+
+            (data[i].handlemethod != "" && data[i].handlemethod) ?
+
             `<div class="carousel-item active">
                 <div class="report-detail-information" onclick="onReportDetailDialogClicked('${data[i].reportername}', '${data[i].reporteremail}', '${data[i].reporterphonenumber}', '${data[i].typeofreport}', '${data[i].reportcontent}', '${data[i].imagepath1}', '${data[i].imagepath2}')">
                     <p><b>Số thứ tự:</b> ${data[i].reportid}</p>
                     <p><b>Phân loại:</b> ${data[i].typeofreport}</p>
+                    <p><b>Trạng thái xử lý:</b>${data[i].handlemethod}</p>
+                </div>
+            </div>`
+
+            :
+
+            `<div class="carousel-item active">
+                <div class="report-detail-information" style="background-color: rgba(254, 182, 0, 0.75);" onclick="onReportDetailDialogClicked('${data[i].reportername}', '${data[i].reporteremail}', '${data[i].reporterphonenumber}', '${data[i].typeofreport}', '${data[i].reportcontent}', '${data[i].imagepath1}', '${data[i].imagepath2}')">
+                    <p><b>Số thứ tự:</b> ${data[i].reportid}</p>
+                    <p><b>Phân loại:</b> ${data[i].typeofreport}</p>
+                    <p><b>Trạng thái xử lý:</b>CHƯA XỬ LÝ</p>
                 </div>
             </div>`
         }
@@ -594,23 +627,36 @@ function showReportBottomDialogFromAdBannerDetail(index) {
             document.getElementById("indicator-carousel-report" + index).innerHTML += `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" aria-label="Slide ${i + 1}"></button>`
         
             document.getElementById("inner-carousel-report" + index).innerHTML += 
+            (data[i].handlemethod != "" && data[i].handlemethod) ?
+
             `<div class="carousel-item">
                 <div class="report-detail-information" onclick="onReportDetailDialogClicked('${data[i].reportername}', '${data[i].reporteremail}', '${data[i].reporterphonenumber}', '${data[i].typeofreport}', '${data[i].reportcontent}', '${data[i].imagepath1}', '${data[i].imagepath2}')">
                     <p><b>Số thứ tự:</b> ${data[i].reportid}</p>
                     <p><b>Phân loại:</b> ${data[i].typeofreport}</p>
+                    <p><b>Trạng thái xử lý: </b>${data[i].handlemethod}</p>
+                </div>
+            </div>`
+            
+            :
+
+            `<div class="carousel-item">
+                <div class="report-detail-information" style="background-color: rgba(254, 182, 0, 0.75);" onclick="onReportDetailDialogClicked('${data[i].reportername}', '${data[i].reporteremail}', '${data[i].reporterphonenumber}', '${data[i].typeofreport}', '${data[i].reportcontent}', '${data[i].imagepath1}', '${data[i].imagepath2}')">
+                    <p><b>Số thứ tự:</b> ${data[i].reportid}</p>
+                    <p><b>Phân loại:</b> ${data[i].typeofreport}</p>
+                    <p><b>Trạng thái xử lý: </b>CHƯA XỬ LÝ</p>
                 </div>
             </div>`
         }
     }
     
-    data.forEach(obj => {
-        // reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2
-        locationReportDetail +=
-            `<div class="report-detail-information" style="margin: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
-            <p><b>Số thứ tự:</b> ${obj.id}</p>
-            <p><b>Phân loại:</b> ${obj.typeofreport}</p>
-        </div>`;
-    })
+    // data.forEach(obj => {
+    //     // reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2
+    //     locationReportDetail +=
+    //         `<div class="report-detail-information" style="margin: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
+    //         <p><b>Số thứ tự:</b> ${obj.id}</p>
+    //         <p><b>Phân loại:</b> ${obj.typeofreport}</p>
+    //     </div>`;
+    // })
 
     // bottomReportDialog.innerHTML = locationReportDetail
 }
@@ -677,7 +723,8 @@ function getReportMarker(map) {
                         reporteremail: rpt.reporteremail,
                         reportername: rpt.reportername,
                         reporterphonenumber: rpt.reporterphonenumber,
-                        typeofreport: rpt.typeofreport
+                        typeofreport: rpt.typeofreport,
+                        handlemethod: rpt.handlemethod
                     });
                 })
 
