@@ -260,7 +260,21 @@ app.get('/get-ad-details/:id', (req, res) => {
             PD."publicImageId",
             PD."createdAt" AS adCreatedAt,
             PD."updatedAt" AS adUpdatedAt,
-            RP.*
+            RP.id as reportID,
+            RP.lat,
+            RP.lng,
+            RP.reportername,
+            RP.typeofreport,
+            RP.reporteremail,
+            RP.reporterphonenumber,
+            RP.reportcontent,
+            RP.imagepath1,
+            RP.imagepath2,
+            RP.locationreport,
+            RP.adbannerreportid,
+            RP.handlemethod,
+            RP.reportlocation,
+            RP.reportkhuvuc
         FROM "Places" PL
         JOIN "Placedetails" PD ON PL.id = PD."placeId"
         LEFT JOIN reports RP ON RP.adbannerreportid = PD.id

@@ -352,7 +352,7 @@ function detailAdButtonClicked(placeID) {
 
                 const groupAdDetail = {}
                 placeDetails.forEach(pds => {
-                    const key = `${pds.stt}`
+                    const key = `${pds.adbannerid}`
 
                     if (!groupAdDetail[key])
                         groupAdDetail[key] = {
@@ -376,7 +376,7 @@ function detailAdButtonClicked(placeID) {
                         }
 
                     groupAdDetail[key].reports.push({
-                        id: pds.id,
+                        reportid: pds.reportid,
                         lat: pds.lat,
                         lng: pds.lng,
                         reportername: pds.reportername,
@@ -394,6 +394,7 @@ function detailAdButtonClicked(placeID) {
                 placeDetails = Object.values(groupAdDetail)
                 placeDetailsTmp = placeDetails
 
+                console.log("Place details...")
                 console.log(placeDetails)
 
                 for (let i = 0; i < placeDetails.length; i++) {
@@ -402,7 +403,7 @@ function detailAdButtonClicked(placeID) {
                     var formattedDate = jsDate.toLocaleDateString('vi-VN', options);
                     console.log(placeDetails[i].reports)
 
-                    popupInformationInnerHTML += !placeDetails[i].reports[0].id ?
+                    popupInformationInnerHTML += !placeDetails[i].reports[0].reportid ?
                         `<div class="place-detail-information">
                             <b>${placeDetails[i].adName}</b>
                             <p>${placeDetails[i].diaChi} - ${placeDetails[i].khuVuc}</p>
@@ -411,12 +412,12 @@ function detailAdButtonClicked(placeID) {
                             <p>Hình thức: <b>${placeDetails[i].hinhThuc}</b></p>
                             <p>Phân loại: <b>${placeDetails[i].loaiVT}</b></p>
                             <div class="placeDetailsButtonContainer">
-                                <a class="placeDetailsButton" href="${placeDetails[i].imgagePath}" data-lightbox="detail-pano-${placeDetails[i].id}" data-title="Ngày hết hạn: ${formattedDate}">
+                                <a class="placeDetailsButton" href="${placeDetails[i].imagePath}" data-lightbox="detail-pano-${placeDetails[i].id}" data-title="Ngày hết hạn: ${formattedDate}">
                                     <img src="./assets/img/icon_info.png" width="25px" height="25px">
                                 </a>
                             
-                                <div style="border: 2px solid #dc4f52; border-radius: 3px;">
-                                <!--<button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].adBannerId})">
+                                <!--<div style="border: 2px solid #dc4f52; border-radius: 3px;">
+                                <button class="placeDetailsButton textWithImageButton" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].adBannerId})">
                                     <span>
                                         <img src="./assets/img/icon_warning.png" width="25px" height="25px" style="margin-right: 6px; alt="no image">
                                     </span>
@@ -443,7 +444,7 @@ function detailAdButtonClicked(placeID) {
                                         <img src="./assets/img/icon_info.png" width="25px" height="25px">
                                     </a>
                                     
-                                    <img src="./assets/img/clipboard.svg" width="25px" height="25px" onclick="showReportBottomDialogFromAdBannerDetail(${i})" data-bs-toggle="collapse" href="#collapseReports" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <img src="./assets/img/clipboard.svg" width="25px" height="25px" onclick="showReportBottomDialogFromAdBannerDetail(${i})" data-bs-toggle="collapse" href="#collapseReports${i}" role="button" aria-expanded="false" aria-controls="collapseExample">
                                 </div>
 
                                 <!--<div style="border: 2px solid #dc4f52; border-radius: 3px;">
@@ -453,24 +454,24 @@ function detailAdButtonClicked(placeID) {
                                         </span>
                                         BÁO CÁO VI PHẠM
                                     </button>
-                                </div>-->
+                                </div> -->
                                 <div class="d-grid gap-2" onclick="onReportAdBannerClicked(${placeDetails[i].latitude}, ${placeDetails[i].longitude}, false, ${placeDetails[i].adBannerId})">
                                     <button type="button" class="btn btn-danger">Báo cáo vi phạm</button>
                                 </div>
                             </div>
 
-                        <div class="collapse" id="collapseReports" style="margin-top: 5px;" >
+                        <div class="collapse" id="collapseReports${i}" style="margin-top: 5px;" >
                             <div class="card card-body">
-                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
-                                    <div class="carousel-indicators" id="indicator-carousel-report">                                       
+                                <div id="carouselExampleIndicators${i}" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
+                                    <div class="carousel-indicators" id="indicator-carousel-report${i}">                                       
                                     </div>
-                                    <div class="carousel-inner" id="inner-carousel-report">
+                                    <div class="carousel-inner" id="inner-carousel-report${i}">
                                     </div>
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators${i}" data-bs-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         <span class="visually-hidden">Previous</span>
                                     </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators${i}" data-bs-slide="next">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="visually-hidden">Next</span>
                                     </button>
@@ -567,33 +568,33 @@ function showReportBottomDialog(data) {
     // bottomReportDialog.innerHTML = locationReportDetail
 }
 
-function showReportBottomDialogFromAdBannerDetail(i) {
-    data = placeDetailsTmp[i].reports
+function showReportBottomDialogFromAdBannerDetail(index) {
+    data = placeDetailsTmp[index].reports
     // bottomReportDialog.style.display = 'flex'
 
     let locationReportDetail = ""
-    document.getElementById("indicator-carousel-report").innerHTML = ""
-    document.getElementById("inner-carousel-report").innerHTML = ""
+    document.getElementById("indicator-carousel-report" + index).innerHTML = ""
+    document.getElementById("inner-carousel-report" + index).innerHTML = ""
 
     for (let i = 0; i < data.length; i++) {
         if (i == 0) {
-            document.getElementById("indicator-carousel-report").innerHTML += `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" class="active" aria-current="true" aria-label="Slide ${i + 1}"></button>`
+            document.getElementById("indicator-carousel-report" + index).innerHTML += `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" class="active" aria-current="true" aria-label="Slide ${i + 1}"></button>`
             
-            document.getElementById("inner-carousel-report").innerHTML += 
+            document.getElementById("inner-carousel-report" + index).innerHTML += 
             `<div class="carousel-item active">
                 <div class="report-detail-information" onclick="onReportDetailDialogClicked('${data[i].reportername}', '${data[i].reporteremail}', '${data[i].reporterphonenumber}', '${data[i].typeofreport}', '${data[i].reportcontent}', '${data[i].imagepath1}', '${data[i].imagepath2}')">
-                    <p><b>Số thứ tự:</b> ${data[i].id}</p>
+                    <p><b>Số thứ tự:</b> ${data[i].reportid}</p>
                     <p><b>Phân loại:</b> ${data[i].typeofreport}</p>
                 </div>
             </div>`
         }
         else {
-            document.getElementById("indicator-carousel-report").innerHTML += `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" aria-label="Slide ${i + 1}"></button>`
+            document.getElementById("indicator-carousel-report" + index).innerHTML += `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" aria-label="Slide ${i + 1}"></button>`
         
-            document.getElementById("inner-carousel-report").innerHTML += 
+            document.getElementById("inner-carousel-report" + index).innerHTML += 
             `<div class="carousel-item">
                 <div class="report-detail-information" onclick="onReportDetailDialogClicked('${data[i].reportername}', '${data[i].reporteremail}', '${data[i].reporterphonenumber}', '${data[i].typeofreport}', '${data[i].reportcontent}', '${data[i].imagepath1}', '${data[i].imagepath2}')">
-                    <p><b>Số thứ tự:</b> ${data[i].id}</p>
+                    <p><b>Số thứ tự:</b> ${data[i].reportid}</p>
                     <p><b>Phân loại:</b> ${data[i].typeofreport}</p>
                 </div>
             </div>`
