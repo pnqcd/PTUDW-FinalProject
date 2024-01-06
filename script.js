@@ -571,6 +571,8 @@ function showReportBottomDialog(data, lat, lng) {
     console.log(data)
     // bottomReportDialog.style.display = 'flex'
 
+    dataAdDetailsInnerHTML.innerHTML = ""
+
     let locationReportDetail = `
         <div class="d-grid gap-2" style="padding: 10px 5px !important;" onclick="">
             <button type="button" class="btn btn-danger" onclick="onReportAdBannerClicked(${lat}, ${lng}, true, null)">+</button>
@@ -585,7 +587,7 @@ function showReportBottomDialog(data, lat, lng) {
         `<div class="report-detail-information" style="margin-bottom: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
             <p><b>Số thứ tự:</b> ${obj.id}</p>
             <p><b>Phân loại:</b> ${obj.typeofreport}</p>
-            <p><b>Trạng thái xử lý:</b>${data[i].handlemethod}</p>
+            <p><b>Trạng thái xử lý:</b>${obj.handlemethod}</p>
         </div>`
 
         :
