@@ -45,6 +45,7 @@ var latX = 0
 var lngY = 0
 var defaultTheme
 var isLocationReport = false
+var currentLocation = -1;
 
 function startClustering(map, data) {
     var dataPoints = data.map(function (item) {
@@ -214,9 +215,13 @@ function sendAdBannerReportButtonClicked() {
             document.getElementById("sendReportButton").disabled = false;
 
             if (data.response == "Successful" && data.message == "") {
+
                 if (isLocationReport) {
                     map.removeObject(groupReportMarker);
                     getReportMarker(map)
+                }
+                else if (!isLocationReport) {
+                    detailAdButtonClicked(currentLocation);
                 }
 
                 myModal.hide()
@@ -301,9 +306,6 @@ function onReportDetailDialogClicked(reportername, reporteremail, reporterphonen
     document.getElementById("lastnameReport").value = typeofreport
     tinymce.get("messageReport").setContent(reportcontent)
 
-    alert(imagepath1)
-    alert(imagepath2)
-
     document.getElementById("imgReportDetail1").src = imagepath1
     document.getElementById("imgReportDetail2").src = imagepath2
 
@@ -344,6 +346,8 @@ function detailAdButtonClicked(placeID) {
     offcanvas.show()
 
     var popupInformationInnerHTML = "";
+    currentLocation = placeID
+    dataAdDetailsInnerHTML.innerHTML = "";
 
     // var popup = document.getElementById("popup");
     // popup.style.display = "block";

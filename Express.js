@@ -137,7 +137,7 @@ app.post('/submit', (req, res) => {
     })
         .then((response) => response.json())
         .then(async (google_response) => {
-            if (google_response.success == true) {
+            if (google_response.success == true && msg == "") {
                 console.log("success");
 
                 let img1Valid = img1 ? img1 : "NULL"
