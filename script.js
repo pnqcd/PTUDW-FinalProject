@@ -209,11 +209,18 @@ function sendAdBannerReportButtonClicked() {
             document.getElementById('email').value = '';
             document.getElementById('phone').value = '';
             tinymce.get("message").setContent('');
-
+            
             $("#reportPostingSpinner").hide();
             document.getElementById("sendReportButton").disabled = false;
 
             if (data.response == "Successful" && data.message == "") {
+                if (isLocationReport) {
+                    map.removeObject(groupReportMarker);
+                    getReportMarker(map)
+                }
+
+                myModal.hide()
+
                 Toastify({
                     text: "Báo cáo thành công!",
                     duration: 3000,
@@ -228,7 +235,7 @@ function sendAdBannerReportButtonClicked() {
                     onClick: function () { } // Callback after click
                 }).showToast();
 
-                addReportMarker(groupReportMarker, { lat: latX, lng: lngY })
+                // addReportMarker(groupReportMarker, { lat: latX, lng: lngY })
             }
             else {
                 Toastify({
@@ -557,19 +564,25 @@ function addReportMarker(group, coordinate, data) {
     group.addObject(reportMarker);
 }
 
-function showReportBottomDialog(data) {
+function showReportBottomDialog(data, lat, lng) {
     data = JSON.parse(data)
     offcanvas.show()
+
+    console.log(data)
     // bottomReportDialog.style.display = 'flex'
 
-    let locationReportDetail = ""
+    let locationReportDetail = `
+        <div class="d-grid gap-2" style="padding: 10px 5px !important;" onclick="">
+            <button type="button" class="btn btn-danger" onclick="onReportAdBannerClicked(${lat}, ${lng}, true, null)">+</button>
+        </div>
+    `
 
     data.forEach(obj => {
         // reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2
         locationReportDetail +=
         (obj.handlemethod != "" && obj.handlemethod != null) ?
 
-        `<div class="report-detail-information" style="margin: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
+        `<div class="report-detail-information" style="margin-bottom: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
             <p><b>Số thứ tự:</b> ${obj.id}</p>
             <p><b>Phân loại:</b> ${obj.typeofreport}</p>
             <p><b>Trạng thái xử lý:</b>${data[i].handlemethod}</p>
@@ -577,7 +590,7 @@ function showReportBottomDialog(data) {
 
         :
 
-        `<div class="report-detail-information" style="background-color: rgba(254, 182, 0, 0.75);" style="margin: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
+        `<div class="report-detail-information" style="background-color: rgba(254, 182, 0, 0.75); margin-bottom: 10px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
             <p><b>Số thứ tự:</b> ${obj.id}</p>
             <p><b>Phân loại:</b> ${obj.typeofreport}</p>
             <p><b>Trạng thái xử lý:</b>CHƯA XỬ LÝ</p>
@@ -667,9 +680,9 @@ function getReportMarker(map) {
     map.addObject(groupReportMarker);
 
     groupReportMarker.addEventListener('tap', function (evt) {
-        console.log(evt.target.getData())
+        console.log(evt.target)
 
-        showReportBottomDialog(JSON.stringify(evt.target.getData()))
+        showReportBottomDialog(JSON.stringify(evt.target.getData()), evt.target.a.lat, evt.target.a.lng)
 
         // let locationReportDetail = ""
 
