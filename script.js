@@ -46,6 +46,7 @@ var lngY = 0
 var defaultTheme
 var isLocationReport = false
 var currentLocation = -1;
+var currentReportMarkerData;
 
 function startClustering(map, data) {
     var dataPoints = data.map(function (item) {
@@ -219,6 +220,55 @@ function sendAdBannerReportButtonClicked() {
                 if (isLocationReport) {
                     map.removeObject(groupReportMarker);
                     getReportMarker(map)
+
+                    console.log("currentprertdata")
+                    console.log(latX + " --- " + lngY)
+                    // console.log(currentReportMarkerData)
+
+                    $.ajax({
+                        url: "/get-report",
+                        method: "GET",
+                        success: function (response) {
+                            report = response.report;
+            
+                            const groupedReports = {}
+                            report.forEach(rpt => {
+                                const key = `${rpt.lat}_${rpt.lng}`
+            
+                                if (!groupedReports[key])
+                                    groupedReports[key] = {
+                                        lat: rpt.lat,
+                                        lng: rpt.lng,
+                                        data: []
+                                    }
+            
+                                groupedReports[key].data.push({
+                                    id: rpt.id,
+                                    adbannerreportid: rpt.adbannerreportid,
+                                    imagepath1: rpt.imagepath1,
+                                    imagepath2: rpt.imagepath2,
+                                    locationreport: rpt.locationreport,
+                                    reportcontent: rpt.reportcontent,
+                                    reporteremail: rpt.reporteremail,
+                                    reportername: rpt.reportername,
+                                    reporterphonenumber: rpt.reporterphonenumber,
+                                    typeofreport: rpt.typeofreport,
+                                    handlemethod: rpt.handlemethod
+                                });
+                            })
+            
+                            const result = Object.values(groupedReports)
+                            // currentReportMarkerData = result
+                            
+                            result.forEach(rst => {
+                                if (latX == rst.lat && lngY == rst.lng) {
+                                    showReportBottomDialog(JSON.stringify(rst.data), rst.lat, rst.lng)
+                                }
+                            })
+                        }
+                    });
+
+
                 }
                 else if (!isLocationReport) {
                     detailAdButtonClicked(currentLocation);
@@ -750,6 +800,7 @@ function getReportMarker(map) {
                 })
 
                 const result = Object.values(groupedReports)
+                currentReportMarkerData = result
 
                 result.forEach(rst => {
                     addReportMarker(groupReportMarker, { lat: rst.lat, lng: rst.lng }, rst.data);
