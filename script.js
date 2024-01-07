@@ -226,6 +226,8 @@ function sendAdBannerReportButtonClicked() {
 
                 myModal.hide()
 
+                grecaptcha.reset(document.getElementById('recaptchaContainer'));
+
                 Toastify({
                     text: "Báo cáo thành công!",
                     duration: 3000,
