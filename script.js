@@ -346,7 +346,16 @@ function closeLogin() {
 }
 
 function moveMapToKHTN(map) {
-    map.setCenter({ lat: 10.76316473604989, lng: 106.68238541539267 });
+    navigator.geolocation.getCurrentPosition(function (position) {
+        var userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+
+        // Update map center and marker position
+        map.setCenter(userLocation);
+    })
+    // map.setCenter({ lat: 10.76316473604989, lng: 106.68238541539267 });
     map.setZoom(15);
 }
 
@@ -1061,7 +1070,7 @@ $(document).ready(function () {
             }
 
         // Perform any action with the selected text
-        alert(`Selected text: ${selectedItem.position.lat}-${selectedItem.position.lng}`);
+        // alert(`Selected text: ${selectedItem.position.lat}-${selectedItem.position.lng}`);
 
         const latitude = selectedItem.position.lat
         const longitude = selectedItem.position.lng
