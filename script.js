@@ -83,7 +83,7 @@ var CUSTOM_THEME = {
         if (data.quyHoach === "CHƯA QUY HOẠCH")
             iconColor = 'red';
 
-        var strokeColor = 'yellow'
+        var strokeColor = 'orange'
         if (data.adnumber == 0)
             strokeColor = 'white';
 
@@ -221,7 +221,7 @@ function sendAdBannerReportButtonClicked() {
             document.getElementById('email').value = '';
             document.getElementById('phone').value = '';
             tinymce.get("message").setContent('');
-            
+
             $("#reportPostingSpinner").hide();
             document.getElementById("sendReportButton").disabled = false;
 
@@ -240,18 +240,18 @@ function sendAdBannerReportButtonClicked() {
                         method: "GET",
                         success: function (response) {
                             report = response.report;
-            
+
                             const groupedReports = {}
                             report.forEach(rpt => {
                                 const key = `${rpt.lat}_${rpt.lng}`
-            
+
                                 if (!groupedReports[key])
                                     groupedReports[key] = {
                                         lat: rpt.lat,
                                         lng: rpt.lng,
                                         data: []
                                     }
-            
+
                                 groupedReports[key].data.push({
                                     id: rpt.id,
                                     adbannerreportid: rpt.adbannerreportid,
@@ -266,10 +266,10 @@ function sendAdBannerReportButtonClicked() {
                                     handlemethod: rpt.handlemethod
                                 });
                             })
-            
+
                             const result = Object.values(groupedReports)
                             // currentReportMarkerData = result
-                            
+
                             result.forEach(rst => {
                                 if (latX == rst.lat && lngY == rst.lng) {
                                     showReportBottomDialog(JSON.stringify(rst.data), rst.lat, rst.lng)
@@ -566,7 +566,7 @@ function detailAdButtonClicked(placeID) {
                 // dataAdDetailsInnerHTML.innerHTML = '<span class="close-button" id="closeButton" onclick="closeAdDetailRightSidePanel()">X</span><h2>Thông tin chi tiết</h2>' + popupInformationInnerHTML;
                 // <span class="closeAdBannerDialog">&times;</span>
                 if (popupInformationInnerHTML == "")
-                dataAdDetailsInnerHTML.innerHTML = `<p>Chưa có bảng quảng cáo nào!</p>`;
+                    dataAdDetailsInnerHTML.innerHTML = `<p>Chưa có bảng quảng cáo nào!</p>`;
                 else
                     dataAdDetailsInnerHTML.innerHTML = popupInformationInnerHTML;
                 // console.log(dataAdDetailsInnerHTML.innerHTML);
@@ -651,17 +651,17 @@ function showReportBottomDialog(data, lat, lng) {
     data.forEach(obj => {
         // reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2
         locationReportDetail +=
-        (obj.handlemethod != "" && obj.handlemethod != null) ?
+            (obj.handlemethod != "" && obj.handlemethod != null) ?
 
-        `<div class="report-detail-information" style="margin-bottom: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
+                `<div class="report-detail-information" style="margin-bottom: 5px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
             <p><b>Số thứ tự:</b> ${obj.id}</p>
             <p><b>Phân loại:</b> ${obj.typeofreport}</p>
             <p><b>Trạng thái xử lý:</b>${obj.handlemethod}</p>
         </div>`
 
-        :
+                :
 
-        `<div class="report-detail-information" style="background-color: rgba(254, 182, 0, 0.75); margin-bottom: 10px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
+                `<div class="report-detail-information" style="background-color: rgba(254, 182, 0, 0.75); margin-bottom: 10px;" onclick="onReportDetailDialogClicked('${obj.reportername}', '${obj.reporteremail}', '${obj.reporterphonenumber}', '${obj.typeofreport}', '${obj.reportcontent}', '${obj.imagepath1}', '${obj.imagepath2}')">
             <p><b>Số thứ tự:</b> ${obj.id}</p>
             <p><b>Phân loại:</b> ${obj.typeofreport}</p>
             <p><b>Trạng thái xử lý:</b>CHƯA XỬ LÝ</p>
@@ -685,11 +685,11 @@ function showReportBottomDialogFromAdBannerDetail(index) {
         if (i == 0) {
             document.getElementById("indicator-carousel-report" + index).innerHTML += `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" class="active" aria-current="true" aria-label="Slide ${i + 1}"></button>`
 
-            document.getElementById("inner-carousel-report" + index).innerHTML += 
+            document.getElementById("inner-carousel-report" + index).innerHTML +=
 
-            (data[i].handlemethod != "" && data[i].handlemethod) ?
+                (data[i].handlemethod != "" && data[i].handlemethod) ?
 
-            `<div class="carousel-item active">
+                    `<div class="carousel-item active">
                 <div class="report-detail-information" onclick="onReportDetailDialogClicked('${data[i].reportername}', '${data[i].reporteremail}', '${data[i].reporterphonenumber}', '${data[i].typeofreport}', '${data[i].reportcontent}', '${data[i].imagepath1}', '${data[i].imagepath2}')">
                     <p><b>Số thứ tự:</b> ${data[i].reportid}</p>
                     <p><b>Phân loại:</b> ${data[i].typeofreport}</p>
@@ -697,9 +697,9 @@ function showReportBottomDialogFromAdBannerDetail(index) {
                 </div>
             </div>`
 
-            :
+                    :
 
-            `<div class="carousel-item active">
+                    `<div class="carousel-item active">
                 <div class="report-detail-information" style="background-color: rgba(254, 182, 0, 0.75);" onclick="onReportDetailDialogClicked('${data[i].reportername}', '${data[i].reporteremail}', '${data[i].reporterphonenumber}', '${data[i].typeofreport}', '${data[i].reportcontent}', '${data[i].imagepath1}', '${data[i].imagepath2}')">
                     <p><b>Số thứ tự:</b> ${data[i].reportid}</p>
                     <p><b>Phân loại:</b> ${data[i].typeofreport}</p>
@@ -709,21 +709,21 @@ function showReportBottomDialogFromAdBannerDetail(index) {
         }
         else {
             document.getElementById("indicator-carousel-report" + index).innerHTML += `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" aria-label="Slide ${i + 1}"></button>`
-        
-            document.getElementById("inner-carousel-report" + index).innerHTML += 
-            (data[i].handlemethod != "" && data[i].handlemethod) ?
 
-            `<div class="carousel-item">
+            document.getElementById("inner-carousel-report" + index).innerHTML +=
+                (data[i].handlemethod != "" && data[i].handlemethod) ?
+
+                    `<div class="carousel-item">
                 <div class="report-detail-information" onclick="onReportDetailDialogClicked('${data[i].reportername}', '${data[i].reporteremail}', '${data[i].reporterphonenumber}', '${data[i].typeofreport}', '${data[i].reportcontent}', '${data[i].imagepath1}', '${data[i].imagepath2}')">
                     <p><b>Số thứ tự:</b> ${data[i].reportid}</p>
                     <p><b>Phân loại:</b> ${data[i].typeofreport}</p>
                     <p><b>Trạng thái xử lý: </b>${data[i].handlemethod}</p>
                 </div>
             </div>`
-            
-            :
 
-            `<div class="carousel-item">
+                    :
+
+                    `<div class="carousel-item">
                 <div class="report-detail-information" style="background-color: rgba(254, 182, 0, 0.75);" onclick="onReportDetailDialogClicked('${data[i].reportername}', '${data[i].reporteremail}', '${data[i].reporterphonenumber}', '${data[i].typeofreport}', '${data[i].reportcontent}', '${data[i].imagepath1}', '${data[i].imagepath2}')">
                     <p><b>Số thứ tự:</b> ${data[i].reportid}</p>
                     <p><b>Phân loại:</b> ${data[i].typeofreport}</p>
@@ -732,7 +732,7 @@ function showReportBottomDialogFromAdBannerDetail(index) {
             </div>`
         }
     }
-    
+
     // data.forEach(obj => {
     //     // reportername, reporteremail, reporterphonenumber, typeofreport, reportcontent, imagepath1, imagepath2
     //     locationReportDetail +=
@@ -850,6 +850,9 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
 // Create the default UI components
 var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+ui.getControl('mapsettings').setAlignment('top-left');
+ui.getControl('zoom').setAlignment('top-left');
 
 // Now use the map as required...
 window.onload = function () {
@@ -1119,3 +1122,33 @@ $(document).ready(function () {
         autocompleteDropdown.empty();
     });
 });
+
+function moveToCurrentPosition() {
+    navigator.geolocation.getCurrentPosition(function (position) {
+        var userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+
+        // Update map center and marker position
+        map.setCenter(userLocation);
+    })
+}
+
+function locateButtonEnter() {
+    document.getElementById('locateButton').innerHTML = 
+    `
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="rgb(64, 68, 77)" class="bi bi-crosshair" viewBox="0 0 19 18">
+                <path d="M8.5.5a.5.5 0 0 0-1 0v.518A7 7 0 0 0 1.018 7.5H.5a.5.5 0 0 0 0 1h.518A7 7 0 0 0 7.5 14.982v.518a.5.5 0 0 0 1 0v-.518A7 7 0 0 0 14.982 8.5h.518a.5.5 0 0 0 0-1h-.518A7 7 0 0 0 8.5 1.018zm-6.48 7A6 6 0 0 1 7.5 2.02v.48a.5.5 0 0 0 1 0v-.48a6 6 0 0 1 5.48 5.48h-.48a.5.5 0 0 0 0 1h.48a6 6 0 0 1-5.48 5.48v-.48a.5.5 0 0 0-1 0v.48A6 6 0 0 1 2.02 8.5h.48a.5.5 0 0 0 0-1zM8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+            </svg>
+    `
+}
+
+function locateButtonLeave() {
+    document.getElementById('locateButton').innerHTML = 
+    `
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="rgb(112, 115, 121)" class="bi bi-crosshair" viewBox="0 0 19 18">
+                <path d="M8.5.5a.5.5 0 0 0-1 0v.518A7 7 0 0 0 1.018 7.5H.5a.5.5 0 0 0 0 1h.518A7 7 0 0 0 7.5 14.982v.518a.5.5 0 0 0 1 0v-.518A7 7 0 0 0 14.982 8.5h.518a.5.5 0 0 0 0-1h-.518A7 7 0 0 0 8.5 1.018zm-6.48 7A6 6 0 0 1 7.5 2.02v.48a.5.5 0 0 0 1 0v-.48a6 6 0 0 1 5.48 5.48h-.48a.5.5 0 0 0 0 1h.48a6 6 0 0 1-5.48 5.48v-.48a.5.5 0 0 0-1 0v.48A6 6 0 0 1 2.02 8.5h.48a.5.5 0 0 0 0-1zM8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+            </svg>
+    `
+}
