@@ -221,8 +221,26 @@ app.delete('/revert', (req, res) => {
 })
 
 app.get("/get-place", (req, res) => {
-    pool.query('SELECT * FROM "Places"', (error, results) => {
+    // pool.query('SELECT * FROM "Places"', (error, results) => {
         // pool.query("select * from reports right join place on reports.adbannerreportid  = place.stt", (error, results) => {
+    pool.query(`select PL.*, COUNT(PLD.id) as adNumber
+    from 	
+        "Places" PL left join "Placedetails" PLD 
+    on
+        PLD."placeId" = PL.id 
+    group by 
+        PL.id,
+        PL."diaChi",
+        PL."khuVuc",
+        PL."loaiVT",
+        PL."hinhThuc",
+        PL."hinhAnh",
+        PL."hinhAnhId",
+        PL."quyHoach",
+        PL.longitude,
+        PL.latitude,
+        PL."createdAt",
+        PL."updatedAt" `, (error, results) => {
         if (error) {
             res.status(500).json({ error });
             console.log("loi roi")
