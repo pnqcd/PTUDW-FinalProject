@@ -101,6 +101,8 @@ app.post('/submit', (req, res) => {
     const email = req.body["email"];
     const phone = req.body["phone"];
     const message = req.body["message"];
+    const reportlocation = req.body["reportlocation"];
+    const reportkhuvuc = req.body["reportkhuvuc"];
     var img1, img2
 
     if (Array.isArray(req.body["adBannerReportUploader"])) {
@@ -157,17 +159,17 @@ app.post('/submit', (req, res) => {
                 }
 
                 let tmp = `
-                INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2, locationreport, adbannerreportid)
+                INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2, locationreport, adbannerreportid, reportlocation, reportkhuvuc)
                 VALUES
-                    (${lat}, ${lng}, '${name}', '${type}', '${email}', '${phone}', '${message}', 'uploads/${img1Valid}', 'uploads/${img2Valid}', ${isLocationReport}, ${adBannerID});
+                    (${lat}, ${lng}, '${name}', '${type}', '${email}', '${phone}', '${message}', '${img1Valid}', '${img2Valid}', ${isLocationReport}, ${adBannerID}, ${reportlocation}, ${reportkhuvuc});
                 `
 
                 console.log(tmp)
 
                 pool.query(`
-                INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2, locationreport, adbannerreportid)
+                INSERT INTO reports (lat, lng, reporterName, typeOfReport, reporterEmail, reporterPhoneNumber, reportContent, imagePath1, imagePath2, locationreport, adbannerreportid, reportlocation, reportkhuvuc)
                 VALUES
-                    (${lat}, ${lng}, '${name}', '${type}', '${email}', '${phone}', '${message}', '${img1Valid}', '${img2Valid}', ${isLocationReport}, ${adBannerID});
+                    (${lat}, ${lng}, '${name}', '${type}', '${email}', '${phone}', '${message}', '${img1Valid}', '${img2Valid}', ${isLocationReport}, ${adBannerID}, '${reportlocation}', '${reportkhuvuc}');
                 `)
 
                 return res.send({ response: "Successful", message: msg });
