@@ -390,6 +390,13 @@ function onReportAdBannerClicked(lx, ly, reportType, adID) {
     isLocationReport = reportType
     adBannerID = adID
     // reportAdBannerDialog.style.display = "block";
+
+    let filePond = FilePond.find(document.getElementById("adBannerReportUploader"));
+    if (filePond != null) {
+    //this will remove all files
+        filePond.removeFiles();
+    }
+
     myModal.show()
 }
 
