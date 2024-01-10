@@ -205,6 +205,27 @@ function sendAdBannerReportButtonClicked() {
     formData.append('lng', lngY);
     formData.append('isLocationReport', isLocationReport)
     formData.append('adBannerID', adBannerID)
+
+    const url = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${latX}%2C${lngY}&lang=vi-VN&apiKey=${apiKey}`;
+    fetch(url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            if (data.items && data.items.length > 0) {
+                var address = data.items[0].address;
+
+                let tmp = address.label;
+                reportLocationField = tmp.replace(/, Hồ Chí Minh, Việt Nam$/, '');
+                reportKhuVucField = address.district + ", " + address.city;
+            }
+                
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+
+
     formData.append('reportlocation', reportLocationField)
     formData.append('reportkhuvuc', reportKhuVucField)
     const urlSearchParams = new URLSearchParams(formData);
@@ -368,6 +389,8 @@ function onReportAdBannerClicked(lx, ly, reportType, adID) {
     lngY = ly
     isLocationReport = reportType
     adBannerID = adID
+
+    console.log(location + " --- " + khuvuc)
     // reportAdBannerDialog.style.display = "block";
     myModal.show()
 }
@@ -922,11 +945,6 @@ map.addEventListener('tap', function (evt) {
         .then(function (data) {
             if (data.items && data.items.length > 0) {
                 var address = data.items[0].address;
-
-                let tmp = address.label;
-                reportLocationField = tmp.replace(/, Hồ Chí Minh, Việt Nam$/, '');
-                reportKhuVucField = address.district + ", " + address.city;
-                // console.log(reportLocationField + " --- " + reportKhuVucField)
 
                 let content = '<div style="width:250px;"><i class="fa-regular fa-circle-check" style="color: #00a832; margin-right:5px;"></i><b>Thông tin địa điểm</b> <br />' + address.label + '</div>' +
                     `
