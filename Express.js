@@ -105,12 +105,17 @@ app.post('/submit', (req, res) => {
     const reportkhuvuc = req.body["reportkhuvuc"];
     var img1, img2
 
+    console.log(req.body["adBannerReportUploader"]);
+
     if (Array.isArray(req.body["adBannerReportUploader"])) {
         img1 = req.body["adBannerReportUploader"][0];
         img2 = req.body["adBannerReportUploader"][1];
     } else {
         img1 = req.body["adBannerReportUploader"];
         img2 = null
+
+        if (!img1)
+            img1 = null;
     }
 
     const lat = req.body["lat"];

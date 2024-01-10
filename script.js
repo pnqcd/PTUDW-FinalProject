@@ -389,8 +389,6 @@ function onReportAdBannerClicked(lx, ly, reportType, adID) {
     lngY = ly
     isLocationReport = reportType
     adBannerID = adID
-
-    console.log(location + " --- " + khuvuc)
     // reportAdBannerDialog.style.display = "block";
     myModal.show()
 }
