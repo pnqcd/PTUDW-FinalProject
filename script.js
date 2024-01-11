@@ -188,7 +188,7 @@ function closeAdDetailRightSidePanel() {
     offcanvas.hide()
 }
 
-function sendAdBannerReportButtonClicked() {
+async function sendAdBannerReportButtonClicked() {
     event.preventDefault();
 
     // var name = document.getElementById('firstname').value;
@@ -207,7 +207,7 @@ function sendAdBannerReportButtonClicked() {
     formData.append('adBannerID', adBannerID)
 
     const url = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${latX}%2C${lngY}&lang=vi-VN&apiKey=${apiKey}`;
-    fetch(url)
+    await fetch(url)
         .then(function (response) {
             return response.json();
         })
